@@ -1,10 +1,11 @@
 apply plugin: 'android'
 apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
+apply plugin: 'android-test'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.2"
 
     defaultConfig {
         minSdkVersion 14
@@ -29,15 +30,15 @@ android {
         disable 'InvalidPackage'
     }
 
-    signingConfigs {
-        release {
-            storeFile file('XXXX')
-            storePassword 'XXXX'
-            keyAlias 'XXXX'
-            keyPassword 'XXXX'
-        }
-    }
-
+//    signingConfigs {
+//        release {
+//            storeFile file('XXXX')
+//            storePassword 'XXXX'
+//            keyAlias 'XXXX'
+//            keyPassword 'XXXX'
+//        }
+//    }
+//
 //    buildTypes {
 //        release {
 //            signingConfig signingConfigs.release
@@ -47,6 +48,13 @@ android {
 //            }
 //        }
 //    }
+
+    sourceSets {
+        main {
+            instrumentTest.setRoot('src/test')
+        }
+    }
+
 }
 
 retrolambda {
@@ -54,6 +62,10 @@ retrolambda {
     jdk System.getenv("JAVA8_HOME")
     oldJdk System.getenv("JAVA7_HOME")
     javaVersion JavaVersion.VERSION_1_7
+}
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // robolectric 2.3-SNAPSHOT
 }
 
 dependencies {
@@ -83,4 +95,14 @@ dependencies {
 
     compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
     apt 'com.github.mttkay.memento:memento-processor:0.+'
+
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+    testCompile 'com.squareup:fest-android:1.0.+'
+
+    instrumentTestCompile 'junit:junit:4.10'
+    instrumentTestCompile 'org.mockito:mockito-all:1.9.5'
+    instrumentTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+    instrumentTestCompile 'com.squareup:fest-android:1.0.+'
 }
