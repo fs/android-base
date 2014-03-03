@@ -65,7 +65,8 @@ retrolambda {
 }
 
 repositories {
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // robolectric 2.3-SNAPSHOT
+    // robolectric 2.3-SNAPSHOT
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
@@ -96,13 +97,13 @@ dependencies {
     compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
     apt 'com.github.mttkay.memento:memento-processor:0.+'
 
-    testCompile 'junit:junit:4.10'
-    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.mockito:mockito-all:1.+'
     testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
-    testCompile 'com.squareup:fest-android:1.0.+'
+    testCompile 'com.squareup:fest-android:1.+'
 
-    instrumentTestCompile 'junit:junit:4.10'
-    instrumentTestCompile 'org.mockito:mockito-all:1.9.5'
+    instrumentTestCompile 'junit:junit:4.+'
+    instrumentTestCompile 'org.mockito:mockito-all:1.+'
     instrumentTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
-    instrumentTestCompile 'com.squareup:fest-android:1.0.+'
+    instrumentTestCompile 'com.squareup:fest-android:1.+'
 }
