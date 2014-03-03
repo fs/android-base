@@ -8,6 +8,6 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:text="XXXX"
+        android:text="@string/dummy_text"
         android:layout_gravity="center"/>
 </FrameLayout>

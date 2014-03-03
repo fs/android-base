@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Android Base</string>
     <string name="settings">Settings</string>
+    <string name="dummy_text">XXXX</string>
 </resources>
