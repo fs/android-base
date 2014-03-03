@@ -3,7 +3,6 @@ package com.companyname.appname.dagger;
 import android.content.Context;
 import android.os.Environment;
 
-import com.companyname.appname.qualifiers.CacheDir;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
@@ -11,7 +10,10 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
+import javax.inject.Qualifier;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -27,6 +29,8 @@ public class AppScopeDaggerModule {
     public AppScopeDaggerModule(Context context) {this.context = context;}
 
     @Provides Context provideContext() {return context;}
+
+    @Qualifier @Retention(RetentionPolicy.RUNTIME) public static @interface CacheDir {}
 
     @Provides @CacheDir File provideCacheDir(Context context) {
         boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
