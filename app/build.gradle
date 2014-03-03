@@ -77,9 +77,9 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.+' // json parsing
     compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
 
-    compile files('libs/argument-1.0.3.jar')
-    compile files('libs/crittercism_v4_4_0_sdkonly.jar')
-    compile files('libs/libGoogleAnalyticsServices.jar')
+    compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
+    compile files('libs/crittercism_v4_4_0_sdkonly.jar') // crash reporting
+    compile files('libs/libGoogleAnalyticsServices.jar') // analytics
 
     compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
     apt 'com.github.mttkay.memento:memento-processor:0.+'
