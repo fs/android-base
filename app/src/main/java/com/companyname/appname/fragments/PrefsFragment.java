@@ -30,18 +30,4 @@ public class PrefsFragment extends PreferenceFragment {
         }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (getFragmentManager() != null) {
-                    getFragmentManager().popBackStack();
-                    return true;
-                }
-                return false;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

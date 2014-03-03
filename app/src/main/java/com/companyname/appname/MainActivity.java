@@ -2,6 +2,7 @@ package com.companyname.appname;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.companyname.appname.dagger.Dagger;
 import com.companyname.appname.dagger.UiScopeDaggerModule;
@@ -31,6 +32,16 @@ public class MainActivity extends Activity implements MementoCallbacks {
 
     @Override public void onLaunch() {
         objectGraph = Dagger.getAppScope(this).plus(new UiScopeDaggerModule());
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getFragmentManager().popBackStack();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override public void onStart() {
