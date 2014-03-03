@@ -1,0 +1,21 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // android plugin
+        classpath 'com.android.tools.build:gradle:0.8.+'
+        // configuration for codegen dependencies (dagger-compiler)
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.+'
+        // use Java 8 lambdas on android
+        classpath 'me.tatarka:gradle-retrolambda:1.+'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}

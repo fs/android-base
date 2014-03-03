@@ -1,0 +1,85 @@
+apply plugin: 'android'
+apply plugin: 'android-apt'
+apply plugin: 'retrolambda'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
+        disable 'InvalidPackage'
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('XXXX')
+            storePassword 'XXXX'
+            keyAlias 'XXXX'
+            keyPassword 'XXXX'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+            }
+        }
+    }
+}
+
+retrolambda {
+    compile "net.orfjackal.retrolambda:retrolambda:1.+"
+    jdk System.getenv("JAVA8_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    compile 'com.netflix.rxjava:rxjava-android:0.17.+' // FRP
+
+    compile 'com.jakewharton:butterknife:4.+' // view injection
+    compile 'com.jakewharton.timber:timber:2.+' // logging
+
+    compile 'com.squareup.dagger:dagger:+' // DI
+    apt 'com.squareup.dagger:dagger-compiler:+'
+//    compile 'com.squareup:pollexor:+' // backend image resizing
+    compile 'com.squareup.picasso:picasso:+' // image loading
+    compile 'com.squareup.okhttp:okhttp:+' // HTTP client
+    compile('com.squareup.retrofit:converter-jackson:+') { //rest client
+        exclude group: 'com.google.code.gson'
+    }
+    compile 'com.intellij:annotations:+' // @Nullable @NotNull
+
+    compile 'org.projectlombok:lombok:1.+' // get set generation
+
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.+' // json parsing
+    compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
+    compile files('libs/argument-1.0.3.jar')
+    compile files('libs/crittercism_v4_4_0_sdkonly.jar')
+    compile files('libs/libGoogleAnalyticsServices.jar')
+
+    compile 'com.github.mttkay.memento:memento:0.+' // activity's object retaining
+    apt 'com.github.mttkay.memento:memento-processor:0.+'
+}
