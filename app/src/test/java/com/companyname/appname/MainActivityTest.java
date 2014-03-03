@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import com.companyname.appname.dagger.Dagger;
 import com.companyname.appname.fragments.MainFragment;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +17,7 @@ import org.robolectric.util.ActivityController;
 
 import dagger.ObjectGraph;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -48,7 +48,7 @@ public class MainActivityTest {
         MainActivity mainActivity = activityController.get();
         ObjectGraph objectGraph = Dagger.getObjectGraph(mainActivity);
         mainActivity.onLaunch();
-        Assert.assertNotEquals(Dagger.getObjectGraph(mainActivity), objectGraph);
+        assertNotEquals(Dagger.getObjectGraph(mainActivity), objectGraph);
     }
 
     @Test public void testOnOptionsItemSelected() throws Exception {
