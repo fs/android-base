@@ -22,7 +22,7 @@ public class AppTest {
 
     @Test public void testGetModules() throws Exception {
         App app = (App) Robolectric.application;
-        assertEquals(1, app.getModules().size());
+        assertEquals(2, app.getModules().size());
     }
 
     @Test public void testAppClass() {

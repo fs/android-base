@@ -22,14 +22,13 @@ public class Dagger {
     }
 
     @Nullable public static ObjectGraph getUiScope(@NotNull Context context) {
-        MainActivity mainActivity = (MainActivity) context;
-        return mainActivity.getObjectGraph();
+        return ((MainActivity) context).getObjectGraph();
     }
 
     public static ObjectGraph getObjectGraph(Context context) {
-        ObjectGraph uiScope = getUiScope(context);
-        return context instanceof MainActivity && uiScope != null ?
-                uiScope :
+        // TODO manage null UI scope
+        return context instanceof MainActivity ?
+                getUiScope(context) :
                 getAppScope(context);
     }
 

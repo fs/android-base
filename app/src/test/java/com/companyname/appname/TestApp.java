@@ -1,11 +1,19 @@
 package com.companyname.appname;
 
+import com.companyname.appname.dagger.ModulesTestModule;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by adelnizamutdinov on 03/03/2014
  */
 public class TestApp extends App {
-    @Override public void onCreate() {
-        super.onCreate();
-        System.out.println("FUUUUUCK");
+    @NotNull @Override protected List<Object> getModules() {
+        List<Object> modules = super.getModules();
+        modules.addAll(Arrays.asList(new ModulesTestModule()));
+        return modules;
     }
 }
