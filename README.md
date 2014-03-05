@@ -1,12 +1,12 @@
 Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base)
 ================================================
-#Configured for:
+##Configured for:
 * JDK 7 and 8 (you need both)
 * Gradle 1.10
 * Android gradle plugin 0.8.+
 * Android build tools 19.0.2
 
-#Setup
+##Setup
 
  1. Clone application as new project with original remote named "android-base"
 
@@ -17,22 +17,22 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
     	git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
     	git push -u origin master
 
- 3. wda
+ 3. Import the project
 
-#What's included:
-##Gradle plugins:
+##What's included:
+###Gradle plugins:
 * [android-apt][1] for adding a compile-time annotation processer dependencies
 * [gradle-retrolambda][2] for Java 8 lambda support
 * [gradle-android-test-plugin][3] for [robolectric][4] support
 
-##Compiler dependencies:
+###Compiler dependencies:
 * [ButterKnife][5] view and view callback injections
 * [Dagger][6] lightweight dependency injection with typesafe compile-time checks
 * [Lombok][7] POJO boilerplate (getters, setters, etc)
 * [Argument][8] boilerplate for `Fragment` arguments
 * [Memento][9] boilerplate for retaining data in `Activity` across config changes
 
-##Runtime dependencies:
+###Runtime dependencies:
 * [RxJava][10] composable and combinable asynchronous data (event) streams
 * [Timber][11] advanced logging
 * [Jackson][12] mapping Json to POJO and vice-versa
@@ -41,17 +41,17 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 * [Retrofit][16] declarative REST (works with [RxJava][17], [OkHttp][18] and [Jackson][19])
 * [Cupboard][20] SQL boilerplate
 
-##Test dependencies
+###Test dependencies
 * [JUnit][21] unit testing for Java
 * [Robolectric][22] running Android Unit tests on the JVM
 * [Mockito][23] mocking framework
 * [FEST Android][24] a set of FEST assertions for Android
 
-##Analytics
+###Analytics
 * [Crittercism][25] crash reporting
 * [Google Analytics][26] general analytics
 
-##IDE Enhancements:
+###IDE Enhancements:
 * [IntelliJ annotations][27] advanced null-pointer, magic constant and other inspections for IntelliJ IDEA-based IDEs
 * [Dagger IntelliJ plugin][28] easily navigate between dependency providers and consumers
 * [Lombok IntelliJ plugin][29] codegen support for [Lombok][7] 
