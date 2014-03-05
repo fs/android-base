@@ -1,11 +1,9 @@
 Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base)
 ================================================
-##Configured for:
+##Prerequisites
 * JDK 7 and 8 (you need both)
 * Android gradle plugin 0.8.+
 * Android build tools 19.0.2
-
-##Prerequisites
 * `JAVA7_HOME` pointing to your jdk7
 * `JAVA8_HOME` pointing to your jdk8
 * `ANDROID_HOME` pointing to your android sdk
@@ -34,6 +32,7 @@ There's things that need to be configured (such as app tokens and so on)
 4. Now the toughest part - renaming the default `com.companyname.appname` java package
     1. At the project view, click on a gear icon and unselect *Compact empty middle packages*, this will allow us to rename the empty packages
     2. Now select any package root, `companyname`, for example. Highlight it and do `Refactor` -> `Rename` -> `Rename package`. This will rename the package root and all the underlying packages, imports and also do that for `test`source folder
+    3. Click the gear icon and select *Hide empty middle packages* again
 
 ##What's included:
 ###Gradle plugins:
@@ -72,6 +71,10 @@ There's things that need to be configured (such as app tokens and so on)
 * [Dagger IntelliJ plugin][33] easily navigate between dependency providers and consumers
 * [Lombok IntelliJ plugin][34] codegen support for [Lombok][35] 
 
+## TODO add note on DI
+## TODO add note on test dependencies
+## TODO add TestFairy or Deploygate gradle tasks
+## TODO add note on Travis configuration
 
   [1]: http://developer.android.com/sdk/installing/studio.html
   [2]: http://www.jetbrains.com/idea/
