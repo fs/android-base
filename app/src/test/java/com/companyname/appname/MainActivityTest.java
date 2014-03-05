@@ -2,7 +2,6 @@ package com.companyname.appname;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.view.MenuItem;
 
 import com.companyname.appname.dagger.Dagger;
 import com.companyname.appname.fragments.MainFragment;
@@ -13,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.tester.android.view.TestMenuItem;
 import org.robolectric.util.ActivityController;
 
 import dagger.ObjectGraph;
@@ -20,8 +20,6 @@ import dagger.ObjectGraph;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by adelnizamutdinov on 03/03/2014
@@ -60,10 +58,7 @@ public class MainActivityTest {
                 .commit();
         int oldStack = fragmentManager.getBackStackEntryCount();
 
-        MenuItem menuItem = mock(MenuItem.class);
-        when(menuItem.getItemId()).thenReturn(android.R.id.home);
-
-        assertTrue(mainActivity.onOptionsItemSelected(menuItem));
+        assertTrue(mainActivity.onOptionsItemSelected(new TestMenuItem(android.R.id.home)));
         assertTrue(fragmentManager.getBackStackEntryCount() < oldStack);
     }
 }

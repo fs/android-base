@@ -27,7 +27,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by adelnizamutdinov on 05/03/2014
  */
-@Config(emulateSdk = 17)
+@Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainFragmentTest {
     Activity     activity;
