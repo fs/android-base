@@ -20,10 +20,6 @@ import static org.junit.Assert.assertEquals;
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class DaggerTest {
-    @Before public void setUp() {
-        Robolectric.buildActivity(MainActivity.class).create().get();
-    }
-
     @Test public void testGetAppScope() throws Exception {
 
     }

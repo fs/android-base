@@ -4,6 +4,7 @@ import android.os.Environment;
 
 import com.companyname.appname.MainActivity;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.Picasso;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import org.robolectric.annotation.Config;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertSame;
 
 /**
  * Created by adelnizamutdinov on 03/03/2014
@@ -26,7 +27,6 @@ public class AppScopeDaggerModuleTest {
     AppScopeDaggerModule module;
 
     @Before public void setUp() throws Exception {
-        Robolectric.buildActivity(MainActivity.class).create().get();
         module = new AppScopeDaggerModule(Robolectric.application);
     }
 
@@ -39,12 +39,13 @@ public class AppScopeDaggerModuleTest {
     }
 
     @Test public void testProvideOkHttpClient() throws Exception {
-        assertNotSame(Robolectric.application.getClass(), MainActivity.class);
         OkHttpClient okHttpClient = Dagger.getObjectGraph(Robolectric.application).get(OkHttpClient.class);
         assertNotNull(okHttpClient.getResponseCache());
     }
 
     @Test public void testProvidePicasso() throws Exception {
-
+        Picasso picasso = Dagger.getObjectGraph(Robolectric.application).get(Picasso.class);
+        Picasso picasso1 = Dagger.getObjectGraph(Robolectric.application).get(Picasso.class);
+        assertSame(picasso, picasso1);
     }
 }
