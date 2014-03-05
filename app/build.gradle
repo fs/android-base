@@ -97,7 +97,6 @@ dependencies {
     compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
     apt 'com.github.mttkay.memento:memento-processor:0.+'
 
-    testCompile 'com.github.mttkay.memento:memento-processor:0.+'
     testCompile 'com.squareup.dagger:dagger-compiler:1.+'
     testCompile 'junit:junit:4.+'
     testCompile 'org.mockito:mockito-all:1.+'
