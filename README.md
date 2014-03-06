@@ -2,8 +2,8 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 ================================================
 ##Prerequisites
 * JDK 7 and 8 (you need both)
-* Android gradle plugin 0.8.+
-* Android build tools 19.0.2
+* Android SDK tools 22.6
+* Android build tools 19.0.3
 * `JAVA7_HOME` pointing to your jdk7
 * `JAVA8_HOME` pointing to your jdk8
 * `ANDROID_HOME` pointing to your android sdk
