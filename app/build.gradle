@@ -2,6 +2,7 @@ apply plugin: 'android'
 apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
 apply plugin: 'android-test'
+apply plugin: 'testfairy'
 
 android {
     compileSdkVersion 19
@@ -55,6 +56,9 @@ android {
         }
     }
 
+    testfairyConfig {
+        apiKey "9d3fee392bd23fd649f19e6b4a43b6e5dd4b1b07"
+    }
 }
 
 retrolambda {
@@ -77,20 +81,19 @@ dependencies {
 
     compile 'com.squareup.dagger:dagger:1.+' // DI
     apt 'com.squareup.dagger:dagger-compiler:1.+'
-//    compile 'com.squareup:pollexor:+' // backend image resizing
     compile 'com.squareup.picasso:picasso:2.+' // image loading
     compile 'com.squareup.okhttp:okhttp:1.+' // HTTP client
-//    compile('com.squareup.retrofit:converter-jackson:1.+') { //rest client
-//        exclude group: 'com.google.code.gson'
-//    }
+    compile('com.squareup.retrofit:converter-jackson:1.+') { //rest client
+        exclude group: 'com.google.code.gson'
+    }
     compile 'com.intellij:annotations:12.+' // @Nullable @NotNull
 
     compile 'org.projectlombok:lombok:1.+' // get set generation
 
     compile 'com.fasterxml.jackson.core:jackson-databind:2.+' // json parsing
-//    compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
+    compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
 
-//    compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
+    compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
     compile files('libs/crittercism_v4_4_0_sdkonly.jar') // crash reporting
     compile files('libs/libGoogleAnalyticsServices.jar') // analytics
 

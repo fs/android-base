@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.companyname.appname.R;
 import com.companyname.appname.dagger.Dagger;
 import com.companyname.appname.qualifiers.IOThreadPool;
-import com.companyname.appname.qualifiers.MainThread;
 import com.companyname.appname.utils.Preferences;
 
 import javax.inject.Inject;
@@ -29,9 +28,10 @@ import rx.android.observables.AndroidObservable;
  * Created by adelnizamutdinov on 03/03/2014
  */
 public class MainFragment extends Fragment {
-    @Inject                        Preferences preferences;
-    @Inject @IOThreadPool          Scheduler   ioThreadPool;
-    @InjectView(R.id.default_text) TextView    defaultText;
+    @Inject               Preferences preferences;
+    @Inject @IOThreadPool Scheduler   ioThreadPool;
+
+    @InjectView(R.id.default_text) TextView defaultText;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
