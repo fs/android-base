@@ -1,8 +1,5 @@
 package com.companyname.appname.dagger;
 
-import com.companyname.appname.MainActivity;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;

@@ -29,23 +29,4 @@ public class AppScopeDaggerModuleTest {
     @Before public void setUp() throws Exception {
         module = new AppScopeDaggerModule(Robolectric.application);
     }
-
-    @Test public void testProvideContext() throws Exception {
-        assertEquals(Robolectric.application, module.provideContext());
-    }
-
-    @Test public void testProvideCacheDir() throws Exception {
-        assertFalse(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
-    }
-
-    @Test public void testProvideOkHttpClient() throws Exception {
-        OkHttpClient okHttpClient = Dagger.getObjectGraph(Robolectric.application).get(OkHttpClient.class);
-        assertNotNull(okHttpClient.getResponseCache());
-    }
-
-    @Test public void testProvidePicasso() throws Exception {
-        Picasso picasso = Dagger.getObjectGraph(Robolectric.application).get(Picasso.class);
-        Picasso picasso1 = Dagger.getObjectGraph(Robolectric.application).get(Picasso.class);
-        assertSame(picasso, picasso1);
-    }
 }
