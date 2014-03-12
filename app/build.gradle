@@ -2,7 +2,6 @@ apply plugin: 'android'
 apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
 apply plugin: 'android-test'
-apply plugin: 'testfairy'
 
 android {
     compileSdkVersion 19
@@ -24,6 +23,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/'
     }
 
     lintOptions {
@@ -54,10 +54,6 @@ android {
         main {
             androidTest.setRoot('src/test')
         }
-    }
-
-    testfairyConfig {
-        apiKey "9d3fee392bd23fd649f19e6b4a43b6e5dd4b1b07"
     }
 }
 

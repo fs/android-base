@@ -17,4 +17,4 @@ before_install:
   - echo yes | android update sdk -a -t platform-tools,build-tools-19.0.3,android-19,extra-android-support,extra-android-m2repository --no-ui --force > /dev/null
 
 after_success:
-  - ./gradlew -PtestfairyChangelog="Successful CI build" testfairyDebug
+  - ./testfairy-upload.sh app/build/apk/app-debug-unaligned.apk

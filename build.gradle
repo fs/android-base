@@ -5,8 +5,6 @@ buildscript {
         mavenCentral()
         //gradle-test-plugin
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        // testfairy plugin
-        maven { url 'https://www.testfairy.com/maven' }
     }
     dependencies {
         // android plugin
@@ -17,8 +15,6 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:1.+'
         // gradle robolectric plugin
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
-        // gradle testfairy plugin
-        classpath 'com.testfairy.plugins.gradle:testfairy:1.+'
     }
 }
 
