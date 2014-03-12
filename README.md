@@ -8,6 +8,27 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 * `JAVA8_HOME` pointing to your jdk8
 * `ANDROID_HOME` pointing to your android sdk
 
+##What's included:
+ 1. *Crittercism* configuration
+ 2. *Google Analytics* configuration with `Fragment` tracking helper methods
+ 3. Logger configuration supporting *Crittercism* `Exception` logging
+ 4. Java 8 lambdas support and configuratiuon
+ 5. Robolectric support and configuration
+ 6. `Application` subclass with an application-wide `ObjectGraph`
+ 7. `Activity` subclass with configured UI-wide `ObjectGraph` and a root `Fragment`
+ 8. Default `Menu` with *Settings* `MenuItem`
+ 9. `Preferences` interface for the `SharedPreferences` boilerplate reduction
+ 10. `PreferenceFragment` with default Preferences xml added to a `MainFragment`'s *Settings* `MenuItem`
+ 11. *Android Lint* configuration
+ 12. *TestFairy* upload script
+ 13. *Travis CI* build script, including:
+    * Downloading an *Android SDK*
+    * Building
+    * Running *Android Lint*
+    * Running *Robolectric* tests
+    * Uploading a successful build to the *TestFairy*
+ 14. Release build signing and naming configuration
+
 ##Setup
  1. Clone application as new project with original remote named "android-base"
 
@@ -23,27 +44,8 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 Just select the root `build.gradle` and your IDE will do the rest.
 It will ask you to change the language level - do it, we're using Java 8 now
 
-##Configuration
-There's things that need to be configured (such as app tokens and so on)
-
-1. At [app/src/main/res/values/analytics.xml][3] change your Google Analytics `ga_trackingId` appropriately, or completely remove GA if you don't need it (see *removing GA section*)
-2. At [app/src/main/res/values/tokens.xml][4] change `crittercism_app_id`, or completely remove it if not needed (see *removing Crittercism section*)
-3. At [app/src/main/AndroidManifest.xml][5] change the `package` field how you need it 
-4. Now the toughest part - renaming the default `com.companyname.appname` java package
-    1. At the project view, click on a gear icon and unselect *Compact empty middle packages*, this will allow us to rename the empty packages
-    2. Now select any package root, `companyname`, for example. Highlight it and do `Refactor` -> `Rename` -> `Rename package`. This will rename the package root and all the underlying packages, imports and also do that for `test`source folder
-    3. Click the gear icon and select *Hide empty middle packages* again
-
-##What's included:
-
-
-## TODO add note on DI
-## TODO add note on test dependencies
-## TODO add TestFairy or Deploygate gradle tasks
-## TODO add note on Travis configuration
-
-
+##[Configuration][3]
+         
   [1]: http://developer.android.com/sdk/installing/studio.html
   [2]: http://www.jetbrains.com/idea/
-
- 
+  [3]: CONFIGURATION.md
