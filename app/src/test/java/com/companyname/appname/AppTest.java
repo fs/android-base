@@ -20,11 +20,6 @@ public class AppTest {
         assertNotNull(app.getObjectGraph());
     }
 
-    @Test public void testGetModules() throws Exception {
-        App app = (App) Robolectric.application;
-        assertEquals(2, app.getModules().size());
-    }
-
     @Test public void testAppClass() {
         assertEquals("TestApp", Robolectric.application.getClass().getSimpleName());
     }

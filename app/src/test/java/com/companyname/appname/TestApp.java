@@ -1,6 +1,7 @@
 package com.companyname.appname;
 
 import com.companyname.appname.dagger.ModulesTestModule;
+import com.companyname.appname.dagger.UiScopeDaggerModule;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class TestApp extends App {
     @NotNull @Override protected List<Object> getModules() {
         List<Object> modules = super.getModules();
-        modules.addAll(Arrays.asList(new ModulesTestModule()));
+        modules.addAll(Arrays.asList(new ModulesTestModule(), new UiScopeDaggerModule()));
         return modules;
     }
 }

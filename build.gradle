@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         // android plugin
-        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
         // configuration for codegen dependencies (dagger-compiler)
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.+'
         // use Java 8 lambdas on android

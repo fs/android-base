@@ -8,16 +8,35 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.companyname.appname.R;
+import com.companyname.appname.dagger.Dagger;
+import com.companyname.appname.qualifiers.IOThreadPool;
+import com.companyname.appname.qualifiers.MainThread;
+import com.companyname.appname.utils.Preferences;
+
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.observables.AndroidObservable;
 
 /**
  * Created by adelnizamutdinov on 03/03/2014
  */
 public class MainFragment extends Fragment {
+    @Inject                        Preferences preferences;
+    @Inject @IOThreadPool          Scheduler   ioThreadPool;
+    @InjectView(R.id.default_text) TextView    defaultText;
+
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Dagger.inject(this);
     }
 
     @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -33,6 +52,21 @@ public class MainFragment extends Fragment {
             getActivity().getActionBar().setTitle(R.string.app_name);
         }
         return inflater.inflate(R.layout.main_fragment, container, false);
+    }
+
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.inject(this, view);
+        Observable<String> defaultString = Observable.create((Subscriber<? super String> subscriber) -> {
+            subscriber.onNext(preferences.defaultString());
+            subscriber.onCompleted();
+        }).subscribeOn(ioThreadPool);
+        AndroidObservable.fromFragment(this, defaultString).subscribe(defaultText::setText);
+    }
+
+    @Override public void onDestroyView() {
+        ButterKnife.reset(this);
+        super.onDestroyView();
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
