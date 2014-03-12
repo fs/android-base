@@ -1,6 +1,5 @@
 language: java
-jdk:
-  - oraclejdk7
+jdk: oraclejdk7
 
 before_install:
   # Install base Android SDK

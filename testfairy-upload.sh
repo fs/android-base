@@ -2,7 +2,7 @@
 
 # UPDATE THESE
 API_KEY=9d3fee392bd23fd649f19e6b4a43b6e5dd4b1b07
-TESTER_GROUPS=
+TESTER_GROUPS=testers
 KEYSTORE=debug.keystore
 STOREPASS=android
 ALIAS=android

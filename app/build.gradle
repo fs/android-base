@@ -23,7 +23,6 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
-        exclude 'META-INF/'
     }
 
     lintOptions {
@@ -84,7 +83,7 @@ dependencies {
     }
     compile 'com.intellij:annotations:12.+' // @Nullable @NotNull
 
-    compile 'org.projectlombok:lombok:1.+' // get set generation
+    compile 'org.projectlombok:lombok:1.+' // POJO boilerplate
 
     compile 'com.fasterxml.jackson.core:jackson-databind:2.+' // json parsing
     compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
@@ -99,11 +98,11 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:1.+' // shared prefs boilerplate
     compile 'de.devland.esperandro:esperandro-api:1.+'
 
-    testCompile 'com.squareup.dagger:dagger-compiler:1.+'
-    testCompile 'junit:junit:4.+'
-    testCompile 'org.mockito:mockito-all:1.+'
-    testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
-    testCompile 'com.squareup:fest-android:1.+'
+    testCompile 'com.squareup.dagger:dagger-compiler:1.+' // because codegen is not fired for tests
+    testCompile 'junit:junit:4.+' // well, junit
+    testCompile 'org.mockito:mockito-all:1.+' // basic mocking framework
+    testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT' // running tests on the JVM
+    testCompile 'com.squareup:fest-android:1.+' // fest assertions for the Android classes
 
     androidTestCompile 'junit:junit:4.+'
     androidTestCompile 'org.mockito:mockito-all:1.+'
