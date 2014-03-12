@@ -10,7 +10,6 @@ import com.companyname.appname.fragments.MainFragment;
 import com.github.mttkay.memento.Memento;
 import com.github.mttkay.memento.MementoCallbacks;
 import com.github.mttkay.memento.Retain;
-import com.google.analytics.tracking.android.EasyTracker;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,13 +43,13 @@ public class MainActivity extends Activity implements MementoCallbacks {
         }
     }
 
-    @Override public void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
-    }
+//    @Override public void onStart() {
+//        super.onStart();
+//        EasyTracker.getInstance(this).activityStart(this);
+//    }
+//
+//    @Override public void onStop() {
+//        super.onStop();
+//        EasyTracker.getInstance(this).activityStop(this);
+//    }
 }

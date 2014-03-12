@@ -3,7 +3,6 @@ package com.companyname.appname;
 import android.app.Application;
 
 import com.companyname.appname.dagger.AppScopeDaggerModule;
-import com.crittercism.app.Crittercism;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +22,7 @@ public class App extends Application {
 
     @Override public void onCreate() {
         super.onCreate();
-        Crittercism.initialize(getApplicationContext(), getString(R.string.crittercism_app_id));
+//        Crittercism.initialize(getApplicationContext(), getString(R.string.crittercism_app_id));
         Timber.plant(BuildConfig.DEBUG ? new Timber.DebugTree() : new CrashReportingTree());
         objectGraph = ObjectGraph.create(getModules().toArray());
     }

@@ -1,12 +1,10 @@
 package com.companyname.appname.dagger;
 
+import com.companyname.appname.qualifiers.IOThreadPool;
+import com.companyname.appname.qualifiers.MainThread;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import javax.inject.Qualifier;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -26,11 +24,7 @@ public class UiScopeDaggerModule {
         return objectMapper;
     }
 
-    @Qualifier @Retention(RetentionPolicy.RUNTIME) public static @interface IOThreadPool {}
-
     @Provides @IOThreadPool Scheduler provideIOThreadPool() { return Schedulers.io(); }
-
-    @Qualifier @Retention(RetentionPolicy.RUNTIME) public static @interface MainThread {}
 
     @Provides @MainThread Scheduler provideMainThread() { return AndroidSchedulers.mainThread(); }
 }
