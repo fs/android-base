@@ -1,6 +1,7 @@
 package com.flatsoft.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import dagger.ObjectGraph;
 import lombok.Getter;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends Activity implements MementoCallbacks {
     @Retain @NotNull @Getter ObjectGraph objectGraph;
@@ -50,6 +52,10 @@ public class MainActivity extends Activity implements MementoCallbacks {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
 //    @Override public void onStart() {

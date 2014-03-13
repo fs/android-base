@@ -98,6 +98,8 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:1.+' // shared prefs boilerplate
     compile 'de.devland.esperandro:esperandro-api:1.+'
 
+    compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.+' // custom fonts made easy
+
     testCompile 'com.squareup.dagger:dagger-compiler:1.+' // because codegen is not fired for tests
     testCompile 'junit:junit:4.+' // well, junit
     testCompile 'org.mockito:mockito-all:1.+' // basic mocking framework
