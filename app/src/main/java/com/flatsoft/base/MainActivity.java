@@ -17,10 +17,19 @@ import org.jetbrains.annotations.NotNull;
 
 import dagger.ObjectGraph;
 import lombok.Getter;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends Activity implements MementoCallbacks {
+    static {
+        CalligraphyConfig.initDefault(null);
+    }
+
     @Retain @NotNull @Getter ObjectGraph objectGraph;
+
+    @Override protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +61,6 @@ public class MainActivity extends Activity implements MementoCallbacks {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
 //    @Override public void onStart() {
