@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.flatsoft.base.dagger.Dagger;
+import com.flatsoft.base.dagger.Injector;
 import com.flatsoft.base.dagger.UiScopeDaggerModule;
 import com.flatsoft.base.fragments.MainFragment;
 import com.flatsoft.base.fragments.PrefsFragment;
@@ -20,7 +21,7 @@ import lombok.Getter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends Activity implements MementoCallbacks {
+public class MainActivity extends Activity implements MementoCallbacks, Injector {
     static {
         CalligraphyConfig.initDefault(null);
     }
@@ -42,7 +43,7 @@ public class MainActivity extends Activity implements MementoCallbacks {
     }
 
     @Override public void onLaunch() {
-        objectGraph = Dagger.getAppScope(this).plus(new UiScopeDaggerModule());
+        objectGraph = Dagger.getObjectGraph(getApplication()).plus(new UiScopeDaggerModule());
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {

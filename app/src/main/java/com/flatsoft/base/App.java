@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.flatsoft.base.dagger.AppScopeDaggerModule;
+import com.flatsoft.base.dagger.Injector;
 import com.flatsoft.base.utils.TimberCrashReportingTree;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
@@ -22,7 +23,7 @@ import timber.log.Timber;
 /**
  * Created by adelnizamutdinov on 03/03/2014
  */
-public class App extends Application {
+public class App extends Application implements Injector {
     @NotNull @Getter ObjectGraph objectGraph;
 
     @Override public void onCreate() {

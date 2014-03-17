@@ -4,11 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.view.View;
 
-import com.flatsoft.base.App;
-import com.flatsoft.base.MainActivity;
-
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import dagger.ObjectGraph;
 
@@ -16,33 +12,22 @@ import dagger.ObjectGraph;
  * Created by adelnizamutdinov on 03/03/2014
  */
 public class Dagger {
-    public static ObjectGraph getAppScope(@NotNull Context context) {
-        @NotNull @SuppressWarnings("all") App app = (App) context.getApplicationContext();
-        return app.getObjectGraph();
-    }
-
-    @Nullable public static ObjectGraph getUiScope(@NotNull Context context) {
-        return ((MainActivity) context).getObjectGraph();
-    }
-
-    public static ObjectGraph getObjectGraph(Context context) {
-        // TODO manage null UI scope
-        return context instanceof MainActivity ?
-                getUiScope(context) :
-                getAppScope(context);
-    }
-
-    public static void inject(Object object) {
-        @Nullable ObjectGraph objectGraph = null;
-        if (object instanceof Context) {
-            objectGraph = getObjectGraph((Context) object);
-        } else if (object instanceof Fragment) {
-            objectGraph = getObjectGraph(((Fragment) object).getActivity());
-        } else if (object instanceof View) {
-            objectGraph = getObjectGraph(((View) object).getContext());
+    @NotNull public static ObjectGraph getObjectGraph(Context context) {
+        if (!(context instanceof Injector)) {
+            throw new IllegalArgumentException("Your context should implement Injector interface");
         }
-        if (objectGraph != null) {
-            objectGraph.inject(object);
-        }
+        return ((Injector) context).getObjectGraph();
+    }
+
+    public static void inject(Context context) {
+        getObjectGraph(context).inject(context);
+    }
+
+    public static void inject(View view) {
+        getObjectGraph(view.getContext()).inject(view);
+    }
+
+    public static void inject(Fragment fragment) {
+        getObjectGraph(fragment.getActivity()).inject(fragment);
     }
 }
