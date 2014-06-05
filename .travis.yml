@@ -1,19 +1,13 @@
 language: java
-jdk: oraclejdk7
 
 before_install:
-  # Install base Android SDK
-  - sudo apt-get update -qq
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
-  - wget http://dl.google.com/android/android-sdk_r22.6-linux.tgz
-  - tar xzf android-sdk_r22.6-linux.tgz
-  - export ANDROID_HOME=$PWD/android-sdk-linux
-  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-  - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
-  - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
+  - export TERM=dumb
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1
 
-  # Install required components.
-  - echo yes | android update sdk -a -t platform-tools,build-tools-19.0.3,android-19,extra-android-support,extra-android-m2repository --no-ui --force > /dev/null
+notifications:
+  email: false
 
-after_success:
-  - ./testfairy-upload.sh app/build/apk/app-debug-unaligned.apk
+branches:
+  only:
+    - master
+    - integration

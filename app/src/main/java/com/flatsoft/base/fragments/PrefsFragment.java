@@ -15,7 +15,7 @@ public class PrefsFragment extends PreferenceFragment {
     @Override public void onStart() {
         super.onStart();
         ActionBars.configure(this, actionBar -> {
-            ActionBars.homeAsUp(actionBar, false);
+            ActionBars.homeAsUp(actionBar, true);
             actionBar.setTitle(R.string.settings);
         });
     }

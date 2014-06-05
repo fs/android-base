@@ -6,11 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
-/**
- * Created by adelnizamutdinov on 13/03/2014
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
-    static final String NAME    = "example.sqlite3";
+    static final String NAME = "database.sqlite3";
     static final int    VERSION = 1;
 
     static {
