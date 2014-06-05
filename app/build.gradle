@@ -1,7 +1,11 @@
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
 apply plugin: 'android-test'
+
+def isTravis = "true".equals(System.getenv("TRAVIS"))
+def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
 android {
     compileSdkVersion 19
@@ -10,13 +14,18 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
+
         versionCode 1
-        versionName "1.0"
+        versionName '0.1.0'
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries = preDexEnabled && !isTravis
     }
 
     packagingOptions {
@@ -28,6 +37,7 @@ android {
     lintOptions {
         enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
         disable 'InvalidPackage'
+        warningsAsErrors true
     }
 
     sourceSets {
