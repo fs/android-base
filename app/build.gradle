@@ -4,8 +4,8 @@ apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
 apply plugin: 'android-test'
 
-def isTravis = "true".equals(System.getenv("TRAVIS"))
-def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+final IS_TRAVIS = "true".equals(System.getenv("TRAVIS"))
+final PRE_DEX_ENABLED = "true".equals(System.getProperty("pre-dex", "true"))
 
 android {
     compileSdkVersion 19
@@ -25,7 +25,7 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = preDexEnabled && !isTravis
+        preDexLibraries = PRE_DEX_ENABLED && !IS_TRAVIS
     }
 
     packagingOptions {
@@ -53,43 +53,41 @@ retrolambda {
     javaVersion JavaVersion.VERSION_1_7
 }
 
-repositories {
-    // crashlytics
-    maven { url 'http://download.crashlytics.com/maven' }
-}
+final DAGGER_VERSION = '1.2.1'
+final ESPERANDRO_VERSION = '2.0.0'
 
 dependencies {
-    compile 'com.netflix.rxjava:rxjava-android:0.19.+' // FRP
+    compile 'com.netflix.rxjava:rxjava-android:0.19.0' // FRP
 
-    compile 'com.jakewharton:butterknife:5.+' // view injection
-    compile 'com.jakewharton.timber:timber:2.+' // logging
+    compile 'com.jakewharton:butterknife:5.1.0' // view injection
+    compile 'com.jakewharton.timber:timber:2.3.0' // logging
 
-    compile 'com.squareup.dagger:dagger:1.+' // DI
-    apt 'com.squareup.dagger:dagger-compiler:1.+'
-    compile 'com.squareup.picasso:picasso:2.+' // image loading
-    compile 'com.squareup.okhttp:okhttp:2.+' // HTTP client
-    compile 'com.squareup.retrofit:retrofit:1.+'
-    compile 'com.intellij:annotations:12.+' // @Nullable @NotNull
+    compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
+    apt "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile 'com.squareup.picasso:picasso:2.3.1' // image loading
+    compile 'com.squareup.okhttp:okhttp:2.0.0-RC1' // HTTP client
+    compile 'com.squareup.retrofit:retrofit:1.5.1'
+    compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-    compile 'org.projectlombok:lombok:1.+' // POJO boilerplate
+    compile 'org.projectlombok:lombok:1.14.0' // POJO boilerplate
 
-    compile 'nl.qbusict:cupboard:2.+' // sql boilerplate
+    compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
 
     compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
 
-    compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
-    apt 'com.github.mttkay.memento:memento-processor:0.+'
+    compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
+    apt 'com.github.mttkay.memento:memento-processor:0.2'
 
-    apt 'de.devland.esperandro:esperandro:2.+' // shared prefs boilerplate
-    compile 'de.devland.esperandro:esperandro-api:2.+'
-    compile 'de.devland.esperandro:esperandro-gson-addon:2.+'
+    apt "de.devland.esperandro:esperandro:$ESPERANDRO_VERSION" // shared prefs boilerplate
+    compile "de.devland.esperandro:esperandro-api:$ESPERANDRO_VERSION"
+    compile "de.devland.esperandro:esperandro-gson-addon:$ESPERANDRO_VERSION"
 
-    compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.+' // custom fonts made easy
+    compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
 
-    androidTestCompile 'com.android.support:support-v4:+'
-    androidTestCompile 'com.squareup.dagger:dagger-compiler:1.+'
-    androidTestCompile 'junit:junit:4.+'
-    androidTestCompile 'org.mockito:mockito-all:1.+'
-    androidTestCompile 'org.robolectric:robolectric:2.+'
-    androidTestCompile 'com.squareup:fest-android:1.+'
+    androidTestCompile 'com.android.support:support-v4:19.1'
+    androidTestCompile "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
+    androidTestCompile 'junit:junit:4.11'
+    androidTestCompile 'org.mockito:mockito-all:1.9.5'
+    androidTestCompile 'org.robolectric:robolectric:2.3'
+    androidTestCompile 'com.squareup:fest-android:1.0.8'
 }
