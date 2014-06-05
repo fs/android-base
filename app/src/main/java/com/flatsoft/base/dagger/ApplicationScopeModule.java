@@ -22,13 +22,16 @@ import dagger.Provides;
 public class ApplicationScopeModule {
     final Application application;
 
-    public ApplicationScopeModule(Application application) { this.application = application; }
+    public ApplicationScopeModule(Application application) {
+        this.application = application;
+    }
 
     @Provides Context provideContext() { return application; }
 
     @Provides @CacheDir File provideCacheDir(Context context) {
-        boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-        return mounted ? context.getExternalCacheDir() : context.getCacheDir();
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                ? context.getExternalCacheDir()
+                : context.getCacheDir();
     }
 
     @Provides @Singleton OkHttpClient provideOkHttpClient(@CacheDir File cacheDir) {
@@ -41,7 +44,7 @@ public class ApplicationScopeModule {
 
     /*
      *  Although Picasso is only needed in the UI scope, it subscribes to the network status updates
-     *  and leaks the Activity's application, which is pretty bad
+     *  and leaks the Activity's context, which is pretty bad
      */
     @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
         return new Picasso.Builder(context)

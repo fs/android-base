@@ -84,7 +84,7 @@ dependencies {
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
 
-    androidTestCompile 'com.android.support:support-v4:19.1'
+    androidTestCompile 'com.android.support:support-v4:19.1.0'
     androidTestCompile "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
     androidTestCompile 'junit:junit:4.11'
     androidTestCompile 'org.mockito:mockito-all:1.9.5'

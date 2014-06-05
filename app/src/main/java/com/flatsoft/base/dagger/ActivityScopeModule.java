@@ -2,9 +2,9 @@ package com.flatsoft.base.dagger;
 
 import android.content.Context;
 
+import com.flatsoft.base.utils.DatabaseHelper;
 import com.flatsoft.base.utils.Preferences;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
 
@@ -17,11 +17,15 @@ import de.devland.esperandro.serialization.GsonSerializer;
         library = true)
 public class ActivityScopeModule {
     @Provides @Singleton Gson provideGson() {
-        return new GsonBuilder().create();
+        return new Gson();
     }
 
     @Provides @Singleton Preferences providePreferences(Context context, Gson gson) {
         Esperandro.setSerializer(new GsonSerializer(gson));
         return Esperandro.getPreferences(Preferences.class, context);
+    }
+
+    @Provides @Singleton DatabaseHelper provideDatabaseHelper(Context context) {
+        return new DatabaseHelper(context);
     }
 }

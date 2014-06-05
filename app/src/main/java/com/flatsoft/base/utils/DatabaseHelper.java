@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    static final String NAME = "database.sqlite3";
+    static final String NAME    = "database.sqlite3";
     static final int    VERSION = 1;
 
     static {
@@ -15,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // cupboard().register(Model.class);
     }
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(@NotNull Context context) {
         super(context, NAME, null, VERSION);
     }
 

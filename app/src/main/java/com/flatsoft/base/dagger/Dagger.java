@@ -8,15 +8,12 @@ import org.jetbrains.annotations.NotNull;
 
 import dagger.ObjectGraph;
 
-/**
- * Created by adelnizamutdinov on 03/03/2014
- */
 public class Dagger {
     @NotNull public static ObjectGraph getObjectGraph(@NotNull Context context) {
-        if (!(context instanceof Injector)) {
-            throw new IllegalArgumentException("Your application should implement Injector interface");
+        if (context instanceof Injector) {
+            return ((Injector) context).getObjectGraph();
         }
-        return ((Injector) context).getObjectGraph();
+        throw new IllegalArgumentException("Your application should implement Injector interface");
     }
 
     public static void inject(@NotNull Context context) {

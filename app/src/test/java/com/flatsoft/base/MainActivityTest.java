@@ -37,7 +37,8 @@ public class MainActivityTest {
         MainActivity mainActivity = activityController.create().get();
         assertNotNull(mainActivity.getObjectGraph());
 
-        Fragment mainFragment = mainActivity.getFragmentManager().findFragmentById(android.R.id.content);
+        Fragment mainFragment = mainActivity.getFragmentManager().findFragmentById(
+                android.R.id.content);
         assertNotNull(mainFragment);
         assertTrue(mainFragment instanceof MainFragment);
     }

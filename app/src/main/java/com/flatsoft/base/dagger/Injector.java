@@ -1,10 +1,9 @@
 package com.flatsoft.base.dagger;
 
+import org.jetbrains.annotations.NotNull;
+
 import dagger.ObjectGraph;
 
-/**
- * Created by adelnizamutdinov on 17/03/2014
- */
 public interface Injector {
-    ObjectGraph getObjectGraph();
+    @NotNull ObjectGraph getObjectGraph();
 }
