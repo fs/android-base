@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import com.flatsoft.base.R;
 import com.flatsoft.base.qualifiers.CacheDir;
+import com.flatsoft.base.utils.MixPanel;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
@@ -50,5 +53,17 @@ public class ApplicationScopeModule {
         return new Picasso.Builder(context)
                 .downloader(new OkHttpDownloader(okHttpClient))
                 .build();
+    }
+
+    @Provides MixpanelAPI provideMixpanelAPI(Context context) {
+        return MixpanelAPI.getInstance(context, context.getString(R.string.mixpanel_token));
+    }
+
+    @Provides @Singleton MixPanel provideMixPanel(MixpanelAPI mixpanelAPI) {
+        return new MixPanel(mixpanelAPI);
+    }
+
+    @Provides MixpanelAPI.People providePeople(MixpanelAPI mixpanelAPI) {
+        return mixpanelAPI.getPeople();
     }
 }
