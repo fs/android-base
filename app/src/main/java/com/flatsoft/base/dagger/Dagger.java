@@ -12,22 +12,22 @@ import dagger.ObjectGraph;
  * Created by adelnizamutdinov on 03/03/2014
  */
 public class Dagger {
-    @NotNull public static ObjectGraph getObjectGraph(Context context) {
+    @NotNull public static ObjectGraph getObjectGraph(@NotNull Context context) {
         if (!(context instanceof Injector)) {
-            throw new IllegalArgumentException("Your context should implement Injector interface");
+            throw new IllegalArgumentException("Your application should implement Injector interface");
         }
         return ((Injector) context).getObjectGraph();
     }
 
-    public static void inject(Context context) {
+    public static void inject(@NotNull Context context) {
         getObjectGraph(context).inject(context);
     }
 
-    public static void inject(View view) {
+    public static void inject(@NotNull View view) {
         getObjectGraph(view.getContext()).inject(view);
     }
 
-    public static void inject(Fragment fragment) {
+    public static void inject(@NotNull Fragment fragment) {
         getObjectGraph(fragment.getActivity()).inject(fragment);
     }
 }

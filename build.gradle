@@ -3,18 +3,21 @@
 buildscript {
     repositories {
         mavenCentral()
-        //gradle-test-plugin
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        // for the crashlytics plugin
+        maven { url 'http://download.crashlytics.com/maven' }
     }
+
     dependencies {
         // android plugin
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:+'
         // configuration for codegen dependencies (dagger-compiler)
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:+'
         // use Java 8 lambdas on android
-        classpath 'me.tatarka:gradle-retrolambda:1.+'
+        classpath 'me.tatarka:gradle-retrolambda:+'
         // gradle robolectric plugin
-        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
+        classpath 'org.robolectric.gradle:gradle-android-test-plugin:+'
+        // sdk manager for downloading Android SDK on CI servers
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:+'
     }
 }
 
@@ -25,5 +28,5 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '1.12'
 }

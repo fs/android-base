@@ -1,3 +1,4 @@
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'android-apt'
 apply plugin: 'retrolambda'
@@ -5,7 +6,7 @@ apply plugin: 'android-test'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion '19.1'
 
     defaultConfig {
         minSdkVersion 14
@@ -30,25 +31,6 @@ android {
         disable 'InvalidPackage'
     }
 
-//    signingConfigs {
-//        release {
-//            storeFile file(STORE_FILE)
-//            storePassword STORE_PASSWORD
-//            keyAlias KEY_ALIAS
-//            keyPassword KEY_PASSWORD
-//        }
-//    }
-//
-//    buildTypes {
-//        release {
-//            signingConfig signingConfigs.release
-//            applicationVariants.all { variant ->
-//                def file = variant.outputFile
-//                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
-//            }
-//        }
-//    }
-
     sourceSets {
         main {
             androidTest.setRoot('src/test')
@@ -57,57 +39,47 @@ android {
 }
 
 retrolambda {
-    compile "net.orfjackal.retrolambda:retrolambda:1.+"
     jdk System.getenv("JAVA8_HOME")
     oldJdk System.getenv("JAVA7_HOME")
     javaVersion JavaVersion.VERSION_1_7
 }
 
 repositories {
-    // robolectric 2.3-SNAPSHOT
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    // crashlytics
+    maven { url 'http://download.crashlytics.com/maven' }
 }
 
 dependencies {
-    compile 'com.netflix.rxjava:rxjava-android:0.17.+' // FRP
+    compile 'com.netflix.rxjava:rxjava-android:0.19.+' // FRP
 
-    compile 'com.jakewharton:butterknife:4.+' // view injection
+    compile 'com.jakewharton:butterknife:5.+' // view injection
     compile 'com.jakewharton.timber:timber:2.+' // logging
 
     compile 'com.squareup.dagger:dagger:1.+' // DI
     apt 'com.squareup.dagger:dagger-compiler:1.+'
     compile 'com.squareup.picasso:picasso:2.+' // image loading
-    compile 'com.squareup.okhttp:okhttp:1.+' // HTTP client
-    compile('com.squareup.retrofit:converter-jackson:1.+') { //rest client
-        exclude group: 'com.google.code.gson'
-    }
+    compile 'com.squareup.okhttp:okhttp:2.+' // HTTP client
+    compile 'com.squareup.retrofit:retrofit:1.+'
     compile 'com.intellij:annotations:12.+' // @Nullable @NotNull
 
     compile 'org.projectlombok:lombok:1.+' // POJO boilerplate
 
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.+' // json parsing
-    compile 'nl.qbusict:cupboard:1.+' // sql boilerplate
+    compile 'nl.qbusict:cupboard:2.+' // sql boilerplate
 
     compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
-    compile files('libs/crittercism_v4_4_0_sdkonly.jar') // crash reporting
-    compile files('libs/libGoogleAnalyticsServices.jar') // analytics
 
     compile 'com.github.mttkay.memento:memento:0.+' // retaining objects in activity
     apt 'com.github.mttkay.memento:memento-processor:0.+'
 
-    apt 'de.devland.esperandro:esperandro:1.+' // shared prefs boilerplate
-    compile 'de.devland.esperandro:esperandro-api:1.+'
+    apt 'de.devland.esperandro:esperandro:2.+' // shared prefs boilerplate
+    compile 'de.devland.esperandro:esperandro-api:2.+'
+    compile 'de.devland.esperandro:esperandro-gson-addon:2.+'
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.+' // custom fonts made easy
 
-    testCompile 'com.squareup.dagger:dagger-compiler:1.+' // because codegen is not fired for tests
-    testCompile 'junit:junit:4.+' // well, junit
-    testCompile 'org.mockito:mockito-all:1.+' // basic mocking framework
-    testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT' // running tests on the JVM
-    testCompile 'com.squareup:fest-android:1.+' // fest assertions for the Android classes
-
+    androidTestCompile 'com.squareup.dagger:dagger-compiler:1.+'
     androidTestCompile 'junit:junit:4.+'
     androidTestCompile 'org.mockito:mockito-all:1.+'
-    androidTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+    androidTestCompile 'org.robolectric:robolectric:2.+'
     androidTestCompile 'com.squareup:fest-android:1.+'
 }

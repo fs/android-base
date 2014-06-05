@@ -1,10 +1,11 @@
 package com.flatsoft.base.dagger;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
 import com.flatsoft.base.qualifiers.CacheDir;
-import com.squareup.okhttp.HttpResponseCache;
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
@@ -17,16 +18,13 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by adelnizamutdinov on 03/03/2014
- */
 @Module(library = true)
-public class AppScopeDaggerModule {
-    final Context context;
+public class ApplicationScopeModule {
+    final Application application;
 
-    public AppScopeDaggerModule(Context context) {this.context = context;}
+    public ApplicationScopeModule(Application application) { this.application = application; }
 
-    @Provides Context provideContext() {return context;}
+    @Provides Context provideContext() { return application; }
 
     @Provides @CacheDir File provideCacheDir(Context context) {
         boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
@@ -36,14 +34,14 @@ public class AppScopeDaggerModule {
     @Provides @Singleton OkHttpClient provideOkHttpClient(@CacheDir File cacheDir) {
         OkHttpClient okHttpClient = new OkHttpClient();
         try {
-            okHttpClient.setResponseCache(new HttpResponseCache(cacheDir, 20 * 1024 * 1024));
+            okHttpClient.setCache(new Cache(cacheDir, 20 * 1024 * 1024));
         } catch (IOException ignored) { }
         return okHttpClient;
     }
 
     /*
      *  Although Picasso is only needed in the UI scope, it subscribes to the network status updates
-     *  and leaks the Activity's context, which is pretty bad
+     *  and leaks the Activity's application, which is pretty bad
      */
     @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
         return new Picasso.Builder(context)

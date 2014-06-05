@@ -5,9 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.flatsoft.base.dagger.ActivityScopeModule;
 import com.flatsoft.base.dagger.Dagger;
 import com.flatsoft.base.dagger.Injector;
-import com.flatsoft.base.dagger.UiScopeDaggerModule;
 import com.flatsoft.base.fragments.MainFragment;
 import com.flatsoft.base.fragments.PrefsFragment;
 import com.github.mttkay.memento.Memento;
@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
     }
 
     @Override public void onLaunch() {
-        objectGraph = Dagger.getObjectGraph(getApplication()).plus(new UiScopeDaggerModule());
+        objectGraph = Dagger.getObjectGraph(getApplication()).plus(new ActivityScopeModule());
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,14 +63,4 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
                 return super.onOptionsItemSelected(item);
         }
     }
-
-//    @Override public void onStart() {
-//        super.onStart();
-//        EasyTracker.getInstance(this).activityStart(this);
-//    }
-//
-//    @Override public void onStop() {
-//        super.onStop();
-//        EasyTracker.getInstance(this).activityStop(this);
-//    }
 }

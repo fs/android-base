@@ -2,8 +2,8 @@ package com.flatsoft.base.fragments;
 
 import android.app.Fragment;
 
-import com.flatsoft.base.App;
 import com.flatsoft.base.R;
+import com.flatsoft.base.utils.ActionBars;
 
 /**
  * Created by adelnizamutdinov on 03/03/2014
@@ -11,11 +11,9 @@ import com.flatsoft.base.R;
 public class MainFragment extends Fragment {
     @Override public void onStart() {
         super.onStart();
-        if (getActivity() != null && getActivity().getActionBar() != null) {
-            getActivity().getActionBar().setHomeButtonEnabled(false);
-            getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-            getActivity().getActionBar().setTitle(R.string.app_name);
-        }
-        App.gaSendScreen(getActivity(), "Main Fragment");
+        ActionBars.configure(this, actionBar -> {
+            ActionBars.homeAsUp(actionBar, false);
+            actionBar.setTitle(R.string.app_name);
+        });
     }
 }
