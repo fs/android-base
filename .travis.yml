@@ -8,6 +8,7 @@ android:
   components:
     - build-tools-19.1
     - android-19
+    - extra-android-m2repository
 
 before_install:
   - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
