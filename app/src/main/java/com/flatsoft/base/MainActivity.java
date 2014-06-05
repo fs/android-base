@@ -45,7 +45,8 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
     }
 
     @Override public void onLaunch() {
-        objectGraph = Dagger.getObjectGraph(getApplication()).plus(new ActivityScopeModule());
+        objectGraph = Dagger.getObjectGraph(getApplication())
+                .plus(new ActivityScopeModule());
     }
 
     @Override public boolean onCreateOptionsMenu(@NotNull Menu menu) {

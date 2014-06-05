@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         mavenCentral()
+        // gradle versions
+        maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
     }
 
     dependencies {
@@ -9,11 +11,13 @@ buildscript {
         // configuration for codegen dependencies (dagger-compiler)
         classpath 'com.neenbedankt.gradle.plugins:android-apt:+'
         // use Java 8 lambdas on android
-        classpath 'me.tatarka:gradle-retrolambda:+'
+        classpath 'me.tatarka:gradle-retrolambda:1.3.2'
         // gradle robolectric plugin
         classpath 'org.robolectric.gradle:gradle-android-test-plugin:+'
         // downloading deps for CI
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:+'
+        // versions plugin
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-5'
     }
 }
 
