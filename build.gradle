@@ -12,8 +12,6 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:+'
         // gradle robolectric plugin
         classpath 'org.robolectric.gradle:gradle-android-test-plugin:+'
-        // sdk manager for downloading Android SDK on CI servers
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:+'
     }
 }
 
