@@ -69,9 +69,9 @@ dependencies {
 
     compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
     apt "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
-    compile 'com.squareup.picasso:picasso:2.3.1' // image loading
+    compile 'com.squareup.picasso:picasso:2.3.2' // image loading
     compile 'com.squareup.okhttp:okhttp:2.0.0-RC1' // HTTP client
-    compile 'com.squareup.retrofit:retrofit:1.5.1'
+    compile 'com.squareup.retrofit:retrofit:1.6.0'
     compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
     compile 'org.projectlombok:lombok:1.14.0' // POJO boilerplate
