@@ -13,7 +13,9 @@ public class Dagger {
         if (context instanceof Injector) {
             return ((Injector) context).getObjectGraph();
         }
-        throw new IllegalArgumentException("Your application should implement Injector interface");
+        throw new IllegalArgumentException(String.format(
+                "Your %s should implement Injector interface",
+                context.getClass().getSimpleName()));
     }
 
     public static void inject(@NotNull Context context) {

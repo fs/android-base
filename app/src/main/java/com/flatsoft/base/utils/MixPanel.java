@@ -23,7 +23,8 @@ public @Value class MixPanel {
         mixpanelAPI.track(eventName, new JSONObject(map));
     }
 
-    @NotNull static <T> Map<String, T> map(@NotNull Object... objects) {
+    @SuppressWarnings("unchecked") @NotNull
+    static <T> Map<String, T> map(@NotNull Object... objects) {
         Map<String, T> ret = new HashMap<>();
         for (int i = 0; i < objects.length; i += 2) {
             ret.put((String) objects[i], (T) objects[i + 1]);

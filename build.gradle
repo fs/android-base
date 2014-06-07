@@ -7,15 +7,15 @@ buildscript {
 
     dependencies {
         // android plugin
-        classpath 'com.android.tools.build:gradle:+'
+        classpath 'com.android.tools.build:gradle:0.10.+'
         // configuration for codegen dependencies (dagger-compiler)
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.2'
         // use Java 8 lambdas on android
         classpath 'me.tatarka:gradle-retrolambda:1.3.2'
         // gradle robolectric plugin
-        classpath 'org.robolectric.gradle:gradle-android-test-plugin:+'
+        classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.10.0'
         // downloading deps for CI
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.1'
         // versions plugin
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-5'
     }

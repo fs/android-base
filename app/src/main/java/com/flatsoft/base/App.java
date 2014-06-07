@@ -4,12 +4,11 @@ import android.app.Application;
 
 import com.flatsoft.base.dagger.ApplicationScopeModule;
 import com.flatsoft.base.dagger.Injector;
+import com.flatsoft.base.utils.Lists;
 import com.flatsoft.base.utils.TimberCrashReportingTree;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
@@ -28,6 +27,6 @@ public class App extends Application implements Injector {
     }
 
     @NotNull protected List<Object> getDaggerModules() {
-        return new ArrayList<>(Arrays.asList(new ApplicationScopeModule(this)));
+        return Lists.mutableOf(new ApplicationScopeModule(this));
     }
 }

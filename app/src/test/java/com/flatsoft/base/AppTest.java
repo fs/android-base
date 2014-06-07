@@ -1,5 +1,7 @@
 package com.flatsoft.base;
 
+import com.flatsoft.base.dagger.Dagger;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -18,6 +20,7 @@ public class AppTest {
     @Test public void testOnCreate() throws Exception {
         App app = (App) Robolectric.application;
         assertNotNull(app.getObjectGraph());
+        assertNotNull(Dagger.getObjectGraph(app));
     }
 
     @Test public void testAppClass() {
