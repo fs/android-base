@@ -54,6 +54,7 @@ android {
         enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
         disable 'InvalidPackage'
         warningsAsErrors true
+        lintConfig file('lint.xml')
     }
 
     sourceSets {

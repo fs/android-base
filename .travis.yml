@@ -10,6 +10,10 @@ branches:
   only:
     - master
 
+script:
+  - # staging tests are not working because of the applicationId suffix
+  - ./gradlew lintProductionRelease testProductionRelease
+
 after_success:
   - if [ -f app/crashlytics.properties ]; then
   -   ./gradlew crashlyticsUploadDistributionStagingRelease
