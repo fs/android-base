@@ -7,12 +7,9 @@ before_install:
   - sudo apt-get install -qq libstdc++6:i386 lib32z1
 
 branches:
-  only:
-    - master
+  only: master
 
-script:
-  - # staging tests are not working because of the applicationId suffix
-  - ./gradlew lintProductionRelease testProductionRelease
+script: ./gradlew lintStagingRelease lintProductionRelease testProductionDebug
 
 after_success:
   - if [ -f app/crashlytics.properties ]; then

@@ -7,3 +7,4 @@
 build/
 crashlytics.properties
 com_crashlytics_export_strings.xml
+.gradletasknamecache
