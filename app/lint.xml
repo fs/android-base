@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="UnusedResources">
-        <ignore path=".*com_crashlytics_export.xml"/>
+        <ignore path="src/main/res/values/com_crashlytics_export_strings.xml"/>
     </issue>
     <issue id="TypographyDashes">
-        <ignore path=".*com_crashlytics_export.xml"/>
+        <ignore path="src/main/res/values/com_crashlytics_export_strings.xml"/>
     </issue>
 </lint>
