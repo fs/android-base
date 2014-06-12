@@ -1,7 +1,8 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
+apply plugin: 'crashlytics'
 apply plugin: 'android-apt'
-apply plugin: 'android-test'
+apply plugin: 'robolectric'
 apply plugin: 'retrolambda'
 apply plugin: 'versions'
 
@@ -54,6 +55,11 @@ retrolambda {
     javaVersion JavaVersion.VERSION_1_7
 }
 
+repositories {
+    // crashlytics
+    maven { url 'http://download.crashlytics.com/maven' }
+}
+
 final DAGGER_VERSION = '1.2.1'
 final ESPERANDRO_VERSION = '2.0.0'
 
@@ -65,16 +71,16 @@ dependencies {
     compile 'com.netflix.rxjava:rxjava-android:0.19.0' // FRP
 
     compile 'com.jakewharton:butterknife:5.1.0' // view injection
-    compile 'com.jakewharton.timber:timber:2.3.0' // logging
+    compile 'com.jakewharton.timber:timber:2.4.0' // logging
 
     compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
     apt "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
     compile 'com.squareup.picasso:picasso:2.3.2' // image loading
-    compile 'com.squareup.okhttp:okhttp:2.0.0-RC1' // HTTP client
+    compile 'com.squareup.okhttp:okhttp:2.0.0-RC2' // HTTP client
     compile 'com.squareup.retrofit:retrofit:1.6.0'
     compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-    compile 'org.projectlombok:lombok:1.14.0' // POJO boilerplate
+    compile 'org.projectlombok:lombok:1.14.2' // POJO boilerplate
 
     compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
 
@@ -95,4 +101,5 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-all:1.9.5'
     androidTestCompile 'org.robolectric:robolectric:2.3'
     androidTestCompile 'com.squareup:fest-android:1.0.8'
+    compile 'com.crashlytics.android:crashlytics:1.+'
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.flatsoft.base.dagger.ActivityScopeModule;
 import com.flatsoft.base.dagger.Dagger;
 import com.flatsoft.base.dagger.Injector;
@@ -36,6 +37,8 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
+
         Memento.retain(this);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()

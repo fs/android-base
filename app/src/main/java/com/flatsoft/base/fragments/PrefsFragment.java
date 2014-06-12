@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import com.flatsoft.base.R;
+import com.flatsoft.base.dagger.Dagger;
 import com.flatsoft.base.utils.ActionBars;
 import com.flatsoft.base.utils.MixPanel;
 
@@ -21,6 +22,7 @@ public class PrefsFragment extends PreferenceFragment {
 
     @Override public void onStart() {
         super.onStart();
+        Dagger.inject(this);
         ActionBars.configure(this, actionBar -> {
             ActionBars.homeAsUp(actionBar, true);
             actionBar.setTitle(R.string.settings);

@@ -2,6 +2,8 @@ package com.flatsoft.base.dagger;
 
 import android.content.Context;
 
+import com.flatsoft.base.fragments.MainFragment;
+import com.flatsoft.base.fragments.PrefsFragment;
 import com.flatsoft.base.utils.DatabaseHelper;
 import com.flatsoft.base.utils.Preferences;
 import com.google.gson.Gson;
@@ -14,6 +16,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.esperandro.serialization.GsonSerializer;
 
 @Module(addsTo = ApplicationScopeModule.class,
+        injects = {MainFragment.class, PrefsFragment.class},
         library = true)
 public class ActivityScopeModule {
     @Provides @Singleton Gson provideGson() {
