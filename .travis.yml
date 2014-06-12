@@ -9,8 +9,6 @@ before_install:
 branches:
   only: master
 
-script: ./gradlew lintStagingRelease lintProductionRelease testProductionDebug
-
 after_success:
   - if [ -f app/crashlytics.properties ]; then
   -   ./gradlew crashlyticsUploadDistributionStagingRelease

@@ -24,7 +24,7 @@ android {
     productFlavors {
         staging {
             buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationId "${APPLICATION_ID}.staging"
+//            applicationId "${APPLICATION_ID}.staging"
         }
 
         production {
@@ -54,7 +54,7 @@ android {
         enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
         disable 'InvalidPackage'
         warningsAsErrors true
-        lintConfig file('lint.xml')
+        lintConfig file("$projectDir/lint.xml")
     }
 
     sourceSets {
