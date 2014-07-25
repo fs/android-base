@@ -41,14 +41,18 @@ android {
         }
     }
 
-    buildTypes {
-        debug {
-            applicationIdSuffix '.debug'
+    signingConfigs {
+        release {
+            storeFile file("$rootDir/flatsoft.keystore")
+            storePassword "flatsoft13579"
+            keyAlias "flatsoft"
+            keyPassword "flatsoft13579"
         }
+    }
 
-        beta.initWith(buildTypes.release)
-        beta {
-            applicationIdSuffix '.beta'
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
 
             ext {
                 betaDistributionReleaseNotes = commitMessage
@@ -92,12 +96,11 @@ repositories {
 }
 
 dependencies {
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.5.0'
-    compile 'com.crashlytics.android:crashlytics:1.1.11'
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.5.0' // java 8
 
-    compile "com.mixpanel.android:mixpanel-android:4.2.1@aar"
-
-    compile 'com.netflix.rxjava:rxjava-android:0.20.0-RC2' // FRP
+    compile 'com.crashlytics.android:crashlytics:1.1.11' // crash reporting
+    compile "com.mixpanel.android:mixpanel-android:4.2.1@aar" // analytics
+    compile 'com.netflix.rxjava:rxjava-android:0.20.0-RC2' // asyncrony and events
 
     compile 'com.jakewharton:butterknife:5.1.1' // view injection
     compile 'com.jakewharton.timber:timber:2.4.1' // logging
@@ -123,17 +126,17 @@ dependencies {
     compile "de.devland.esperandro:esperandro-jackson-addon:$ESPERANDRO_VERSION"
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
-    provided 'com.android.support:support-v4:20.0.0'
+    provided 'com.android.support:support-v4:20.0.0' // support lib for tests
 
-    androidTestCompile 'com.squareup:fest-android:1.0.8'
-    androidTestCompile 'junit:junit:4.11'
-    androidTestCompile 'org.mockito:mockito-all:1.9.5'
-    androidTestCompile 'org.robolectric:robolectric:2.3'
+    androidTestCompile 'com.squareup:fest-android:1.0.8' // rich android-specific assertions
+    androidTestCompile 'junit:junit:4.11' // java testing framework
+    androidTestCompile 'org.mockito:mockito-all:1.9.5' // java mocking framework
+    androidTestCompile 'org.robolectric:robolectric:2.3' // android testing framework
 }
 
 configurations {
-    compile.exclude module: 'gson'
-    compile.exclude module: 'guava'
-    androidTestCompile.exclude module: 'commons-logging'
-    androidTestCompile.exclude module: 'httpclient'
+    compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
+    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+    androidTestCompile.exclude module: 'commons-logging' // anti-warning
+    androidTestCompile.exclude module: 'httpclient' // anti-warning
 }

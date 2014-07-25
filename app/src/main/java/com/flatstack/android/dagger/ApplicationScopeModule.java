@@ -55,7 +55,7 @@ public class ApplicationScopeModule {
                 .build();
     }
 
-    @Provides MixpanelAPI provideMixpanelAPI(Context context) {
+    @Provides @Singleton MixpanelAPI provideMixpanelAPI(Context context) {
         return MixpanelAPI.getInstance(context, context.getString(R.string.mixpanel_token));
     }
 

@@ -37,10 +37,16 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Crashlytics.start(this);
+        try {
+            Crashlytics.start(this);
+        } catch (Exception ignored) {
+            // can't find any workaround to NOT invoke this in tests
+            // when robolectric runs tests, this statement throws
+            // CrashlyticsMissingDependencyException
+        }
 
         Memento.retain(this);
-        if (savedInstanceState == null) {
+        if (getFragmentManager().findFragmentById(android.R.id.content) == null) {
             getFragmentManager().beginTransaction()
                     .add(android.R.id.content, new MainFragment())
                     .commit();
