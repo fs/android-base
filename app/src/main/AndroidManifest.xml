@@ -3,6 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.flatstack.android">
 
+    <!-- this is only for tests with Memento, which is checking the build version -->
     <uses-sdk
         tools:ignore="GradleOverrides"
         android:minSdkVersion="14"/>
