@@ -4,7 +4,7 @@ before_install:
   - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
   - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
   - export TERM=dumb
-  # - sudo apt-get install -qq libstdc++6:i386 lib32z1
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1
 
 script: ./gradlew build check
 
