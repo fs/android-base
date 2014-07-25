@@ -3,7 +3,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="match_parent"
           android:gravity="center"
-          android:text="Ha!"
+          android:text="@string/app_name"
           android:textStyle="bold|italic"
           android:textSize="100sp"
           android:layout_height="match_parent"/>
