@@ -44,7 +44,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 Just select the root `build.gradle` and your IDE will do the rest.
 It will ask you to change the language level - do it, we're using Java 8 now
 
-##Configuration
+## Configuration
 There're things that need to be configured (such as app tokens and so on)
 `// TODO`
 
@@ -53,3 +53,12 @@ There're things that need to be configured (such as app tokens and so on)
 
 ##Notes on ProGuarding
 Currently [Dagger](http://square.github.io/dagger/) doesn't work with ProGuard at all, but there's a project that solves the problem, and we need to somehow make it work on gradle: https://github.com/idamobile/dagger-proguard-helper
+
+## Credits
+
+Android app skeleton is maintained by [Nizamutdinov Adel](http://github.com/adelnizamutdinov).
+It was written by [Flatstack](http://www.flatstack.com) with the help of our
+[contributors](http://github.com/fs/android-base/contributors).
+
+
+[![Flatstack](http://www.flatstack.com/assets/images/logo.png)](http://www.flatstack.com)
