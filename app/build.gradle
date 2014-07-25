@@ -52,7 +52,7 @@ android {
 
             ext {
                 betaDistributionReleaseNotes = commitMessage
-                betaDistributionEmailsFilePath = "$rootDir/emails.txt"
+                betaDistributionEmailsFilePath = "$rootDir/beta_distribution_emails.txt"
             }
         }
     }
