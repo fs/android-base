@@ -19,7 +19,7 @@ ext {
 
 android {
     compileSdkVersion TARGET_SDK_VERSION
-    buildToolsVersion '20'
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         minSdkVersion 14
@@ -123,6 +123,7 @@ dependencies {
     compile "de.devland.esperandro:esperandro-jackson-addon:$ESPERANDRO_VERSION"
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
+    provided 'com.android.support:support-v4:20.0.0'
 
     androidTestCompile 'com.squareup:fest-android:1.0.8'
     androidTestCompile 'junit:junit:4.11'
