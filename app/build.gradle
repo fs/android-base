@@ -74,7 +74,7 @@ android {
 
     lintOptions {
         enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-        disable 'InvalidPackage'
+        disable 'InvalidPackage', 'GradleDependency'
         warningsAsErrors true
         lintConfig file("$projectDir/lint.xml")
     }
@@ -93,7 +93,7 @@ repositories {
 
 dependencies {
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.5.0'
-    compile 'com.crashlytics.android:crashlytics:1.+'
+    compile 'com.crashlytics.android:crashlytics:1.1.11'
 
     compile "com.mixpanel.android:mixpanel-android:4.2.1@aar"
 
