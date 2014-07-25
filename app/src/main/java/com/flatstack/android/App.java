@@ -16,14 +16,14 @@ import lombok.Getter;
 import timber.log.Timber;
 
 public class App extends Application implements Injector {
-    final @NotNull @Getter ObjectGraph objectGraph = ObjectGraph.create(
-            getDaggerModules().toArray());
+    final @NotNull @Getter ObjectGraph objectGraph =
+            ObjectGraph.create(getDaggerModules().toArray());
 
     @Override public void onCreate() {
         super.onCreate();
         Timber.plant(BuildConfig.DEBUG
-                ? new Timber.DebugTree()
-                : new TimberCrashReportingTree());
+                             ? new Timber.DebugTree()
+                             : new TimberCrashReportingTree());
     }
 
     @NotNull protected List<Object> getDaggerModules() {

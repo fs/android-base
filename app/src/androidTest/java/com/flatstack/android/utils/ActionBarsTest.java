@@ -15,7 +15,7 @@ import rx.functions.Action1;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk = 18)
+@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
 @RunWith(RobolectricTestRunner.class)
 public class ActionBarsTest {
     Activity activity;

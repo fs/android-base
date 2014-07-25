@@ -9,8 +9,4 @@ before_install:
 branches:
   only: master
 
-after_success:
-  - if [ -f app/crashlytics.properties ]; then
-  -   ./gradlew crashlyticsUploadDistributionStagingRelease
-  -   ./gradlew crashlyticsUploadDistributionProductionRelease
-  - fi
+after_success: [ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./gradlew crashlyticsUploadDistributionStagingBeta crashlyticsUploadDistributionProductionBeta

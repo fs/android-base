@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.flatstack.android.R;
 import com.flatstack.android.dagger.Dagger;
@@ -20,18 +21,18 @@ import dagger.ObjectGraph;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk = 18)
+@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
 @RunWith(RobolectricTestRunner.class)
 public class MainFragmentTest {
     @Module static class MyModule {}
 
     @Test public void testInjectorContextWrapper() {
         Robolectric.buildActivity(Activity.class).create().get();
-        ObjectGraph objectGraph = Dagger.getObjectGraph(Robolectric.application).plus(new MyModule());
+        ObjectGraph objectGraph =
+                Dagger.getObjectGraph(Robolectric.application).plus(new MyModule());
         Context context = new ScopedContextWrapper(Robolectric.application, objectGraph);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.com_mixpanel_android_activity_notification_full,
-                                     null);
+        View view = inflater.inflate(R.layout.main, new FrameLayout(context));
         assertThat(Dagger.getObjectGraph(view.getContext())).isEqualTo(objectGraph);
     }
 }

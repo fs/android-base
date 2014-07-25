@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-@Config(emulateSdk = 18)
+@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
 @RunWith(RobolectricTestRunner.class)
 public class MixPanelTest {
     @Test public void testMap() throws Exception {

@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by adelnizamutdinov on 03/03/2014
  */
-@Config(emulateSdk = 18)
+@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
     ActivityController<MainActivity> activityController;

@@ -9,9 +9,7 @@ buildscript {
 
     dependencies {
         // android plugin
-        classpath 'com.android.tools.build:gradle:0.11+'
-        // configuration for codegen dependencies (dagger-compiler)
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
         // use Java 8 lambdas on android
         classpath 'me.tatarka:gradle-retrolambda:+'
         // gradle robolectric plugin
@@ -24,6 +22,8 @@ buildscript {
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
+
+apply plugin: 'versions'
 
 allprojects {
     repositories {
