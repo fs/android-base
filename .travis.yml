@@ -6,6 +6,8 @@ before_install:
   - export TERM=dumb
   # - sudo apt-get install -qq libstdc++6:i386 lib32z1
 
+script: ./gradlew build check
+
 branches:
   only:
     - master
