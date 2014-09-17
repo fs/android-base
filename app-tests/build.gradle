@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+repositories {
+    maven {
+        url "${System.getenv("ANDROID_HOME")}/extras/android/m2repository"
+    }
+}
+
+dependencies {
+    final androidModule = project(':app')
+    compile androidModule
+
+    final jc = androidModule.android.applicationVariants.toList().first().javaCompile
+    testCompile jc.classpath
+    testCompile jc.outputs.files
+    testCompile files(androidModule.plugins.findPlugin("com.android.application").getBootClasspath())
+
+    testCompile 'junit:junit:4.12-beta-1'
+    testCompile 'org.robolectric:robolectric:2.3'
+    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+}

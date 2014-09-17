@@ -4,19 +4,20 @@ apply plugin: 'retrolambda'
 ext {
     APPLICATION_ID = "com.flatstack.android"
     TARGET_SDK_VERSION = 20
+    BUILD_TOOLS_VERSION = '20'
 
     IS_TRAVIS = "true".equals(System.getenv("TRAVIS"))
     PRE_DEX_ENABLED = "true".equals(System.getProperty("pre-dex", "true"))
 
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 
-    DAGGER_VERSION = '1.2.1'
-    ESPERANDRO_VERSION = '2.0.0'
+    DAGGER_VERSION = '1.2.2'
+    ESPERANDRO_VERSION = '2.1.0'
 }
 
 android {
     compileSdkVersion TARGET_SDK_VERSION
-    buildToolsVersion '20.0.0'
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion 14
@@ -35,26 +36,6 @@ android {
 
         production {
             buildConfigField "String", "API_URL", "\"https://example.com\""
-        }
-    }
-
-    signingConfigs {
-        release {
-            storeFile file("$rootDir/flatsoft.keystore")
-            storePassword "flatsoft13579"
-            keyAlias "flatsoft"
-            keyPassword "flatsoft13579"
-        }
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-
-            ext {
-                betaDistributionReleaseNotes = commitMessage
-                betaDistributionEmailsFilePath = "$rootDir/beta_distribution_emails.txt"
-            }
         }
     }
 
@@ -81,28 +62,22 @@ android {
     }
 }
 
-retrolambda {
-    jdk System.getenv("JAVA8_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-}
-
 dependencies {
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.5.0' // java 8
 
-    compile 'com.netflix.rxjava:rxjava-android:0.20.0-RC2' // asyncrony and events
+    compile 'com.netflix.rxjava:rxjava-android:0.20.4' // asyncrony and events
 
-    compile 'com.jakewharton:butterknife:5.1.1' // view injection
+    compile 'com.jakewharton:butterknife:5.1.2' // view injection
     compile 'com.jakewharton.timber:timber:2.4.1' // logging
 
     compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
     provided "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
-    compile 'com.squareup.picasso:picasso:2.3.3' // image loading
+    compile 'com.squareup.picasso:picasso:2.3.4' // image loading
     compile 'com.squareup.okhttp:okhttp:2.0.0' // HTTP client
     compile 'com.squareup.retrofit:converter-jackson:1.6.1'
     compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-    compile 'org.projectlombok:lombok:1.14.4' // POJO boilerplate
+    compile 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
     compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
 
@@ -116,13 +91,9 @@ dependencies {
     compile "de.devland.esperandro:esperandro-jackson-addon:$ESPERANDRO_VERSION"
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
-    provided 'com.android.support:support-v4:20.0.0' // support lib for tests
-
 }
 
 configurations {
     compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
     compile.exclude module: 'guava' // some deps drag this monster into the final APK
-    androidTestCompile.exclude module: 'commons-logging' // anti-warning
-    androidTestCompile.exclude module: 'httpclient' // anti-warning
 }

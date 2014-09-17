@@ -19,7 +19,8 @@ import org.robolectric.annotation.Config;
 import dagger.Module;
 import dagger.ObjectGraph;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
 @RunWith(RobolectricTestRunner.class)
