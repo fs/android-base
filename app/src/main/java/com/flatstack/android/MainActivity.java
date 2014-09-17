@@ -1,12 +1,12 @@
 package com.flatstack.android;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.crashlytics.android.Crashlytics;
 import com.flatstack.android.dagger.ActivityScopeModule;
 import com.flatstack.android.dagger.Dagger;
 import com.flatstack.android.dagger.Injector;
@@ -37,17 +37,10 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            Crashlytics.start(this);
-        } catch (Exception ignored) {
-            // can't find any workaround to NOT invoke this in tests
-            // when robolectric runs tests, this statement throws
-            // CrashlyticsMissingDependencyException
-        }
-
         Memento.retain(this);
-        if (getFragmentManager().findFragmentById(android.R.id.content) == null) {
-            getFragmentManager().beginTransaction()
+        FragmentManager fm = getFragmentManager();
+        if (fm.findFragmentById(android.R.id.content) == null) {
+            fm.beginTransaction()
                     .add(android.R.id.content, new MainFragment())
                     .commit();
         }

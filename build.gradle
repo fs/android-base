@@ -3,8 +3,6 @@ buildscript {
         mavenCentral()
         // gradle versions
         maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
-        // crashlytics
-        maven { url 'http://download.crashlytics.com/maven' }
     }
 
     dependencies {
@@ -12,14 +10,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:0.12.2'
         // use Java 8 lambdas on android
         classpath 'me.tatarka:gradle-retrolambda:2.1.0'
-        // gradle robolectric plugin
-        classpath 'org.robolectric:robolectric-gradle-plugin:0.11.0'
-        // downloading deps for CI
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
         // versions plugin
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-5'
-        // crashlytics
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.11.3'
     }
 }
 
