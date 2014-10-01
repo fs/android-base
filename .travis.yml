@@ -1,20 +1,20 @@
-language: java
+language: android
 
-before_install:
-  - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
-  - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
-  - export TERM=dumb
-  - sudo apt-get install -qq libstdc++6:i386 lib32z1
+android:
+  components:
+    - build-tools-20.0.0
+    - android-20
+    - extra-android-m2repository
+  licenses:
+    - android-sdk-license-5be876d5
+
+before_install: export TERM=dumb
+
+script: ./gradlew build check
 
 branches:
   only:
     - master
-    - production
+    - integration
 
-notifications:
-  email: false
-
-after_success:
-  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-  -   ./gradlew crashlyticsUploadDistributionStagingRelease crashlyticsUploadDistributionProductionRelease
-  - fi
+after_success: '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./gradlew -PtestfairyChangelog="$(git log -1 --pretty=%B)" testfairyStagingRelease testfairyProductionTestfairy'
