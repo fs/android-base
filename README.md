@@ -1,15 +1,13 @@
 Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base)
 ============================================
 ##Prerequisites
-* JDK 7 and 8 (you need both)
-* `JAVA7_HOME` pointing to your jdk7
-* `JAVA8_HOME` pointing to your jdk8
-* Advanced [Dagger](http://square.github.io/dagger/) knowledge
+* JDK 8
+* `JAVA_HOME` pointing to your jdk8
+* `ANDROID_HOME` pointing to your android-sdk
 
 ##What's included:
 * [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L33-L42) build flavors with different package names
 * *[Crashlytics](https://crashlytics.com)* [configuration](https://github.com/fs/android-base/blob/master/app/src/main/AndroidManifest.xml#L30-L32)
-* *[MixPanel](https://mixpanel.com/)* [configuration](https://github.com/fs/android-base/blob/master/app/src/main/res/values/tokens.xml#L3)
 * Logger configuration [supporting *Crashlytics* `Exception` logging](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/utils/TimberCrashReportingTree.java)
 * [Java 8 lambdas support and configuratiuon](https://github.com/fs/android-base/blob/master/app/build.gradle#L87-L91)
 * [Robolectric support and configuration](https://github.com/robolectric/robolectric-gradle-plugin)
