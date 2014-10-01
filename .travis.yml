@@ -16,6 +16,6 @@ script: ./gradlew build check
 branches:
   only:
     - master
-    - integration
+    - production
 
-after_success: '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./gradlew -PtestfairyChangelog="$(git log -1 --pretty=%B)" testfairyStagingRelease testfairyProductionTestfairy'
+# after_success: uncomment this and add your own deployment targets

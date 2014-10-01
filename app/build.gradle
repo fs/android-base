@@ -38,6 +38,15 @@ android {
         }
     }
 
+//    signingConfigs {
+//        release {
+//            storeFile file("$rootDir/XXXX.keystore")
+//            storePassword "XXXX"
+//            keyAlias "XXXX"
+//            keyPassword "XXXX"
+//        }
+//    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
