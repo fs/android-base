@@ -1,32 +1,33 @@
 Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base)
-============================================
+=======================================
 ##Prerequisites
 * JDK 8
 * `JAVA_HOME` pointing to your jdk8
 * `ANDROID_HOME` pointing to your android-sdk
 
 ##What's included:
-* [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L33-L42) build flavors with different package names
-* *[Crashlytics](https://crashlytics.com)* [configuration](https://github.com/fs/android-base/blob/master/app/src/main/AndroidManifest.xml#L30-L32)
-* Logger configuration [supporting *Crashlytics* `Exception` logging](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/utils/TimberCrashReportingTree.java)
-* [Java 8 lambdas support and configuratiuon](https://github.com/fs/android-base/blob/master/app/build.gradle#L87-L91)
-* [Robolectric support and configuration](https://github.com/robolectric/robolectric-gradle-plugin)
-* Dagger configuration:
-	* `Application` subclass with an application-wide scope
-	* `Activity` subclass with configured UI-wide scope and a root `Fragment`
-	* `ScopedFragment` for `Fragment`-wide scopes
+* [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L33-L42) build flavors with different package names ([read more](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Product-flavors))
+* Logger configuration [supporting `Exception` logging](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/App.java#L24-L26) ([read more](https://github.com/JakeWharton/timber))
+* [Java 8 lambdas support and configuratiuon](https://github.com/fs/android-base/blob/master/app/build.gradle#L41-L44) ([read more](https://github.com/evant/gradle-retrolambda))
+* [Robolectric support and configuration](https://github.com/fs/android-base/blob/master/app-tests/build.gradle) ([read more](http://blog.blundell-apps.com/android-gradle-app-with-robolectric-junit-tests/))
+* [Dagger](http://square.github.io/dagger/) configuration ([read more](http://stackoverflow.com/a/16923040)):
+	* [`Application`](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/App.java) subclass with an [application-wide scope](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/dagger/modules/ApplicationScopeModule.java)
+	* [`Activity`](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/MainActivity.java) subclass with configured [UI-wide scope](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/dagger/modules/MainActivityScopeModule.java) and a root `Fragment`
+	* [`ScopedFragment`](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/dagger/ScopedFragment.java) for `Fragment`-wide [scopes](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/dagger/modules/MainFragmentScopeModule.java)
 * Default `Menu` with *Settings* `MenuItem`
-* `Preferences` interface for the `SharedPreferences` boilerplate reduction
-* `PreferenceFragment` with default Preferences xml added to a `MainFragment`'s *Settings* `MenuItem`
-* *Android Lint* configuration
-* *Travis CI* build script:
+* [`Preferences`](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/utils/Preferences.java) interface for the `SharedPreferences` boilerplate reduction (using [Esperandro](http://dkunzler.github.io/esperandro/))
+* [`PreferenceFragment`](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/fragments/PrefsFragment.java) with default Preferences xml added to a `MainFragment`'s *Settings* `MenuItem`
+* *Android Lint* [configuration](https://github.com/fs/android-base/blob/master/app/build.gradle#L56-L61)
+* *Travis CI* build [script](https://github.com/fs/android-base/blob/master/.travis.yml):
     * Downloading an *Android SDK*
     * Building
     * Running *Android Lint*
     * Running *Robolectric* tests
-    * Uploading a successful build to the *Crashlytics beta*
+    * Hook up your continuous deployment target in `after_success`
 * Release build signing and naming configuration
-
+##What's not included
+* [Crashlytics](crashlytics.com): they live in their own world, and including their plugin in template project just fails the build, if `apikey` is not specified. Also, getting `apikey` without an IDE plugin is impossible. You can get it [here](https://crashlytics.com/downloads/android-studio)
+* Test coverage: still in the process of figuring out what's the best way to enable unit test coverage for Android with Robolectric. Any suggestions will be highly appreciated
 ##Setup
  1. Clone application as new project with original remote named "android-base"
 
@@ -42,21 +43,17 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 Just select the root `build.gradle` and your IDE will do the rest.
 It will ask you to change the language level - do it, we're using Java 8 now
 
-## Configuration
-There're things that need to be configured (such as app tokens and so on)
-`// TODO`
+###Configuration
+* Change your app's package by either [renaming the folder structure for Java sources](https://github.com/fs/android-base/tree/master/app/src/main/java/com/flatstack/android) or by just changing this [constant](https://github.com/fs/android-base/blob/master/app/build.gradle#L5) in `build.gradle`
 
 ###Making a release build
-`// TODO`
+* Just uncomment [these lines](https://github.com/fs/android-base/blob/master/app/build.gradle#L41-L48) and fill them up with your credentials
 
 ##Notes on ProGuarding
-Currently [Dagger](http://square.github.io/dagger/) doesn't work with ProGuard at all, but there's a project that solves the problem, and we need to somehow make it work on gradle: https://github.com/idamobile/dagger-proguard-helper
+`TODO`
 
 ## Credits
-
-Android app skeleton is maintained by [Nizamutdinov Adel](http://github.com/adelnizamutdinov).
+Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adelnizamutdinov).
 It was written by [Flatstack](http://www.flatstack.com) with the help of our
-[contributors](http://github.com/fs/android-base/contributors).
-
-
+[contributors](http://github.com/fs/android-base/contributors)
 [![Flatstack](https://avatars0.githubusercontent.com/u/15136?v=2&s=200)](http://www.flatstack.com)
