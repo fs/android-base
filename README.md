@@ -23,7 +23,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
     * Building
     * Running *Android Lint*
     * Running *Robolectric* tests
-    * Hook up your continuous deployment target in `after_success`
+    * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L21)
 * Release build signing and naming configuration
 ##What's not included
 * [Crashlytics](crashlytics.com): they live in their own world, and including their plugin in template project just fails the build, if `apikey` is not specified. Also, getting `apikey` without an IDE plugin is impossible. You can get it [here](https://crashlytics.com/downloads/android-studio)
