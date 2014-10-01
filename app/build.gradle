@@ -13,6 +13,7 @@ ext {
 
     DAGGER_VERSION = '1.2.2'
     ESPERANDRO_VERSION = '2.1.0'
+    fragmentArgs = '1.0.3'
 }
 
 android {
@@ -81,7 +82,8 @@ dependencies {
 
     compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
 
-    compile files('libs/argument-1.0.3.jar') // fragment arguments boilerplate
+    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgs"
+    provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgs"
 
     compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
     provided 'com.github.mttkay.memento:memento-processor:0.2'
