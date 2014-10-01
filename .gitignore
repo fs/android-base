@@ -10,3 +10,4 @@ build/
 crashlytics.properties
 crashlytics-build.properties
 com_crashlytics_export_strings.xml
+dagger-proguard-keepnames.cfg

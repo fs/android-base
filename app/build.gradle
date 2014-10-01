@@ -63,6 +63,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'http://nexus.idamob.ru/content/groups/public' }
+}
+
 dependencies {
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0' // java 8
 
@@ -73,6 +77,8 @@ dependencies {
 
     compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
     provided "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
+    provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
+
     compile 'com.squareup.picasso:picasso:2.3.4' // image loading
     compile 'com.squareup.okhttp:okhttp:2.0.0' // HTTP client
     compile 'com.squareup.retrofit:converter-jackson:1.6.1'
