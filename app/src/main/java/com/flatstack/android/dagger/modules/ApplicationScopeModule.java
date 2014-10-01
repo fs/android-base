@@ -1,4 +1,4 @@
-package com.flatstack.android.dagger;
+package com.flatstack.android.dagger.modules;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,6 +10,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -20,9 +22,9 @@ import dagger.Provides;
 
 @Module(library = true)
 public class ApplicationScopeModule {
-    final Application application;
+    final @NotNull Application application;
 
-    public ApplicationScopeModule(Application application) {
+    public ApplicationScopeModule(@NotNull Application application) {
         this.application = application;
     }
 

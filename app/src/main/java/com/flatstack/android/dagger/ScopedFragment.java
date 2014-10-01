@@ -19,36 +19,29 @@ import lombok.Getter;
  * Created by adel on 6/7/14
  */
 public abstract class ScopedFragment extends Fragment {
-    @Nullable @Getter(AccessLevel.PROTECTED) Context     scopedContext;
-    @Nullable                                ObjectGraph objectGraph;
+    @NotNull @Getter(AccessLevel.PROTECTED) Context     scopedContext;
+    @Nullable                               ObjectGraph objectGraph;
 
-    @NotNull protected abstract Object getDaggerModule(@NotNull Context activity);
+    @NotNull protected abstract View createScopedView(@NotNull LayoutInflater inflater,
+                                                      @NotNull ViewGroup container,
+                                                      @Nullable Bundle savedInstanceState);
 
-    @NotNull protected abstract View onCreateScopedView(@NotNull LayoutInflater inflater,
-                                                        @NotNull ViewGroup container,
-                                                        @Nullable Bundle savedInstanceState);
-
-    @NotNull ObjectGraph getObjectGraph(@NotNull Context activity) {
-        if (objectGraph == null) {
-            objectGraph = Dagger.getObjectGraph(activity).plus(getDaggerModule(activity));
-        }
-        return objectGraph;
-    }
+    @NotNull protected abstract ObjectGraph createDaggerScope(@NotNull Context activity);
 
     @Override public void onAttach(@NotNull Activity activity) {
         super.onAttach(activity);
-        scopedContext = new ScopedContextWrapper(activity, getObjectGraph(activity));
+        scopedContext = new ScopedContextWrapper(activity, createDaggerScope(activity));
     }
 
     @Override public View onCreateView(@NotNull LayoutInflater inflater,
                                        @Nullable ViewGroup container,
                                        @Nullable Bundle savedInstanceState) {
-        if (scopedContext == null || container == null) {
+        if (container == null) {
             throw new AssertionError("no nulls here");
         }
-        return onCreateScopedView(LayoutInflater.from(scopedContext),
-                                  container,
-                                  savedInstanceState);
+        return createScopedView(LayoutInflater.from(scopedContext),
+                                container,
+                                savedInstanceState);
     }
 
     @Override public void onDetach() {

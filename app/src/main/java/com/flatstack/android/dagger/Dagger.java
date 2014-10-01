@@ -29,4 +29,8 @@ public class Dagger {
     public static void inject(@NotNull Fragment fragment) {
         getObjectGraph(fragment.getActivity()).inject(fragment);
     }
+
+    public static void inject(@NotNull ScopedFragment fragment) {
+        getObjectGraph(fragment.getScopedContext()).inject(fragment);
+    }
 }

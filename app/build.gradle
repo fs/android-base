@@ -3,17 +3,15 @@ apply plugin: 'retrolambda'
 
 ext {
     APPLICATION_ID = "com.flatstack.android"
-    TARGET_SDK_VERSION = 20
-    BUILD_TOOLS_VERSION = '20'
 
-    IS_TRAVIS = "true".equals(System.getenv("TRAVIS"))
-    PRE_DEX_ENABLED = "true".equals(System.getProperty("pre-dex", "true"))
+    isTravis = "true".equals(System.getenv("TRAVIS"))
+    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 
-    DAGGER_VERSION = '1.2.2'
-    ESPERANDRO_VERSION = '2.1.0'
-    fragmentArgs = '1.0.3'
+    daggerVersion = '1.2.2'
+    esperandroVersion = '2.1.0'
+    fragmentArgsVersion = '1.0.3'
 }
 
 android {
@@ -21,7 +19,7 @@ android {
     buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
 
         applicationId APPLICATION_ID
@@ -46,7 +44,7 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = PRE_DEX_ENABLED && !IS_TRAVIS
+        preDexLibraries = preDexEnabled && !isTravis
     }
 
     packagingOptions {
@@ -64,6 +62,7 @@ android {
 }
 
 repositories {
+    // dagger proguard generator
     maven { url 'http://nexus.idamob.ru/content/groups/public' }
 }
 
@@ -75,8 +74,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.2' // view injection
     compile 'com.jakewharton.timber:timber:2.4.1' // logging
 
-    compile "com.squareup.dagger:dagger:$DAGGER_VERSION" // DI
-    provided "com.squareup.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile "com.squareup.dagger:dagger:$daggerVersion" // DI
+    provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
+
+    // proguard file generation for dagger files
     provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
 
     compile 'com.squareup.picasso:picasso:2.3.4' // image loading
@@ -88,15 +89,15 @@ dependencies {
 
     compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
 
-    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgs"
-    provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgs"
+    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion"
+    provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
     compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
     provided 'com.github.mttkay.memento:memento-processor:0.2'
 
-    provided "de.devland.esperandro:esperandro:$ESPERANDRO_VERSION" // shared prefs boilerplate
-    compile "de.devland.esperandro:esperandro-api:$ESPERANDRO_VERSION"
-    compile "de.devland.esperandro:esperandro-jackson-addon:$ESPERANDRO_VERSION"
+    provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
+    compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
+    compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
     compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
 }

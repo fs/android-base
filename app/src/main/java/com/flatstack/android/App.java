@@ -2,7 +2,7 @@ package com.flatstack.android;
 
 import android.app.Application;
 
-import com.flatstack.android.dagger.ApplicationScopeModule;
+import com.flatstack.android.dagger.modules.ApplicationScopeModule;
 import com.flatstack.android.dagger.Injector;
 import com.flatstack.android.utils.Lists;
 import com.flatstack.android.utils.TimberCrashReportingTree;
@@ -16,8 +16,8 @@ import lombok.Getter;
 import timber.log.Timber;
 
 public class App extends Application implements Injector {
-    final @NotNull @Getter ObjectGraph objectGraph =
-            ObjectGraph.create(getDaggerModules().toArray());
+    @NotNull @Getter
+    final ObjectGraph objectGraph = ObjectGraph.create(getDaggerModules().toArray());
 
     @Override public void onCreate() {
         super.onCreate();

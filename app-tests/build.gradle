@@ -8,7 +8,6 @@ repositories {
     maven { url "file://${System.getenv("ANDROID_HOME")}/extras/android/m2repository" }
 }
 
-
 dependencies {
     final androidModule = project(':app')
     testCompile androidModule
@@ -18,7 +17,7 @@ dependencies {
     testCompile javaCompile.outputs.files
     testCompile files(androidModule.plugins.findPlugin("com.android.application").getBootClasspath())
 
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.12-beta-2'
     testCompile 'com.squareup.assertj:assertj-android:1.0.0'
     testCompile 'org.robolectric:robolectric:2.3'
 }
