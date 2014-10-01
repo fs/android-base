@@ -7,14 +7,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.flatstack.android.R;
+import com.flatstack.android.RobolectricGradleTestRunner;
 import com.flatstack.android.dagger.Dagger;
 import com.flatstack.android.dagger.ScopedContextWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import dagger.Module;
 import dagger.ObjectGraph;
@@ -22,8 +21,7 @@ import dagger.ObjectGraph;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
 public class MainFragmentTest {
     @Module static class MyModule {}
 

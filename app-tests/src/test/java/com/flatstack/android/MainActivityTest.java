@@ -10,8 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.tester.android.view.TestMenuItem;
 import org.robolectric.util.ActivityController;
 
@@ -24,8 +22,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by adelnizamutdinov on 03/03/2014
  */
-@Config(emulateSdk = 18, manifest = "src/main/AndroidManifest.xml")
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
 public class MainActivityTest {
     ActivityController<MainActivity> activityController;
 

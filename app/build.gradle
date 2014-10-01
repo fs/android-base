@@ -63,7 +63,7 @@ android {
 }
 
 dependencies {
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.5.0' // java 8
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0' // java 8
 
     compile 'com.netflix.rxjava:rxjava-android:0.20.4' // asyncrony and events
 
