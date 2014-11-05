@@ -7,7 +7,7 @@ buildscript {
 
     dependencies {
         // android plugin
-        classpath 'com.android.tools.build:gradle:0.13.0'
+        classpath 'com.android.tools.build:gradle:0.14.0'
         // use Java 8 lambdas on android
         classpath 'me.tatarka:gradle-retrolambda:2.4.0'
         // versions plugin
@@ -26,9 +26,9 @@ allprojects {
 // project wide version settings for all submodules
 ext {
     MIN_SDK_VERSION = 14
-    TARGET_SDK_VERSION = 20
-    BUILD_TOOLS_VERSION = '20'
-    SUPPORT_LIBRARY_VERSION = '20.0.0'
+    TARGET_SDK_VERSION = 21
+    BUILD_TOOLS_VERSION = '21.1'
+    SUPPORT_LIBRARY_VERSION = '21.0.0'
 }
 
 task wrapper(type: Wrapper) {

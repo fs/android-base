@@ -11,15 +11,13 @@ repositories {
 dependencies {
     final androidModule = project(':app')
     testCompile androidModule
-
     final javaCompile = androidModule.android.applicationVariants.toList().first().javaCompile
     testCompile javaCompile.classpath
     testCompile javaCompile.outputs.files
-    testCompile files(androidModule.plugins.findPlugin("com.android.application").getBootClasspath())
-
     testCompile 'junit:junit:4.12-beta-2'
     testCompile 'com.squareup.assertj:assertj-android:1.0.0'
     testCompile 'org.robolectric:robolectric:2.3'
+    compile project(':app')
 }
 
 tasks.withType(Test) {
