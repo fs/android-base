@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 ext {
     APPLICATION_ID = "com.flatstack.android"
@@ -78,7 +79,7 @@ repositories {
 }
 
 dependencies {
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0' // java 8
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.7.0' // java 8
 
     compile 'com.netflix.rxjava:rxjava-android:0.20.4' // asyncrony and events
 
@@ -86,7 +87,9 @@ dependencies {
     compile 'com.jakewharton.timber:timber:2.4.1' // logging
 
     compile "com.google.dagger:dagger:$daggerVersion" //DI
-    provided "com.google.dagger:dagger-compiler:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    compile 'org.glassfish:javax.annotation:10.0-b28'
 
     compile 'com.squareup.picasso:picasso:2.3.4' // image loading
     compile 'com.squareup.okhttp:okhttp:2.0.0' // HTTP client
@@ -112,5 +115,12 @@ dependencies {
 
 configurations {
     compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
-    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+//    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+}
+
+apt {
+    arguments {
+        resourcePackageName android.defaultConfig.packageName
+        androidManifestFile variant.processResources.manifestFile
+    }
 }

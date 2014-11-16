@@ -23,7 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.inject.Inject;
 
-import dagger.ObjectGraph;
+// TODO dagger
+//import dagger.ObjectGraph;
 import lombok.Getter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -35,7 +36,8 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
 
     @Inject @NotNull Preferences preferences; // injected from activity scope
 
-    @Retain @NotNull @Getter ObjectGraph objectGraph;
+    // TODO dagger
+//    @Retain @NotNull @Getter ObjectGraph objectGraph;
 
     @Override protected void attachBaseContext(@NotNull Context newBase) {
         super.attachBaseContext(new CalligraphyContextWrapper(newBase));
@@ -59,8 +61,9 @@ public class MainActivity extends Activity implements MementoCallbacks, Injector
     }
 
     @Override public void onLaunch() {
-        objectGraph = Dagger.getObjectGraph(getApplication())
-                .plus(new MainActivityScopeModule());
+        // TODO dagger
+//        objectGraph = Dagger.getObjectGraph(getApplication())
+//                .plus(new MainActivityScopeModule());
     }
 
     @Override public boolean onCreateOptionsMenu(@NotNull Menu menu) {

@@ -7,19 +7,23 @@ import android.view.LayoutInflater;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import dagger.ObjectGraph;
+// TODO dagger
+//import dagger.ObjectGraph;
 import lombok.Getter;
 
 /**
  * Created by adel on 6/7/14
  */
 public class ScopedContextWrapper extends ContextWrapper implements Injector {
-    final @NotNull @Getter ObjectGraph    objectGraph;
+    // TODO dagger
+    //    final @NotNull @Getter ObjectGraph    objectGraph;
     @Nullable              LayoutInflater inflater;
 
-    public ScopedContextWrapper(@NotNull Context base, @NotNull ObjectGraph objectGraph) {
+    // TODO dagger
+
+    public ScopedContextWrapper(@NotNull Context base /*, @NotNull ObjectGraph objectGraph*/) {
         super(base);
-        this.objectGraph = objectGraph;
+//        this.objectGraph = objectGraph;
     }
 
     @NotNull @Override public Object getSystemService(@NotNull String name) {

@@ -20,7 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.inject.Inject;
 
 import dagger.Lazy;
-import dagger.ObjectGraph;
+// TODO dagger
+//import dagger.ObjectGraph;
 import rx.subjects.Subject;
 
 public class MainFragment extends ScopedFragment {
@@ -28,9 +29,10 @@ public class MainFragment extends ScopedFragment {
     @Inject @NotNull Lazy<DatabaseHelper>            databaseHelper; //activity scope
     @Inject @NotNull Lazy<Subject<Boolean, Boolean>> truth; //fragment scope
 
-    @NotNull @Override protected ObjectGraph createDaggerScope(@NotNull Context activity) {
-        return Dagger.getObjectGraph(getActivity()).plus(new MainFragmentScopeModule());
-    }
+    // TODO dagger
+//    @NotNull @Override protected ObjectGraph createDaggerScope(@NotNull Context activity) {
+//        return Dagger.getObjectGraph(getActivity()).plus(new MainFragmentScopeModule());
+//    }
 
     @NotNull @Override protected View createScopedView(@NotNull LayoutInflater inflater,
                                                        @NotNull ViewGroup container,

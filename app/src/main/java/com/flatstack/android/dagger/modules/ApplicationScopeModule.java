@@ -20,8 +20,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(library = true)
-public class ApplicationScopeModule {
+@Module
+final public class ApplicationScopeModule {
     final @NotNull Application application;
 
     public ApplicationScopeModule(@NotNull Application application) {
