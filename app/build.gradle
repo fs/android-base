@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 ext {
     APPLICATION_ID = "com.flatstack.android"
@@ -9,7 +10,7 @@ ext {
 
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 
-    daggerVersion = '1.2.2'
+    daggerVersion = '2.0-SNAPSHOT'
     esperandroVersion = '2.1.0'
     fragmentArgsVersion = '1.0.3'
 }
@@ -71,23 +72,24 @@ android {
 }
 
 repositories {
-    // dagger proguard generator
-    maven { url 'http://nexus.idamob.ru/content/groups/public' }
+    // dagger repo
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
 }
 
 dependencies {
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0' // java 8
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.7.0' // java 8
 
     compile 'com.netflix.rxjava:rxjava-android:0.20.4' // asyncrony and events
 
     compile 'com.jakewharton:butterknife:5.1.2' // view injection
     compile 'com.jakewharton.timber:timber:2.4.1' // logging
 
-    compile "com.squareup.dagger:dagger:$daggerVersion" // DI
-    provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
+    compile "com.google.dagger:dagger:$daggerVersion" //DI
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    // proguard file generation for dagger files
-    provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
 
     compile 'com.squareup.picasso:picasso:2.3.4' // image loading
     compile 'com.squareup.okhttp:okhttp:2.0.0' // HTTP client
@@ -113,5 +115,12 @@ dependencies {
 
 configurations {
     compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
-    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+//    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+}
+
+apt {
+    arguments {
+        resourcePackageName android.defaultConfig.packageName
+        androidManifestFile variant.processResources.manifestFile
+    }
 }

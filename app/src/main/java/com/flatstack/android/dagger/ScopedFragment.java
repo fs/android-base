@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import dagger.ObjectGraph;
+// TODO dagger
+//import dagger.ObjectGraph;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -20,17 +21,20 @@ import lombok.Getter;
  */
 public abstract class ScopedFragment extends Fragment {
     @NotNull @Getter(AccessLevel.PROTECTED) Context     scopedContext;
-    @Nullable                               ObjectGraph objectGraph;
+    // TODO dagger
+//    @Nullable                               ObjectGraph objectGraph;
 
     @NotNull protected abstract View createScopedView(@NotNull LayoutInflater inflater,
                                                       @NotNull ViewGroup container,
                                                       @Nullable Bundle savedInstanceState);
 
-    @NotNull protected abstract ObjectGraph createDaggerScope(@NotNull Context activity);
+    // TODO dagger
+//    @NotNull protected abstract ObjectGraph createDaggerScope(@NotNull Context activity);
 
     @Override public void onAttach(@NotNull Activity activity) {
         super.onAttach(activity);
-        scopedContext = new ScopedContextWrapper(activity, createDaggerScope(activity));
+        // TODO dagger
+//        scopedContext = new ScopedContextWrapper(activity, createDaggerScope(activity));
     }
 
     @Override public View onCreateView(@NotNull LayoutInflater inflater,
