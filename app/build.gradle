@@ -66,6 +66,16 @@ android {
   }
 }
 
+apply plugin: 'android-unit-test'
+
+androidUnitTest {
+  testReleaseBuildType true
+  downloadDependenciesSources true
+  downloadDependenciesJavadoc true
+  downloadTestDependenciesSources true
+  downloadTestDependenciesJavadoc true
+}
+
 repositories {
   // dagger proguard generator
   maven { url 'http://nexus.idamob.ru/content/groups/public' }
@@ -111,6 +121,10 @@ dependencies {
   compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
   compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
+
+  testCompile 'junit:junit:4.10'
+  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  testCompile 'org.robolectric:robolectric:2.4'
 }
 
 configurations {
