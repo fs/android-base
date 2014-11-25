@@ -2,41 +2,37 @@ apply plugin: 'com.android.application'
 apply plugin: 'retrolambda'
 
 ext {
-    APPLICATION_ID = "com.flatstack.android"
+  APPLICATION_ID = "com.flatstack.android"
 
-    isTravis = "true".equals(System.getenv("TRAVIS"))
-    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+  isTravis = "true".equals(System.getenv("TRAVIS"))
+  preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
-    commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
-
-    daggerVersion = '1.2.2'
-    esperandroVersion = '2.1.0'
-    fragmentArgsVersion = '1.0.3'
+  commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 }
 
 android {
-    compileSdkVersion TARGET_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+  compileSdkVersion TARGET_SDK_VERSION
+  buildToolsVersion BUILD_TOOLS_VERSION
 
-    defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
+  defaultConfig {
+    minSdkVersion MIN_SDK_VERSION
+    targetSdkVersion TARGET_SDK_VERSION
 
-        applicationId APPLICATION_ID
-        versionCode 1
-        versionName '0.1.0'
+    applicationId APPLICATION_ID
+    versionCode 1
+    versionName '0.1.0'
+  }
+
+  productFlavors {
+    staging {
+      buildConfigField "String", "API_URL", "\"https://example-staging.com\""
+      applicationId "${APPLICATION_ID}.staging"
     }
 
-    productFlavors {
-        staging {
-            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationId "${APPLICATION_ID}.staging"
-        }
-
-        production {
-            buildConfigField "String", "API_URL", "\"https://example.com\""
-        }
+    production {
+      buildConfigField "String", "API_URL", "\"https://example.com\""
     }
+  }
 
 //    signingConfigs {
 //        release {
@@ -47,71 +43,77 @@ android {
 //        }
 //    }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 
-    dexOptions {
-        preDexLibraries = preDexEnabled && !isTravis
-    }
+  dexOptions {
+    preDexLibraries = preDexEnabled && !isTravis
+  }
 
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-    }
+  packagingOptions {
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
 
-    lintOptions {
-        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-        disable 'InvalidPackage', 'GradleDependency'
-        warningsAsErrors true
-        lintConfig file("$projectDir/lint.xml")
-    }
+  lintOptions {
+    enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
+    disable 'InvalidPackage', 'GradleDependency'
+    warningsAsErrors true
+    lintConfig file("$projectDir/lint.xml")
+  }
 }
 
 repositories {
-    // dagger proguard generator
-    maven { url 'http://nexus.idamob.ru/content/groups/public' }
+  // dagger proguard generator
+  maven { url 'http://nexus.idamob.ru/content/groups/public' }
+}
+
+ext {
+  daggerVersion = '1.2.2'
+  esperandroVersion = '2.1.0'
+  fragmentArgsVersion = '1.1.0'
 }
 
 dependencies {
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.6.0' // java 8
+  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
-    compile 'com.netflix.rxjava:rxjava-android:0.20.4' // asyncrony and events
+  compile 'io.reactivex:rxandroid:0.23.0'
 
-    compile 'com.jakewharton:butterknife:5.1.2' // view injection
-    compile 'com.jakewharton.timber:timber:2.4.1' // logging
+  compile 'com.jakewharton:butterknife:6.0.0' // view injection
+  compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
-    compile "com.squareup.dagger:dagger:$daggerVersion" // DI
-    provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
+  compile "com.squareup.dagger:dagger:$daggerVersion" // DI
+  provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
 
-    // proguard file generation for dagger files
-    provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
+  // proguard file generation for dagger files
+  provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
 
-    compile 'com.squareup.picasso:picasso:2.3.4' // image loading
-    compile 'com.squareup.okhttp:okhttp:2.0.0' // HTTP client
-    compile 'com.squareup.retrofit:converter-jackson:1.6.1'
-    compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
+  compile 'com.squareup.picasso:picasso:2.4.0' // image loading
+  compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
+  compile 'com.squareup.retrofit:converter-jackson:1.8.0'
+  compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-    compile 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+  compile 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
-    compile 'nl.qbusict:cupboard:2.0.1' // sql boilerplate
+  compile 'nl.qbusict:cupboard:2.1.1' // sql boilerplate
 
-    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion"
-    provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
+  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion"
+  provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
-    compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
-    provided 'com.github.mttkay.memento:memento-processor:0.2'
+  compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
+  provided 'com.github.mttkay.memento:memento-processor:0.2'
 
-    provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
-    compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
-    compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
+  provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
+  compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
+  compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
-    compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
+  compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
 }
 
 configurations {
-    compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
-    compile.exclude module: 'guava' // some deps drag this monster into the final APK
+  compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
+  compile.exclude module: 'guava' // some deps drag this monster into the final APK
 }

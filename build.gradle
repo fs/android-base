@@ -1,36 +1,32 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        // gradle versions
-        maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
-    }
-
-    dependencies {
-        // android plugin
-        classpath 'com.android.tools.build:gradle:0.14.0'
-        // use Java 8 lambdas on android
-        classpath 'me.tatarka:gradle-retrolambda:2.4.0'
-        // versions plugin
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-5'
-    }
-}
-
-apply plugin: 'versions'
-
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
 // project wide version settings for all submodules
 ext {
-    MIN_SDK_VERSION = 14
-    TARGET_SDK_VERSION = 21
-    BUILD_TOOLS_VERSION = '21.1'
-    SUPPORT_LIBRARY_VERSION = '21.0.0'
+  MIN_SDK_VERSION = 14
+  TARGET_SDK_VERSION = 21
+  BUILD_TOOLS_VERSION = '21.1.1'
+  SUPPORT_LIBRARY_VERSION = '21.0.0'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    // android plugin
+    classpath 'com.android.tools.build:gradle:1.0.0-rc1'
+    // use Java 8 lambdas on android
+    classpath 'me.tatarka:gradle-retrolambda:2.4.1'
+    // versions plugin
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
+  }
 }
+
+apply plugin: 'com.github.ben-manes.versions'
+
+allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.2' }
