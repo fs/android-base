@@ -5,6 +5,10 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 * `JAVA_HOME` pointing to your jdk8
 * `ANDROID_HOME` pointing to your android-sdk
 
+##Plugins for Android Studio for comfortable work
+* [Lombok](https://plugins.jetbrains.com/plugin/6317)
+* [Unit test](https://github.com/evant/android-studio-unit-test-plugin)
+
 ##What's included:
 * [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L33-L42) build flavors with different package names ([read more](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Product-flavors))
 * Logger configuration [supporting `Exception` logging](https://github.com/fs/android-base/blob/master/app/src/main/java/com/flatstack/android/App.java#L24-L26) ([read more](https://github.com/JakeWharton/timber))
