@@ -80,6 +80,10 @@ ext {
 }
 
 dependencies {
+
+  compile 'com.android.support:support-v4:21.0.0'
+  compile 'com.android.support:appcompat-v7:21.0.0'
+
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
   compile 'io.reactivex:rxandroid:0.23.0'

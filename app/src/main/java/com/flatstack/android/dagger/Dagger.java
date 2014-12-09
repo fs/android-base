@@ -1,10 +1,12 @@
 package com.flatstack.android.dagger;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.View;
-import dagger.ObjectGraph;
+
 import org.jetbrains.annotations.NotNull;
+
+import dagger.ObjectGraph;
 
 public class Dagger {
   @NotNull public static ObjectGraph getObjectGraph(@NotNull Context context) {
