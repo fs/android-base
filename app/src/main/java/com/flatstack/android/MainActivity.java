@@ -8,12 +8,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.flatstack.android.dagger.Dagger;
 import com.flatstack.android.dagger.Injector;
 import com.flatstack.android.dagger.modules.MainActivityScopeModule;
 import com.flatstack.android.fragments.MainFragment;
-import com.flatstack.android.fragments.PrefsFragment;
 import com.flatstack.android.utils.Preferences;
 import com.github.mttkay.memento.Memento;
 import com.github.mttkay.memento.MementoCallbacks;
@@ -83,10 +83,7 @@ public class MainActivity extends ActionBarActivity implements MementoCallbacks,
                 return true;
 
             case R.id.action_settings:
-                getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content, new PrefsFragment())
-            .addToBackStack(null)
-            .commit();
+                Toast.makeText(this, "Hello Flatstack", Toast.LENGTH_SHORT).show();
         return true;
 
       default:
