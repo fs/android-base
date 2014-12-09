@@ -121,7 +121,7 @@ dependencies {
 
   testCompile 'junit:junit:4.12-beta-3'
   testCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  testCompile 'org.robolectric:robolectric:2.3'
+  testCompile 'org.robolectric:robolectric:2.4'
 }
 
 configurations {
