@@ -35,7 +35,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 
     	git clone --depth 1 git://github.com/fs/android-base.git --origin android-base [MY-NEW-PROJECT]
     	
-    +**Note: we use depth parameter here in order to not copy the history of changes in base project**
+    **Note: we use depth parameter here in order to not copy the history of changes in base project**
 
  2. Create your new repository on the GitHub and push master into it. Make sure master branch is tracking origin repo.
 
