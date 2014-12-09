@@ -81,8 +81,8 @@ ext {
 
 dependencies {
 
-  compile 'com.android.support:support-v4:21.0.0'
-  compile 'com.android.support:appcompat-v7:21.0.0'
+  compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
 
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
