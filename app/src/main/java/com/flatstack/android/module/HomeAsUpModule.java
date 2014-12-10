@@ -28,7 +28,7 @@ public class HomeAsUpModule extends RxModule implements
   @Override public boolean onOptionsItemSelected(MenuItem menuItem) {
     if (menuItem.getItemId() == android.R.id.home) {
       if (isFragment) {
-        activity.getFragmentManager().popBackStack();
+        activity.getSupportFragmentManager().popBackStack();
       } else {
         activity.onBackPressed();
       }
