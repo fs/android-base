@@ -80,6 +80,10 @@ ext {
 }
 
 dependencies {
+
+  compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
   compile 'io.reactivex:rxandroid:0.23.0' // events
@@ -112,6 +116,7 @@ dependencies {
 
 //  testCompile 'junit:junit:4.12'
   testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  testCompile 'org.robolectric:robolectric:2.4'
   testCompile 'org.robolectric:robolectric:2.3'
   testCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
 }

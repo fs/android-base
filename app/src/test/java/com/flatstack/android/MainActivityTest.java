@@ -1,10 +1,11 @@
 package com.flatstack.android;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+
 import com.flatstack.android.dagger.Dagger;
 import com.flatstack.android.fragments.MainFragment;
-import dagger.ObjectGraph;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.tester.android.view.TestMenuItem;
 import org.robolectric.util.ActivityController;
+
+import dagger.ObjectGraph;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -34,8 +37,8 @@ public class MainActivityTest {
     MainActivity mainActivity = activityController.create().get();
     assertNotNull(mainActivity.getObjectGraph());
 
-    Fragment mainFragment = mainActivity.getFragmentManager().findFragmentById(
-        android.R.id.content);
+    Fragment mainFragment = mainActivity.getSupportFragmentManager()
+        .findFragmentById(R.id.content);
     assertNotNull(mainFragment);
     assertTrue(mainFragment instanceof MainFragment);
   }
@@ -49,9 +52,9 @@ public class MainActivityTest {
 
   @Test public void testOnOptionsItemSelected() throws Exception {
     MainActivity mainActivity = activityController.create().get();
-    FragmentManager fragmentManager = mainActivity.getFragmentManager();
+    FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
     fragmentManager.beginTransaction()
-        .replace(android.R.id.content, new Fragment())
+        .replace(R.id.content, new Fragment())
         .addToBackStack(null)
         .commit();
     int oldStack = fragmentManager.getBackStackEntryCount();
