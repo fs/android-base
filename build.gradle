@@ -18,8 +18,8 @@ buildscript {
     classpath 'me.tatarka:gradle-retrolambda:2.4.1'
     // versions plugin
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
-    // unittest
-    classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.0.2'
+    // the latest version of the android-apt plugin
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
   }
 }
 

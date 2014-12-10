@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.InjectView;
 import com.flatstack.android.dagger.Dagger;
 import com.flatstack.android.dagger.Injector;
-import com.flatstack.android.fragments.MainFragment;
+import com.flatstack.android.fragments.MainFragmentBuilder;
 import com.flatstack.android.rx.RxActivity;
 import com.flatstack.android.utils.Persistence;
 import com.flatstack.android.utils.StatusBar;
@@ -30,7 +30,7 @@ public class MainActivity extends RxActivity implements Injector {
 
     if (savedInstanceState == null) {
       getSupportFragmentManager().beginTransaction()
-          .replace(R.id.content, new MainFragment())
+          .replace(R.id.content, new MainFragmentBuilder(R.id.content).build())
           .commit();
     }
   }

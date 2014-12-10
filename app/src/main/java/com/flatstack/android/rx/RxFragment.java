@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import org.jetbrains.annotations.NotNull;
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -17,6 +18,7 @@ public class RxFragment extends Fragment {
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    FragmentArgs.inject(this);
     events.onNext(LifeCycleEvent.CREATE);
   }
 

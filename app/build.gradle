@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 ext {
   APPLICATION_ID = "com.flatstack.android"
@@ -66,8 +67,6 @@ android {
   }
 }
 
-apply plugin: 'android-unit-test'
-
 repositories {
   // dagger proguard generator
   maven { url 'http://nexus.idamob.ru/content/groups/public' }
@@ -95,21 +94,22 @@ dependencies {
   compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
   compile "com.squareup.dagger:dagger:$daggerVersion" // DI
-  provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
+  apt "com.squareup.dagger:dagger-compiler:$daggerVersion"
 
   compile 'com.squareup.picasso:picasso:2.4.0' // image loading
   compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
   compile 'com.squareup.retrofit:converter-jackson:1.8.0'
   compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-  compile 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+  apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+  provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
   compile 'nl.qbusict:cupboard:2.1.1' // sql boilerplate
 
   compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
-  provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
+  apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
-  provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
+  apt "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
   compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
   compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
@@ -120,11 +120,8 @@ dependencies {
   compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
   compile "com.android.support:support-v4-preferencefragment:1.0.0"
 
-  testCompile 'junit:junit:4.12'
-  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  testCompile 'org.robolectric:robolectric:2.4'
-  testCompile 'org.robolectric:robolectric:2.3'
-  testCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
+  androidTestCompile 'junit:junit:4.12'
+  androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
 }
 
 configurations {

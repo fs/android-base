@@ -1,9 +1,2 @@
 <resources>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">#32AF64</item>
-        <item name="colorAccent">#fff</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
 </resources>
