@@ -1,10 +1,9 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- For toolbar support -->
-        <item name="android:windowActionBar">false</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#32AF64</item>
+        <item name="colorAccent">#fff</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
-
 </resources>

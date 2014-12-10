@@ -9,4 +9,4 @@ import dagger.Module;
  * Created by adelnizamutdinov on 03/03/2014
  */
 @Module(injects = {OkHttpClient.class, Picasso.class})
-public class ModulesTestModule {}
+public class TestDaggerModule {}

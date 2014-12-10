@@ -79,11 +79,14 @@ ext {
   fragmentArgsVersion = '1.2.0'
 }
 
+repositories {
+  maven {
+    // support preference fragment
+    url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
+  }
+}
+
 dependencies {
-
-  compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
-  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
   compile 'io.reactivex:rxandroid:0.23.0' // events
@@ -114,7 +117,10 @@ dependencies {
   compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
   compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
 
-//  testCompile 'junit:junit:4.12'
+  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
+  compile "com.android.support:support-v4-preferencefragment:1.0.0"
+
+  testCompile 'junit:junit:4.12'
   testCompile 'com.squareup.assertj:assertj-android:1.0.0'
   testCompile 'org.robolectric:robolectric:2.4'
   testCompile 'org.robolectric:robolectric:2.3'

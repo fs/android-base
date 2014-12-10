@@ -12,13 +12,14 @@ import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 public class App extends Application implements Injector {
-  @NotNull @Getter final ObjectGraph objectGraph = ObjectGraph.create(getDaggerModules().toArray());
+  @Getter @NotNull ObjectGraph objectGraph;
 
   @Override public void onCreate() {
     super.onCreate();
     Timber.plant(BuildConfig.DEBUG
                      ? new Timber.DebugTree()
                      : new TimberCrashReportingTree());
+    objectGraph = ObjectGraph.create(getDaggerModules().toArray());
   }
 
   @NotNull protected List<Object> getDaggerModules() {
