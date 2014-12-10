@@ -2,7 +2,7 @@ package com.flatstack.android;
 
 import android.app.Application;
 import com.flatstack.android.dagger.Injector;
-import com.flatstack.android.dagger.modules.ApplicationScopeModule;
+import com.flatstack.android.dagger.modules.AppDaggerModule;
 import com.flatstack.android.utils.Lists;
 import com.flatstack.android.utils.TimberCrashReportingTree;
 import dagger.ObjectGraph;
@@ -22,6 +22,6 @@ public class App extends Application implements Injector {
   }
 
   @NotNull protected List<Object> getDaggerModules() {
-    return Lists.mutableOf(new ApplicationScopeModule(this));
+    return Lists.mutableOf(new AppDaggerModule(this));
   }
 }

@@ -4,12 +4,17 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flatstack.android.qualifiers.CacheDir;
+import com.flatstack.android.utils.DatabaseHelper;
+import com.flatstack.android.utils.Preferences;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import de.devland.esperandro.Esperandro;
+import de.devland.esperandro.serialization.JacksonSerializer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -21,10 +26,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module(library = true)
-public class ApplicationScopeModule {
+public class AppDaggerModule {
     final @NotNull Application application;
 
-    public ApplicationScopeModule(@NotNull Application application) {
+    public AppDaggerModule(@NotNull Application application) {
         this.application = application;
     }
 
@@ -54,4 +59,16 @@ public class ApplicationScopeModule {
                 .downloader(new OkHttpDownloader(okHttpClient))
                 .build();
     }
+
+  @Provides @Singleton ObjectMapper provideJackson() { return new ObjectMapper(); }
+
+  @Provides @Singleton Preferences providePreferences(Context context,
+                                                      ObjectMapper objectMapper) {
+    Esperandro.setSerializer(new JacksonSerializer(objectMapper));
+    return Esperandro.getPreferences(Preferences.class, context);
+  }
+
+  @Provides @Singleton DatabaseHelper provideDatabaseHelper(Context context) {
+    return new DatabaseHelper(context);
+  }
 }

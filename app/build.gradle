@@ -76,23 +76,19 @@ repositories {
 ext {
   daggerVersion = '1.2.2'
   esperandroVersion = '2.1.0'
-  fragmentArgsVersion = '1.1.0'
+  fragmentArgsVersion = '1.2.0'
 }
 
 dependencies {
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
-  compile 'io.reactivex:rxandroid:0.23.0'
+  compile 'io.reactivex:rxandroid:0.23.0' // events
 
   compile 'com.jakewharton:butterknife:6.0.0' // view injection
   compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
   compile "com.squareup.dagger:dagger:$daggerVersion" // DI
   provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
-  testCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
-
-  // proguard file generation for dagger files
-  provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
 
   compile 'com.squareup.picasso:picasso:2.4.0' // image loading
   compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
@@ -103,21 +99,21 @@ dependencies {
 
   compile 'nl.qbusict:cupboard:2.1.1' // sql boilerplate
 
-  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion"
+  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
   provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
-
-  compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
-  provided 'com.github.mttkay.memento:memento-processor:0.2'
 
   provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
   compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
   compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
-  compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
+  compile 'com.github.plusonesoftware:modular:0.3.0' // modular activity/fragments
+  compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
+  compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
 
-  testCompile 'junit:junit:4.12-beta-3'
+//  testCompile 'junit:junit:4.12'
   testCompile 'com.squareup.assertj:assertj-android:1.0.0'
   testCompile 'org.robolectric:robolectric:2.3'
+  testCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
 }
 
 configurations {
