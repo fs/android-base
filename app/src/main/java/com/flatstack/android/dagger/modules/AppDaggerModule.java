@@ -7,7 +7,7 @@ import android.os.Environment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flatstack.android.qualifiers.CacheDir;
 import com.flatstack.android.utils.DatabaseHelper;
-import com.flatstack.android.utils.Preferences;
+import com.flatstack.android.utils.Persistence;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
@@ -62,10 +62,10 @@ public class AppDaggerModule {
 
   @Provides @Singleton ObjectMapper provideJackson() { return new ObjectMapper(); }
 
-  @Provides @Singleton Preferences providePreferences(Context context,
+  @Provides @Singleton Persistence providePreferences(Context context,
                                                       ObjectMapper objectMapper) {
     Esperandro.setSerializer(new JacksonSerializer(objectMapper));
-    return Esperandro.getPreferences(Preferences.class, context);
+    return Esperandro.getPreferences(Persistence.class, context);
   }
 
   @Provides @Singleton DatabaseHelper provideDatabaseHelper(Context context) {
