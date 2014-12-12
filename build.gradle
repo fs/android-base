@@ -3,7 +3,7 @@ ext {
   MIN_SDK_VERSION = 14
   TARGET_SDK_VERSION = 21
   BUILD_TOOLS_VERSION = '21.1.1'
-  SUPPORT_LIBRARY_VERSION = '21.0.2'
+  SUPPORT_LIBRARY_VERSION = '21.0.3'
 }
 
 buildscript {
@@ -20,6 +20,8 @@ buildscript {
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
     // the latest version of the android-apt plugin
     classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    // robolectric
+    classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.0.2'
   }
 }
 

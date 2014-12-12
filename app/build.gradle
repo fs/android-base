@@ -67,6 +67,8 @@ android {
   }
 }
 
+apply plugin: 'android-unit-test'
+
 repositories {
   // dagger proguard generator
   maven { url 'http://nexus.idamob.ru/content/groups/public' }
@@ -75,7 +77,7 @@ repositories {
 ext {
   daggerVersion = '1.2.2'
   esperandroVersion = '2.1.0'
-  fragmentArgsVersion = '1.2.0'
+  fragmentArgsVersion = '2.0.0'
 }
 
 repositories {
@@ -120,8 +122,11 @@ dependencies {
   compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
   compile "com.android.support:support-v4-preferencefragment:1.0.0"
 
-  androidTestCompile 'junit:junit:4.12'
   androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
+
+  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.robolectric:robolectric:2.4'
 }
 
 configurations {
