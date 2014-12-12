@@ -69,11 +69,6 @@ android {
 
 apply plugin: 'android-unit-test'
 
-repositories {
-  // dagger proguard generator
-  maven { url 'http://nexus.idamob.ru/content/groups/public' }
-}
-
 ext {
   daggerVersion = '1.2.2'
   esperandroVersion = '2.1.0'
