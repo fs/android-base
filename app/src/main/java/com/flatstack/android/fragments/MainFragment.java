@@ -34,7 +34,6 @@ public class MainFragment extends RxFragment {
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     Dagger.inject(this);
-
     activity().setTitle(R.string.app_name);
     setHasOptionsMenu(true);
     HomeAsUp.disable(activity());

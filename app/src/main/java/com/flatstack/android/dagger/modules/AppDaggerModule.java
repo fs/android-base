@@ -3,7 +3,20 @@ package com.flatstack.android.dagger.modules;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.flatstack.android.MainActivity;
 import com.flatstack.android.fragments.MainFragment;
 import com.flatstack.android.qualifiers.CacheDir;
@@ -19,6 +32,7 @@ import de.devland.esperandro.Esperandro;
 import de.devland.esperandro.serialization.JacksonSerializer;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import javax.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +70,40 @@ public class AppDaggerModule {
         .build();
   }
 
-  @Provides @Singleton ObjectMapper provideJackson() { return new ObjectMapper(); }
+  @Provides @Singleton ObjectMapper provideJackson() {
+    final ObjectMapper om = new ObjectMapper();
+    om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    om.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+
+    // ISO 8601
+    om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"));
+
+    final SimpleModule sm = new SimpleModule();
+    sm.setDeserializerModifier(new BeanDeserializerModifier() {
+      @Override public JsonDeserializer<Enum> modifyEnumDeserializer(
+          DeserializationConfig config,
+          JavaType type,
+          BeanDescription beanDesc,
+          JsonDeserializer<?> deserializer) {
+        return new JsonDeserializer<Enum>() {
+          @Override public Enum deserialize(JsonParser jp,
+                                            DeserializationContext ctxt) throws IOException {
+            final Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+            return Enum.valueOf(rawClass, jp.getValueAsString().toUpperCase());
+          }
+        };
+      }
+    });
+    sm.addSerializer(Enum.class, new StdSerializer<Enum>(Enum.class) {
+      @Override public void serialize(Enum value,
+                                      JsonGenerator jgen,
+                                      SerializerProvider provider) throws IOException {
+        jgen.writeString(value.name().toLowerCase());
+      }
+    });
+    om.registerModule(sm);
+    return om;
+  }
 
   @Provides @Singleton Persistence providePreferences(Context context,
                                                       ObjectMapper objectMapper) {

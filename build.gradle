@@ -15,13 +15,13 @@ buildscript {
     // android plugin
     classpath 'com.android.tools.build:gradle:1.0.0'
     // use Java 8 lambdas on android
-    classpath 'me.tatarka:gradle-retrolambda:2.4.1'
+    classpath 'me.tatarka:gradle-retrolambda:2.5.0'
     // versions plugin
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
     // the latest version of the android-apt plugin
     classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     // robolectric
-    classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.0.2'
+    classpath 'org.robolectric:robolectric-gradle-plugin:0.14.1'
   }
 }
 
