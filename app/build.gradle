@@ -66,8 +66,6 @@ android {
   }
 }
 
-apply plugin: 'android-unit-test'
-
 repositories {
   // dagger proguard generator
   maven { url 'http://nexus.idamob.ru/content/groups/public' }
