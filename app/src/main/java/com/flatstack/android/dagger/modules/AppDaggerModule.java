@@ -3,6 +3,7 @@ package com.flatstack.android.dagger.modules;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.BeanDescription;
@@ -26,15 +27,20 @@ import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import de.devland.esperandro.Esperandro;
 import de.devland.esperandro.serialization.JacksonSerializer;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import javax.inject.Singleton;
-import org.jetbrains.annotations.NotNull;
 
 @Module(injects = {
     MainActivity.class,
@@ -76,7 +82,7 @@ public class AppDaggerModule {
     om.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
     // ISO 8601
-    om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz"));
+    om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US));
 
     final SimpleModule sm = new SimpleModule();
     sm.setDeserializerModifier(new BeanDeserializerModifier() {
@@ -88,8 +94,9 @@ public class AppDaggerModule {
         return new JsonDeserializer<Enum>() {
           @Override public Enum deserialize(JsonParser jp,
                                             DeserializationContext ctxt) throws IOException {
+            @SuppressWarnings("unchecked")
             final Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
-            return Enum.valueOf(rawClass, jp.getValueAsString().toUpperCase());
+            return Enum.valueOf(rawClass, jp.getValueAsString().toUpperCase(Locale.US));
           }
         };
       }
@@ -98,7 +105,7 @@ public class AppDaggerModule {
       @Override public void serialize(Enum value,
                                       JsonGenerator jgen,
                                       SerializerProvider provider) throws IOException {
-        jgen.writeString(value.name().toLowerCase());
+        jgen.writeString(value.name().toLowerCase(Locale.US));
       }
     });
     om.registerModule(sm);
