@@ -6,4 +6,7 @@
     <issue id="TypographyDashes">
         <ignore path="src/main/res/values/com_crashlytics_export_strings.xml"/>
     </issue>
+    <issue id="CommitPrefEdits">
+        <ignore regexp="build/generated/source/apt/.*"/>
+    </issue>
 </lint>

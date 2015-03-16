@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'retrolambda'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'robolectric'
 
 ext {
   APPLICATION_ID = "com.flatstack.android"
@@ -50,6 +52,7 @@ android {
 
   dexOptions {
     preDexLibraries = preDexEnabled && !isTravis
+    incremental = !isTravis
   }
 
   packagingOptions {
@@ -66,61 +69,63 @@ android {
   }
 }
 
-apply plugin: 'android-unit-test'
-
-repositories {
-  // dagger proguard generator
-  maven { url 'http://nexus.idamob.ru/content/groups/public' }
-}
-
 ext {
   daggerVersion = '1.2.2'
   esperandroVersion = '2.1.0'
-  fragmentArgsVersion = '1.1.0'
+  fragmentArgsVersion = '2.0.0'
+}
+
+repositories {
+  maven {
+    // support preference fragment
+    url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
+  }
 }
 
 dependencies {
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
 
-  compile 'io.reactivex:rxandroid:0.23.0'
+  compile 'io.reactivex:rxandroid:0.23.0' // events
 
   compile 'com.jakewharton:butterknife:6.0.0' // view injection
   compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
   compile "com.squareup.dagger:dagger:$daggerVersion" // DI
-  provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
-  testCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
-
-  // proguard file generation for dagger files
-  provided 'com.github.idamobile:dagger-proguard-helper-processor:1.0-SNAPSHOT'
+  apt "com.squareup.dagger:dagger-compiler:$daggerVersion"
 
   compile 'com.squareup.picasso:picasso:2.4.0' // image loading
   compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
   compile 'com.squareup.retrofit:converter-jackson:1.8.0'
   compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
-  compile 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+  apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+  provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
   compile 'nl.qbusict:cupboard:2.1.1' // sql boilerplate
 
-  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion"
-  provided "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
+  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
+  apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
-  compile 'com.github.mttkay.memento:memento:0.2' // retaining objects in activity
-  provided 'com.github.mttkay.memento:memento-processor:0.2'
-
-  provided "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
+  apt "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
   compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
   compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
 
-  compile 'uk.co.chrisjenx.calligraphy:calligraphy:0.6.0' // custom fonts made easy
+  compile 'com.github.plusonesoftware:modular:0.3.0' // modular activity/fragments
+  compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
+  compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
 
-  testCompile 'junit:junit:4.12-beta-3'
-  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  testCompile 'org.robolectric:robolectric:2.3'
+  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
+  compile "com.android.support:support-v4-preferencefragment:1.0.0"
+
+  androidTestCompile 'junit:junit:4.12'
+  androidTestCompile 'org.robolectric:robolectric:2.4'
+  androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  androidTestCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
 }
 
 configurations {
   compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
   compile.exclude module: 'guava' // some deps drag this monster into the final APK
+  androidTestCompile.exclude module: 'commons-logging'
+  androidTestCompile.exclude module: 'httpclient'
 }

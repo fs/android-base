@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import de.devland.esperandro.annotations.Default;
 import de.devland.esperandro.annotations.SharedPreferences;
 
-public @SharedPreferences interface Preferences {
+public @SharedPreferences interface Persistence {
     @Default(ofString = "XXXX") public String defaultString();
 
     public void defaultString(@NotNull String s);
