@@ -1,9 +1,8 @@
 package com.flatstack.android.dagger;
 
+import dagger.ObjectGraph;
 import org.jetbrains.annotations.NotNull;
 
-import dagger.ObjectGraph;
-
 public interface Injector {
-    @NotNull ObjectGraph getObjectGraph();
+  @NotNull ObjectGraph getObjectGraph();
 }
