@@ -8,20 +8,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flatstack.android.App;
 import com.flatstack.android.R;
-import com.flatstack.android.dagger.Dagger;
+import com.flatstack.android.dagger.components.DaggerMainComponent;
 import com.flatstack.android.rx.RxFragment;
 import com.flatstack.android.utils.DatabaseHelper;
 import com.flatstack.android.utils.HomeAsUp;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.squareup.picasso.Picasso;
-import dagger.Lazy;
+
 import javax.inject.Inject;
-import org.jetbrains.annotations.NotNull;
+
+import dagger.Lazy;
 
 public class MainFragment extends RxFragment {
-  @Inject @NotNull Lazy<Picasso>        picasso; // application scope
-  @Inject @NotNull Lazy<DatabaseHelper> databaseHelper; //activity scope
+  @Inject Lazy<Picasso>        picasso;
+  @Inject Lazy<DatabaseHelper> databaseHelper;
 
   @Arg @IdRes int container;
 
@@ -33,10 +36,14 @@ public class MainFragment extends RxFragment {
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    Dagger.inject(this);
+//    Dagger.inject(this);
     activity().setTitle(R.string.app_name);
     setHasOptionsMenu(true);
     HomeAsUp.disable(activity());
+  }
+
+  private void inject() {
+    DaggerMainComponent.builder().appDaggerModule(((App) getActivity().getApplication()).component());
   }
 
   @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

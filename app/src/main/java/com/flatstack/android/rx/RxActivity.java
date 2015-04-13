@@ -1,18 +1,16 @@
 package com.flatstack.android.rx;
 
 import android.os.Bundle;
-import butterknife.ButterKnife;
+
 import com.f2prateek.dart.Dart;
 import com.flatstack.android.base.ModularActionBarActivity;
-import com.flatstack.android.dagger.Dagger;
-import com.flatstack.android.dagger.Injector;
-import dagger.ObjectGraph;
-import org.jetbrains.annotations.NotNull;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by adelnizamutdinov on 05/12/14
  */
-public class RxActivity extends ModularActionBarActivity implements Injector {
+public class RxActivity extends ModularActionBarActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dart.inject(this);
@@ -23,7 +21,7 @@ public class RxActivity extends ModularActionBarActivity implements Injector {
     ButterKnife.inject(this);
   }
 
-  @NotNull @Override public ObjectGraph getObjectGraph() {
-    return Dagger.getObjectGraph(getApplication());
-  }
+//  @NotNull @Override public ObjectGraph getObjectGraph() {
+//    return Dagger.getObjectGraph(getApplication());
+//  }
 }
