@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'robolectric'
+apply plugin: 'org.robolectric'
 
 ext {
   APPLICATION_ID = "com.flatstack.android"
@@ -72,7 +72,13 @@ android {
 repositories {
   // dagger proguard generator
   maven { url 'http://nexus.idamob.ru/content/groups/public' }
+
+  maven {
+    // support preference fragment
+    url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
+  }
 }
+
 
 ext {
   daggerVersion = '1.2.2'
@@ -80,16 +86,7 @@ ext {
   fragmentArgsVersion = '2.0.0'
 }
 
-repositories {
-  maven {
-    // support preference fragment
-    url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
-  }
-}
-
 dependencies {
-  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
-
   compile 'io.reactivex:rxandroid:0.23.0' // events
 
   compile 'com.jakewharton:butterknife:6.0.0' // view injection
