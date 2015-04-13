@@ -7,7 +7,6 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
 
 ##Plugins for Android Studio for comfortable work
 * [Lombok](https://plugins.jetbrains.com/plugin/6317)
-* [Unit test](https://github.com/evant/android-studio-unit-test-plugin)
 
 ##What's included:
 * [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L33-L42) build flavors with different package names ([read more](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Product-flavors))
