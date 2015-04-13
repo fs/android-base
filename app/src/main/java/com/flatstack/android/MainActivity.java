@@ -33,6 +33,7 @@ public class MainActivity extends RxActivity {
           .replace(R.id.content, new MainFragmentBuilder(R.id.content).build())
           .commit();
     }
+
   }
 
 //  @NotNull @Override public ObjectGraph getObjectGraph() {

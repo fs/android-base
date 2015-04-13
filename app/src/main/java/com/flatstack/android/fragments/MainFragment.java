@@ -8,10 +8,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.flatstack.android.App;
 import com.flatstack.android.R;
 import com.flatstack.android.dagger.components.DaggerMainComponent;
+import com.flatstack.android.dagger.modules.MainModule;
 import com.flatstack.android.rx.RxFragment;
 import com.flatstack.android.utils.DatabaseHelper;
 import com.flatstack.android.utils.HomeAsUp;
@@ -20,35 +22,49 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import dagger.Lazy;
 
 public class MainFragment extends RxFragment {
-  @Inject Lazy<Picasso>        picasso;
-  @Inject Lazy<DatabaseHelper> databaseHelper;
+    @Inject Lazy<Picasso>        picasso;
+    @Inject Lazy<DatabaseHelper> databaseHelper;
 
-  @Arg @IdRes int container;
+    @Arg @IdRes int container;
 
-  @Override public View onCreateView(LayoutInflater inflater,
-                                     ViewGroup container,
-                                     Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_main, container, false);
-  }
+    @InjectView(R.id.image) ImageView image;
 
-  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-//    Dagger.inject(this);
-    activity().setTitle(R.string.app_name);
-    setHasOptionsMenu(true);
-    HomeAsUp.disable(activity());
-  }
+    @Override public View onCreateView(LayoutInflater inflater,
+                                       ViewGroup container,
+                                       Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
+    }
 
-  private void inject() {
-    DaggerMainComponent.builder().appDaggerModule(((App) getActivity().getApplication()).component());
-  }
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.inject(this, view);
+        inject();
+        activity().setTitle(R.string.app_name);
+        setHasOptionsMenu(true);
+        HomeAsUp.disable(activity());
 
-  @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    super.onCreateOptionsMenu(menu, inflater);
-    inflater.inflate(R.menu.fragment_main, menu);
+        picasso.get()
+            .load("https://pbs.twimg.com/profile_images/502109671600033792/QOAC0YGo.png")
+            .fit()
+            .into(image);
+    }
+
+    private void inject() {
+        DaggerMainComponent.builder()
+            .appComponent(App.component)
+            .mainModule(new MainModule(this))
+            .build()
+            .inject(this);
+    }
+
+    @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_main, menu);
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {

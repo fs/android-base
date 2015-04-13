@@ -18,6 +18,8 @@ import com.flatstack.android.utils.EnumDeserializer;
 import com.flatstack.android.utils.Persistence;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -92,4 +94,11 @@ public class AppModule {
   @Provides @Singleton DatabaseHelper provideDatabaseHelper(Context context) {
     return new DatabaseHelper(context);
   }
+
+  @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
+    return new Picasso.Builder(context)
+        .downloader(new OkHttpDownloader(okHttpClient))
+        .build();
+  }
+
 }

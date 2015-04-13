@@ -1,12 +1,9 @@
 package com.flatstack.android.dagger.modules;
 
-import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.picasso.OkHttpDownloader;
-import com.squareup.picasso.Picasso;
-
-import javax.inject.Singleton;
+import com.flatstack.android.dagger.ActivityScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,9 +13,19 @@ import dagger.Provides;
  */
 @Module
 public class MainModule {
-    @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
-        return new Picasso.Builder(context)
-            .downloader(new OkHttpDownloader(okHttpClient))
-            .build();
+
+    private final FragmentActivity activity;
+
+    public MainModule(FragmentActivity activity) {
+        this.activity = activity;
     }
+
+    public MainModule(Fragment fragment) {
+        this.activity = fragment.getActivity();
+    }
+
+    @Provides @ActivityScope FragmentActivity providesActivity() {
+        return activity;
+    }
+
 }

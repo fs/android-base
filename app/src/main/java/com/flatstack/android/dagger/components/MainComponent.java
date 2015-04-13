@@ -7,7 +7,6 @@ import com.flatstack.android.MainActivity;
 import com.flatstack.android.dagger.ActivityScope;
 import com.flatstack.android.dagger.modules.MainModule;
 import com.flatstack.android.fragments.MainFragment;
-import com.squareup.picasso.Picasso;
 
 import dagger.Component;
 
@@ -28,5 +27,4 @@ public interface MainComponent {
     void inject(MainFragment fragment);
 
     FragmentActivity activity();
-    Picasso picasso();
 }
