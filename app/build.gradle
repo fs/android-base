@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'robolectric'
+apply plugin: 'org.robolectric'
 
 ext {
   APPLICATION_ID = "com.flatstack.android"
@@ -80,7 +80,7 @@ repositories {
     // support preference fragment
     url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
   }
-  // dagger 2
+  // dagger 2 && robolectric 3.0
   maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
   mavenCentral()
 }
@@ -122,15 +122,16 @@ dependencies {
   compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
   compile "com.android.support:support-v4-preferencefragment:1.0.0"
 
-  androidTestCompile 'junit:junit:4.12'
-  androidTestCompile 'org.robolectric:robolectric:2.4'
-  androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  androidTestCompile "com.google.dagger:dagger-compiler:$daggerVersion"
+  testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.robolectric:robolectric:3.0-SNAPSHOT'
+  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  testCompile "com.google.dagger:dagger-compiler:$daggerVersion"
 }
 
 configurations {
   compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
 //  compile.exclude module: 'guava' // some deps drag this monster into the final APK
-  androidTestCompile.exclude module: 'commons-logging'
-  androidTestCompile.exclude module: 'httpclient'
+  testCompile.exclude module: 'commons-logging'
+  testCompile.exclude module: 'httpclient'
 }

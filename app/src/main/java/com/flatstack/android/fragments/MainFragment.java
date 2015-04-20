@@ -37,12 +37,13 @@ public class MainFragment extends RxFragment {
     @Override public View onCreateView(LayoutInflater inflater,
                                        ViewGroup container,
                                        Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this, view);
         inject();
         activity().setTitle(R.string.app_name);
         setHasOptionsMenu(true);
