@@ -13,7 +13,7 @@ buildscript {
 
   dependencies {
     // android plugin
-    classpath 'com.android.tools.build:gradle:1.1.1'
+    classpath 'com.android.tools.build:gradle:1.2.0-beta2'
     // use Java 8 lambdas on android
     classpath 'me.tatarka:gradle-retrolambda:2.5.0'
     // versions plugin
