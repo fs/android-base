@@ -20,8 +20,4 @@ public class RxActivity extends ModularActionBarActivity {
     super.setContentView(layoutResID);
     ButterKnife.inject(this);
   }
-
-//  @NotNull @Override public ObjectGraph getObjectGraph() {
-//    return Dagger.getObjectGraph(getApplication());
-//  }
 }

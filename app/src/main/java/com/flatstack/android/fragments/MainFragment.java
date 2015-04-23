@@ -57,7 +57,7 @@ public class MainFragment extends RxFragment {
 
     private void inject() {
         DaggerMainComponent.builder()
-            .appComponent(App.component)
+            .appComponent(((App)getActivity().getApplication()).getDaggerComponent())
             .mainModule(new MainModule(this))
             .build()
             .inject(this);

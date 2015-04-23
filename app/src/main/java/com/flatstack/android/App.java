@@ -18,16 +18,20 @@ public class App extends Application {
 
     public static AppComponent component;
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
         Timber.plant(BuildConfig.DEBUG
-            ? new Timber.DebugTree()
-            : new TimberCrashReportingTree());
-        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+                ? new Timber.DebugTree()
+                : new TimberCrashReportingTree());
+        component = getDaggerComponent();
     }
 
-    @NotNull protected List<Object> getDaggerModules() {
-        return Lists.mutableOf(new AppModule(this));
+    public AppComponent getDaggerComponent() {
+        if (component == null) {
+            component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        }
+        return component;
     }
 
 }

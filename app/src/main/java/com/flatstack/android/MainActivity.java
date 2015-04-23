@@ -22,12 +22,9 @@ public class MainActivity extends RxActivity {
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-//    Dagger.inject(this);
-
     setContentView(R.layout.activity_main);
     StatusBar.setup(this);
     setSupportActionBar(toolbar);
-
     if (savedInstanceState == null) {
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.content, new MainFragmentBuilder(R.id.content).build())
@@ -35,8 +32,4 @@ public class MainActivity extends RxActivity {
     }
 
   }
-
-//  @NotNull @Override public ObjectGraph getObjectGraph() {
-//    return Dagger.getObjectGraph(getApplication());
-//  }
 }
