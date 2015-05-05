@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'robolectric'
+apply plugin: 'org.robolectric'
 
 ext {
   APPLICATION_ID = "com.flatstack.android"
@@ -70,7 +70,7 @@ android {
 }
 
 ext {
-  daggerVersion = '1.2.2'
+  daggerVersion = '2.1-SNAPSHOT'
   esperandroVersion = '2.1.0'
   fragmentArgsVersion = '2.0.0'
 }
@@ -80,6 +80,9 @@ repositories {
     // support preference fragment
     url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
   }
+  // dagger 2 && robolectric 3.0
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  mavenCentral()
 }
 
 dependencies {
@@ -90,11 +93,13 @@ dependencies {
   compile 'com.jakewharton:butterknife:6.0.0' // view injection
   compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
-  compile "com.squareup.dagger:dagger:$daggerVersion" // DI
-  apt "com.squareup.dagger:dagger-compiler:$daggerVersion"
+  compile "com.google.dagger:dagger:$daggerVersion" // DI
+  apt "com.google.dagger:dagger-compiler:$daggerVersion"
+  provided 'org.glassfish:javax.annotation:10.0-b28'
 
   compile 'com.squareup.picasso:picasso:2.4.0' // image loading
   compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
+  compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
   compile 'com.squareup.retrofit:converter-jackson:1.8.0'
   compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
 
@@ -117,15 +122,16 @@ dependencies {
   compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
   compile "com.android.support:support-v4-preferencefragment:1.0.0"
 
-  androidTestCompile 'junit:junit:4.12'
-  androidTestCompile 'org.robolectric:robolectric:2.4'
-  androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  androidTestCompile "com.squareup.dagger:dagger-compiler:$daggerVersion"
+  testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.robolectric:robolectric:3.0-SNAPSHOT'
+  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  testCompile "com.google.dagger:dagger-compiler:$daggerVersion"
 }
 
 configurations {
   compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
-  compile.exclude module: 'guava' // some deps drag this monster into the final APK
-  androidTestCompile.exclude module: 'commons-logging'
-  androidTestCompile.exclude module: 'httpclient'
+//  compile.exclude module: 'guava' // some deps drag this monster into the final APK
+  testCompile.exclude module: 'commons-logging'
+  testCompile.exclude module: 'httpclient'
 }

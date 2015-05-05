@@ -1,28 +1,37 @@
 package com.flatstack.android;
 
 import android.app.Application;
-import com.flatstack.android.dagger.Injector;
-import com.flatstack.android.dagger.modules.AppDaggerModule;
+
+import com.flatstack.android.dagger.components.AppComponent;
+import com.flatstack.android.dagger.components.DaggerAppComponent;
+import com.flatstack.android.dagger.modules.AppModule;
 import com.flatstack.android.utils.Lists;
 import com.flatstack.android.utils.TimberCrashReportingTree;
-import dagger.ObjectGraph;
-import java.util.List;
-import lombok.Getter;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
 import timber.log.Timber;
 
-public class App extends Application implements Injector {
-  @Getter @NotNull ObjectGraph objectGraph;
+public class App extends Application {
 
-  @Override public void onCreate() {
-    super.onCreate();
-    Timber.plant(BuildConfig.DEBUG
-                     ? new Timber.DebugTree()
-                     : new TimberCrashReportingTree());
-    objectGraph = ObjectGraph.create(getDaggerModules().toArray());
-  }
+    public static AppComponent component;
 
-  @NotNull protected List<Object> getDaggerModules() {
-    return Lists.mutableOf(new AppDaggerModule(this));
-  }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Timber.plant(BuildConfig.DEBUG
+                ? new Timber.DebugTree()
+                : new TimberCrashReportingTree());
+        component = getDaggerComponent();
+    }
+
+    public AppComponent getDaggerComponent() {
+        if (component == null) {
+            component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        }
+        return component;
+    }
+
 }

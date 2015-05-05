@@ -5,23 +5,16 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.BeanDescription;
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.flatstack.android.MainActivity;
-import com.flatstack.android.fragments.MainFragment;
+import com.flatstack.android.App;
 import com.flatstack.android.qualifiers.CacheDir;
 import com.flatstack.android.utils.DatabaseHelper;
+import com.flatstack.android.utils.EnumDeserializer;
 import com.flatstack.android.utils.Persistence;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
@@ -42,15 +35,16 @@ import dagger.Provides;
 import de.devland.esperandro.Esperandro;
 import de.devland.esperandro.serialization.JacksonSerializer;
 
-@Module(injects = {
-    MainActivity.class,
-    MainFragment.class
-})
-public class AppDaggerModule {
+@Module
+public class AppModule {
   final @NotNull Application application;
 
-  public AppDaggerModule(@NotNull Application application) {
+  public AppModule(@NotNull Application application) {
     this.application = application;
+  }
+
+  @Provides App provideApplication() {
+    return (App)application;
   }
 
   @Provides Context provideContext() { return application; }
@@ -70,12 +64,6 @@ public class AppDaggerModule {
     return okHttpClient;
   }
 
-  @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
-    return new Picasso.Builder(context)
-        .downloader(new OkHttpDownloader(okHttpClient))
-        .build();
-  }
-
   @Provides @Singleton ObjectMapper provideJackson() {
     final ObjectMapper om = new ObjectMapper();
     om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -85,22 +73,7 @@ public class AppDaggerModule {
     om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.US));
 
     final SimpleModule sm = new SimpleModule();
-    sm.setDeserializerModifier(new BeanDeserializerModifier() {
-      @Override public JsonDeserializer<Enum> modifyEnumDeserializer(
-          DeserializationConfig config,
-          JavaType type,
-          BeanDescription beanDesc,
-          JsonDeserializer<?> deserializer) {
-        return new JsonDeserializer<Enum>() {
-          @Override public Enum deserialize(JsonParser jp,
-                                            DeserializationContext ctxt) throws IOException {
-            @SuppressWarnings("unchecked")
-            final Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
-            return Enum.valueOf(rawClass, jp.getValueAsString().toUpperCase(Locale.US));
-          }
-        };
-      }
-    });
+    sm.setDeserializerModifier(new EnumDeserializer());
     sm.addSerializer(Enum.class, new StdSerializer<Enum>(Enum.class) {
       @Override public void serialize(Enum value,
                                       JsonGenerator jgen,
@@ -121,4 +94,11 @@ public class AppDaggerModule {
   @Provides @Singleton DatabaseHelper provideDatabaseHelper(Context context) {
     return new DatabaseHelper(context);
   }
+
+  @Provides @Singleton Picasso providePicasso(Context context, OkHttpClient okHttpClient) {
+    return new Picasso.Builder(context)
+        .downloader(new OkHttpDownloader(okHttpClient))
+        .build();
+  }
+
 }
