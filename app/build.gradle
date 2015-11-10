@@ -1,40 +1,39 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'org.robolectric'
 
 ext {
-  APPLICATION_ID = "com.flatstack.android"
+    APPLICATION_ID = "com.flatstack.android"
 
-  isTravis = "true".equals(System.getenv("TRAVIS"))
-  preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+    isTravis = "true".equals(System.getenv("TRAVIS"))
+    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
-  commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
+    commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 }
 
 android {
-  compileSdkVersion TARGET_SDK_VERSION
-  buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion TARGET_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
 
-  defaultConfig {
-    minSdkVersion MIN_SDK_VERSION
-    targetSdkVersion TARGET_SDK_VERSION
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
 
-    applicationId APPLICATION_ID
-    versionCode 1
-    versionName '0.1.0'
-  }
-
-  productFlavors {
-    staging {
-      buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-      applicationId "${APPLICATION_ID}.staging"
+        applicationId APPLICATION_ID
+        versionCode 1
+        versionName '0.1.0'
     }
 
-    production {
-      buildConfigField "String", "API_URL", "\"https://example.com\""
+    productFlavors {
+        staging {
+            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
+            applicationId "${APPLICATION_ID}.staging"
+        }
+
+        production {
+            buildConfigField "String", "API_URL", "\"https://example.com\""
+        }
     }
-  }
 
 //    signingConfigs {
 //        release {
@@ -45,93 +44,78 @@ android {
 //        }
 //    }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-  dexOptions {
-    preDexLibraries = preDexEnabled && !isTravis
-    incremental = !isTravis
-  }
+    dexOptions {
+        preDexLibraries = preDexEnabled && !isTravis
+        incremental = !isTravis
+    }
 
-  packagingOptions {
-    exclude 'META-INF/LICENSE'
-    exclude 'META-INF/NOTICE'
-    exclude 'META-INF/services/javax.annotation.processing.Processor'
-  }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 
-  lintOptions {
-    enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-    disable 'InvalidPackage', 'GradleDependency'
-    warningsAsErrors true
-    lintConfig file("$projectDir/lint.xml")
-  }
+    lintOptions {
+        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
+        disable 'InvalidPackage', 'GradleDependency'
+        warningsAsErrors true
+        lintConfig file("$projectDir/lint.xml")
+    }
 }
 
 ext {
-  daggerVersion = '2.1-SNAPSHOT'
-  esperandroVersion = '2.1.0'
-  fragmentArgsVersion = '2.0.0'
+    daggerVersion = '2.0.2'
+    fragmentArgsVersion = '2.0.0'
 }
 
 repositories {
-  maven {
-    // support preference fragment
-    url "https://raw.githubusercontent.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/"
-  }
-  // dagger 2 && robolectric 3.0
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-  mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:1.8.0' // java 8
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
 
-  compile 'io.reactivex:rxandroid:0.23.0' // events
+    compile 'io.reactivex:rxandroid:0.23.0' // events
 
-  compile 'com.jakewharton:butterknife:6.0.0' // view injection
-  compile 'com.jakewharton.timber:timber:2.5.0' // logging
+    compile 'com.jakewharton:butterknife:7.0.0' // view injection
+    compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
-  compile "com.google.dagger:dagger:$daggerVersion" // DI
-  apt "com.google.dagger:dagger-compiler:$daggerVersion"
-  provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "com.google.dagger:dagger:$daggerVersion" // DI
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 
-  compile 'com.squareup.picasso:picasso:2.4.0' // image loading
-  compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
-  compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
-  compile 'com.squareup.retrofit:converter-jackson:1.8.0'
-  compile 'com.intellij:annotations:12.0' // @Nullable @NotNull
+    compile 'com.squareup.picasso:picasso:2.4.0' // image loading
+    compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
 
-  apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
-  provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+    apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
+    provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
-  compile 'nl.qbusict:cupboard:2.1.1' // sql boilerplate
+    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
+    apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
-  compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
-  apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
+    compile 'com.github.plusonesoftware:modular:0.3.0' // modular activity/fragments
+    compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
 
-  apt "de.devland.esperandro:esperandro:$esperandroVersion" // shared prefs boilerplate
-  compile "de.devland.esperandro:esperandro-api:$esperandroVersion"
-  compile "de.devland.esperandro:esperandro-jackson-addon:$esperandroVersion"
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.reactivex:rxjava:1.0.14'
 
-  compile 'com.github.plusonesoftware:modular:0.3.0' // modular activity/fragments
-  compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
-  compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
-
-  compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
-  compile "com.android.support:support-v4-preferencefragment:1.0.0"
-
-  testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.robolectric:robolectric:3.0-rc2'
-  testCompile 'com.squareup.assertj:assertj-android:1.0.0'
-  testCompile "com.google.dagger:dagger-compiler:$daggerVersion"
+    testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
+    testCompile "com.google.dagger:dagger-compiler:$daggerVersion"
 }
 
 configurations {
-  compile.exclude module: 'gson' // we prefer jackson over gson for more convinient configuration
 //  compile.exclude module: 'guava' // some deps drag this monster into the final APK
-  testCompile.exclude module: 'commons-logging'
-  testCompile.exclude module: 'httpclient'
+    testCompile.exclude module: 'commons-logging'
+    testCompile.exclude module: 'httpclient'
 }
