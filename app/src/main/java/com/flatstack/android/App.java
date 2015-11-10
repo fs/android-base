@@ -5,12 +5,7 @@ import android.app.Application;
 import com.flatstack.android.dagger.components.AppComponent;
 import com.flatstack.android.dagger.components.DaggerAppComponent;
 import com.flatstack.android.dagger.modules.AppModule;
-import com.flatstack.android.utils.Lists;
 import com.flatstack.android.utils.TimberCrashReportingTree;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 import timber.log.Timber;
 

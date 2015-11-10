@@ -1,12 +1,14 @@
 package com.flatstack.android.module;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
+
 import com.flatstack.android.rx.RxActivity;
 import com.flatstack.android.rx.RxModule;
 import com.flatstack.android.utils.HomeAsUp;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
 import uk.co.plusonesoftware.modular.MenuCallbacks;
 
 /**
@@ -16,7 +18,7 @@ public class HomeAsUpModule extends RxModule implements
     MenuCallbacks.onOptionsItemSelectedCallback {
   final boolean isFragment;
 
-  public HomeAsUpModule(@NotNull RxActivity activity, @Nullable Fragment fragment) {
+  public HomeAsUpModule(@NonNull RxActivity activity, @Nullable Fragment fragment) {
     super(activity);
     HomeAsUp.enable(activity);
     if (fragment != null) {
