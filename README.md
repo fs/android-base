@@ -38,7 +38,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
  1. Clone application as new project with original remote named "android-base"
 
     	git clone --depth 1 git://github.com/fs/android-base.git --origin android-base [MY-NEW-PROJECT]
-    	
+
     **Note: we use depth parameter here in order to not copy the history of changes in base project**
 
  2. Create your new repository on the GitHub and push master into it. Make sure master branch is tracking origin repo.
@@ -65,4 +65,4 @@ Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adel
 It was written by [Flatstack](http://www.flatstack.com) with the help of our
 [contributors](http://github.com/fs/android-base/contributors)
 
-[![Flatstack](https://avatars0.githubusercontent.com/u/15136?v=2&s=200)](http://www.flatstack.com)
+[<img src="http://www.flatstack.com/logo.svg" width="100"/>](http://www.flatstack.com)
