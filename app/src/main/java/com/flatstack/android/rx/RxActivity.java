@@ -1,16 +1,16 @@
 package com.flatstack.android.rx;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.f2prateek.dart.Dart;
-import com.flatstack.android.base.ModularActionBarActivity;
 
 import butterknife.ButterKnife;
 
 /**
  * Created by adelnizamutdinov on 05/12/14
  */
-public class RxActivity extends ModularActionBarActivity {
+public class RxActivity extends AppCompatActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dart.inject(this);

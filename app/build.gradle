@@ -99,7 +99,6 @@ dependencies {
     compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
     apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
 
-    compile 'com.github.plusonesoftware:modular:0.3.0' // modular activity/fragments
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4' // system bar translucent
 
