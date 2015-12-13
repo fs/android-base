@@ -56,12 +56,4 @@ public class MainFragmentTest {
         assertThat(fragment.image).isNotNull();
         assertThat(fragment.hasOptionsMenu()).isTrue();
     }
-
-    @Test
-    public void testOnOptionsItemSelected() throws Exception {
-        fragment.onOptionsItemSelected(new RoboMenuItem(R.id.action_settings));
-        assertThat(fragment.getActivity().getSupportFragmentManager()
-                .findFragmentById(android.R.id.content))
-                .isExactlyInstanceOf(PrefsFragment.class);
-    }
 }
