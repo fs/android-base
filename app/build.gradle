@@ -80,8 +80,6 @@ repositories {
 dependencies {
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
 
-    compile 'io.reactivex:rxandroid:0.23.0' // events
-
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
     compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
@@ -99,7 +97,8 @@ dependencies {
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
 
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'io.reactivex:rxandroid:1.0.1'
+
+    compile 'io.reactivex:rxandroid:1.0.1' // async job and events
     compile 'io.reactivex:rxjava:1.0.14'
 
     testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
@@ -110,7 +109,6 @@ dependencies {
 }
 
 configurations {
-//  compile.exclude module: 'guava' // some deps drag this monster into the final APK
     testCompile.exclude module: 'commons-logging'
     testCompile.exclude module: 'httpclient'
 }

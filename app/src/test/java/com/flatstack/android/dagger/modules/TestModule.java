@@ -1,8 +1,7 @@
 package com.flatstack.android.dagger.modules;
 
 import android.app.Application;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import dagger.Module;
 
@@ -12,7 +11,7 @@ import dagger.Module;
 @Module
 public class TestModule extends AppModule {
 
-    public TestModule(@NotNull Application application) {
+    public TestModule(@NonNull Application application) {
         super(application);
     }
 }
