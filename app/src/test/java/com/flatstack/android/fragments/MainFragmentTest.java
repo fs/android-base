@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(sdk = 18, constants = BuildConfig.class)
+@Config(sdk = 18, constants = BuildConfig.class, packageName = "com.flatstack.android")
 public class MainFragmentTest {
     MainFragment fragment;
 

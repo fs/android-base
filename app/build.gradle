@@ -27,7 +27,7 @@ android {
     productFlavors {
         staging {
             buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationId "${APPLICATION_ID}.staging"
+            applicationIdSuffix ".staging"
         }
 
         production {
@@ -70,7 +70,6 @@ android {
 
 ext {
     daggerVersion = '2.0.2'
-    fragmentArgsVersion = '2.0.0'
 }
 
 repositories {

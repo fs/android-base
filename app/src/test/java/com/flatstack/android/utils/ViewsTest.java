@@ -16,7 +16,7 @@ import org.robolectric.annotation.Config;
 import static org.assertj.android.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(sdk = 18, constants = BuildConfig.class)
+@Config(sdk = 18, constants = BuildConfig.class, packageName = "com.flatstack.android")
 public class ViewsTest {
   @Test public void testRoot() throws Exception {
     final Activity activity = Robolectric.buildActivity(Activity.class).create().get();
