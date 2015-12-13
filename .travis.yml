@@ -4,7 +4,8 @@ sudo: false
 
 android:
   components:
-    - build-tools-23.0.0
+  # same version as in app/build.gradle
+    - build-tools-23.0.1
     - android-23
     - extra-android-m2repository
     # Uncomment this if you need emulator
