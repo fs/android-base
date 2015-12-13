@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
-import com.flatstack.android.fragments.MainFragmentBuilder;
+import com.flatstack.android.fragments.MainFragment;
 import com.flatstack.android.rx.RxActivity;
 
 import butterknife.Bind;
@@ -19,7 +19,7 @@ public class MainActivity extends RxActivity {
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new MainFragmentBuilder(R.id.content).build())
+                .replace(R.id.content, new MainFragment())
                 .commit();
         }
 

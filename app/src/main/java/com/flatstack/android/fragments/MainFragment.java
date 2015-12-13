@@ -1,7 +1,6 @@
 package com.flatstack.android.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import com.flatstack.android.dagger.components.DaggerMainComponent;
 import com.flatstack.android.dagger.modules.MainModule;
 import com.flatstack.android.rx.RxFragment;
 import com.flatstack.android.utils.HomeAsUp;
-import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -24,8 +22,6 @@ import dagger.Lazy;
 
 public class MainFragment extends RxFragment {
     @Inject Lazy<Picasso>        picasso;
-
-    @Arg @IdRes int container;
 
     @Bind(R.id.image) ImageView image;
 

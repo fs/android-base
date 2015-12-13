@@ -96,9 +96,6 @@ dependencies {
     apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
     provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
-    compile "com.hannesdorfmann.fragmentargs:annotation:$fragmentArgsVersion" // fragment arguments
-    apt "com.hannesdorfmann.fragmentargs:processor:$fragmentArgsVersion"
-
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
 
     compile 'com.google.code.gson:gson:2.2.4'
