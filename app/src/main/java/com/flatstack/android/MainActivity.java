@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.flatstack.android.fragments.MainFragmentBuilder;
 import com.flatstack.android.rx.RxActivity;
-import com.flatstack.android.utils.StatusBar;
 
 import butterknife.Bind;
 
@@ -17,7 +16,6 @@ public class MainActivity extends RxActivity {
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBar.setup(this);
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
