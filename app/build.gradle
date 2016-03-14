@@ -37,10 +37,12 @@ android {
 
 //    signingConfigs {
 //        release {
-//            storeFile file("$rootDir/XXXX.keystore")
-//            storePassword "XXXX"
-//            keyAlias "XXXX"
-//            keyPassword "XXXX"
+//            def props = new Properties()
+//            props.load(new FileInputStream(file("$rootDir/keys.properties")))
+//            storeFile file("$rootDir/your.jks")
+//            storePassword props['storePassword']
+//            keyAlias props['keyAlias']
+//            keyPassword props['keyPassword']
 //        }
 //    }
 
