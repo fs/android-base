@@ -4,8 +4,7 @@ apply plugin: 'me.tatarka.retrolambda'
 ext {
     APPLICATION_ID = "com.flatstack.android"
 
-    isTravis = "true".equals(System.getenv("TRAVIS"))
-    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+    isTravis = "true".equals(System.getenv("TRAVIS")) // change if use not travis
 
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 }
@@ -21,6 +20,9 @@ android {
         applicationId APPLICATION_ID
         versionCode 1
         versionName '0.1.0'
+
+//        TODO uncomment after fix https://code.google.com/p/android/issues/detail?id=202973
+//        jackOptions { enabled true }
     }
 
     productFlavors {
@@ -51,7 +53,7 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = preDexEnabled && !isTravis
+        preDexLibraries = !isTravis
         incremental = !isTravis
     }
 
@@ -62,15 +64,12 @@ android {
     }
 
     lintOptions {
+        textReport true
+        textOutput "stdout"
         enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
         disable 'InvalidPackage', 'GradleDependency'
-        warningsAsErrors true
         lintConfig file("$projectDir/lint.xml")
     }
-}
-
-ext {
-    daggerVersion = '2.0.2'
 }
 
 repositories {
@@ -83,15 +82,13 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
     compile 'com.jakewharton.timber:timber:2.5.0' // logging
 
-
-    compile 'com.squareup.picasso:picasso:2.4.0' // image loading
-    compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
-
+    compile 'com.squareup.picasso:picasso:2.5.2' // image loading
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
 
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
 
-    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.code.gson:gson:2.4'
 
     compile 'io.reactivex:rxandroid:1.0.1' // async job and events
     compile 'io.reactivex:rxjava:1.0.14'

@@ -8,7 +8,8 @@ import android.widget.FrameLayout;
 
 import com.flatstack.android.BuildConfig;
 import com.flatstack.android.R;
-import com.flatstack.android.rx.RxActivity;
+import com.flatstack.android.BaseActivity;
+import com.flatstack.android.main_screen.MainFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class MainFragmentTest {
 
     @Before
     public void setUp() throws Exception {
-        final FragmentManager fm = Robolectric.buildActivity(RxActivity.class)
+        final FragmentManager fm = Robolectric.buildActivity(BaseActivity.class)
                 .create()
                 .get()
                 .getSupportFragmentManager();
