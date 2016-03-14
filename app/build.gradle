@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
 
 ext {
     APPLICATION_ID = "com.flatstack.android"
@@ -89,8 +88,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.1.0' // HTTP client
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
 
-    apt 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
-    provided 'org.projectlombok:lombok:1.14.8' // POJO boilerplate
 
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
 
