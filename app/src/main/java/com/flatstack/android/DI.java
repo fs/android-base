@@ -1,6 +1,5 @@
 package com.flatstack.android;
 
-import android.content.Context;
 import android.os.Environment;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
@@ -20,16 +19,10 @@ import okhttp3.OkHttpClient;
  */
 public class DI {
 
-    private static Context appContext;
-
-    static {
-        appContext = App.appContext;
-    }
-
     public static File getCacheDir() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-            ? appContext.getExternalCacheDir()
-            : appContext.getCacheDir();
+            ? App.appContext.getExternalCacheDir()
+            : App.appContext.getCacheDir();
     }
 
     private static volatile OkHttpClient okHttpInstance = null;
@@ -57,7 +50,7 @@ public class DI {
             synchronized (Picasso.class) {
                 localInstance = picassoInstance;
                 if (localInstance == null) {
-                    picassoInstance = localInstance = new Picasso.Builder(appContext)
+                    picassoInstance = localInstance = new Picasso.Builder(App.appContext)
                         .downloader(new OkHttp3Downloader(getHttpClient()))
                         .build();
                 }
