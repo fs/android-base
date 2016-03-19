@@ -1,9 +1,9 @@
 // project wide version settings for all submodules
 ext {
   MIN_SDK_VERSION = 14
-  TARGET_SDK_VERSION = 21
-  BUILD_TOOLS_VERSION = '21.1.2'
-  SUPPORT_LIBRARY_VERSION = '21.0.3'
+  TARGET_SDK_VERSION = 23
+  BUILD_TOOLS_VERSION = '23.0.2'
+  SUPPORT_LIBRARY_VERSION = '23.2.1'
 }
 
 buildscript {
@@ -13,19 +13,12 @@ buildscript {
 
   dependencies {
     // android plugin
-    classpath 'com.android.tools.build:gradle:1.2.0-beta2'
+    classpath 'com.android.tools.build:gradle:1.5.0'
     // use Java 8 lambdas on android
-    classpath 'me.tatarka:gradle-retrolambda:2.5.0'
-    // versions plugin
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
-    // the latest version of the android-apt plugin
-    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-    // robolectric
-    classpath 'org.robolectric:robolectric-gradle-plugin:1.0.1'
+    // TODO replace with jack and jill in near future
+    classpath 'me.tatarka:gradle-retrolambda:3.2.5'
   }
 }
-
-apply plugin: 'com.github.ben-manes.versions'
 
 allprojects {
   repositories {

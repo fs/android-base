@@ -3,17 +3,20 @@ package com.flatstack.android.utils;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flatstack.android.BuildConfig;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static org.assertj.android.api.Assertions.assertThat;
 
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(sdk = 18, constants = BuildConfig.class, packageName = "com.flatstack.android")
 public class ViewsTest {
   @Test public void testRoot() throws Exception {
     final Activity activity = Robolectric.buildActivity(Activity.class).create().get();

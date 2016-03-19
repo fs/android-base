@@ -5,8 +5,10 @@
         <item name="colorPrimary">#32AF64</item>
         <item name="colorAccent">#fff</item>
         <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">
+
     </style>
 </resources>

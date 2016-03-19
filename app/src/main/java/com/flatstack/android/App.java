@@ -1,37 +1,23 @@
 package com.flatstack.android;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.flatstack.android.dagger.components.AppComponent;
-import com.flatstack.android.dagger.components.DaggerAppComponent;
-import com.flatstack.android.dagger.modules.AppModule;
-import com.flatstack.android.utils.Lists;
 import com.flatstack.android.utils.TimberCrashReportingTree;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 import timber.log.Timber;
 
 public class App extends Application {
 
-    public static AppComponent component;
+    public static Context appContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        appContext = this;
         Timber.plant(BuildConfig.DEBUG
                 ? new Timber.DebugTree()
                 : new TimberCrashReportingTree());
-        component = getDaggerComponent();
-    }
-
-    public AppComponent getDaggerComponent() {
-        if (component == null) {
-            component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
-        }
-        return component;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.flatstack.android.fragments;
+package com.flatstack.android.main_screen;
 
 import android.app.Application;
 import android.support.v4.app.FragmentManager;
@@ -6,33 +6,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.flatstack.android.BaseActivity;
+import com.flatstack.android.BuildConfig;
 import com.flatstack.android.R;
-import com.flatstack.android.rx.RxActivity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.fakes.RoboMenuItem;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.robolectric.RuntimeEnvironment.*;
+import static org.robolectric.RuntimeEnvironment.application;
 
-
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(sdk = 18, constants = BuildConfig.class, packageName = "com.flatstack.android")
 public class MainFragmentTest {
     MainFragment fragment;
 
     @Before
     public void setUp() throws Exception {
-        final FragmentManager fm = Robolectric.buildActivity(RxActivity.class)
+        final FragmentManager fm = Robolectric.buildActivity(BaseActivity.class)
                 .create()
                 .get()
                 .getSupportFragmentManager();
-        fragment = new MainFragmentBuilder(android.R.id.content).build();
+        fragment = new MainFragment();
         fm.beginTransaction()
                 .add(android.R.id.content, fragment)
                 .commit();
@@ -55,13 +54,5 @@ public class MainFragmentTest {
         assertThat(fragment.getActivity().getTitle()).isEqualTo(ctx.getString(R.string.app_name));
         assertThat(fragment.image).isNotNull();
         assertThat(fragment.hasOptionsMenu()).isTrue();
-    }
-
-    @Test
-    public void testOnOptionsItemSelected() throws Exception {
-        fragment.onOptionsItemSelected(new RoboMenuItem(R.id.action_settings));
-        assertThat(fragment.getActivity().getSupportFragmentManager()
-                .findFragmentById(android.R.id.content))
-                .isExactlyInstanceOf(PrefsFragment.class);
     }
 }

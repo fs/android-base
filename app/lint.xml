@@ -9,4 +9,11 @@
     <issue id="CommitPrefEdits">
         <ignore regexp="build/generated/source/apt/.*"/>
     </issue>
+    <issue id="PrivateResource" severity="ignore" />
+    <issue id="FieldGetter" severity="ignore" />
+
+    <!--lint does not see allowBackup option in manifest for some reason-->
+    <issue id="AllowBackup" severity="ignore" />
+    <!-- uncomment if your app has deep links-->
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
 </lint>
