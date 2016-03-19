@@ -1,4 +1,4 @@
-package com.flatstack.android.fragments;
+package com.flatstack.android.main_screen;
 
 import android.app.Application;
 import android.support.v4.app.FragmentManager;
@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.flatstack.android.BaseActivity;
 import com.flatstack.android.BuildConfig;
 import com.flatstack.android.R;
-import com.flatstack.android.BaseActivity;
-import com.flatstack.android.main_screen.MainFragment;
 
 import org.junit.Before;
 import org.junit.Test;
