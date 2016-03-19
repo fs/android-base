@@ -2,12 +2,9 @@ package com.flatstack.android;
 
 import android.os.Environment;
 
-import com.jakewharton.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Ilya Eremin on 14.03.2016.
@@ -25,38 +22,22 @@ public class DI {
             : App.appContext.getCacheDir();
     }
 
-    private static volatile OkHttpClient okHttpInstance = null;
+    private static volatile Glide glideInstance = null;
 
-    public static OkHttpClient getHttpClient() {
-        OkHttpClient localInstance = okHttpInstance;
-        if (localInstance == null) {
-            synchronized (OkHttpClient.class) {
-                localInstance = okHttpInstance;
-                if (localInstance == null) {
-                    okHttpInstance = localInstance = new OkHttpClient.Builder()
-                        .cache(new okhttp3.Cache(getCacheDir(), 20 * 1024 * 1024))
-                        .build();
-                }
-            }
-        }
-        return localInstance;
+    public static Glide getImageLoader() {
+        return Glide.get(App.appContext);
     }
 
-    private static volatile Picasso picassoInstance = null;
-
-    public static Picasso getPicasso() {
-        Picasso localInstance = picassoInstance;
-        if (localInstance == null) {
-            synchronized (Picasso.class) {
-                localInstance = picassoInstance;
-                if (localInstance == null) {
-                    picassoInstance = localInstance = new Picasso.Builder(App.appContext)
-                        .downloader(new OkHttp3Downloader(getHttpClient()))
-                        .build();
-                }
-            }
-        }
-        return localInstance;
-    }
+// just example how implement proper singleton
+//    Glide localInstance = glideInstance;
+//    if (localInstance == null) {
+//        synchronized (Glide.class) {
+//            localInstance = glideInstance;
+//            if (localInstance == null) {
+//                glideInstance = localInstance = Glide.get(App.appContext);
+//            }
+//        }
+//    }
+//    return localInstance;
 
 }
