@@ -22,6 +22,7 @@ android {
         versionName '0.1.0'
 
 //        TODO uncomment after fix https://code.google.com/p/android/issues/detail?id=202973
+//        and after annotation processing completed
 //        jackOptions { enabled true }
     }
 
@@ -46,6 +47,15 @@ android {
 //            keyPassword props['keyPassword']
 //        }
 //    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
