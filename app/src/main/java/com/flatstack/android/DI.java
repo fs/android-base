@@ -2,8 +2,6 @@ package com.flatstack.android;
 
 import android.os.Environment;
 
-import com.bumptech.glide.Glide;
-
 import java.io.File;
 
 /**
@@ -22,22 +20,19 @@ public class DI {
             : App.appContext.getCacheDir();
     }
 
-    private static volatile Glide glideInstance = null;
-
-    public static Glide getImageLoader() {
-        return Glide.get(App.appContext);
-    }
-
 // just example how implement proper singleton
-//    Glide localInstance = glideInstance;
-//    if (localInstance == null) {
-//        synchronized (Glide.class) {
-//            localInstance = glideInstance;
-//            if (localInstance == null) {
-//                glideInstance = localInstance = Glide.get(App.appContext);
-//            }
-//        }
-//    }
-//    return localInstance;
+//    private static volatile Glide glideInstance = null;
+//    public static Glide getImageLoader() {
+    //    Glide localInstance = glideInstance;
+    //    if (localInstance == null) {
+    //        synchronized (Glide.class) {
+    //            localInstance = glideInstance;
+    //            if (localInstance == null) {
+    //                glideInstance = localInstance = Glide.get(App.appContext);
+    //            }
+    //        }
+    //    }
+    //    return localInstance;
+//}
 
 }

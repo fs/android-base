@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.flatstack.android.DI;
 import com.flatstack.android.R;
 import com.flatstack.android.utils.HomeAsUp;
 
@@ -18,8 +17,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainFragment extends Fragment {
-    private Glide imageLoader = DI.getImageLoader();
-
     @Bind(R.id.image) ImageView image;
 
     @Override public View onCreateView(LayoutInflater inflater,
@@ -41,7 +38,7 @@ public class MainFragment extends Fragment {
             Toast.makeText(getActivity(), "Hello Pridurok", Toast.LENGTH_LONG).show()
         );
 
-        imageLoader
+        Glide
             .with(this)
             .load("https://pbs.twimg.com/profile_images/502109671600033792/QOAC0YGo.png")
             .into(image);
