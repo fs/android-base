@@ -1,6 +1,8 @@
 package com.flatstack.android;
 
+import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 
@@ -13,26 +15,8 @@ import java.io.File;
  * then create new flavors: mock and producation and move these dependencies there
  */
 public class DI {
-
-    public static File getCacheDir() {
-        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-            ? App.appContext.getExternalCacheDir()
-            : App.appContext.getCacheDir();
+    public static @NonNull File getCacheDir(@NonNull Context context) {
+        final File external = context.getExternalCacheDir();
+        return external != null ? external : context.getCacheDir();
     }
-
-// just example how implement proper singleton
-//    private static volatile Glide glideInstance = null;
-//    public static Glide getImageLoader() {
-    //    Glide localInstance = glideInstance;
-    //    if (localInstance == null) {
-    //        synchronized (Glide.class) {
-    //            localInstance = glideInstance;
-    //            if (localInstance == null) {
-    //                glideInstance = localInstance = Glide.get(App.appContext);
-    //            }
-    //        }
-    //    }
-    //    return localInstance;
-//}
-
 }
