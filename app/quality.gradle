@@ -1,0 +1,20 @@
+apply plugin: 'findbugs'
+
+final classesDir = "build/intermediates/classes/production/debug"
+final sourceDir = "src/main/java"
+
+task findBugs(type: FindBugs, dependsOn: "assembleProductionDebug") {
+  classes = fileTree(classesDir)
+  source = fileTree(sourceDir)
+  classpath = files()
+  excludeFilter = file("findbugs-exclude.xml")
+
+  effort = 'max'
+
+  reports {
+    xml.enabled = false
+    html.enabled = true
+  }
+}
+
+tasks.check.dependsOn findBugs

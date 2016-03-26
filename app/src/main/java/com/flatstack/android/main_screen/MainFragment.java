@@ -38,8 +38,7 @@ public class MainFragment extends Fragment {
             Toast.makeText(getActivity(), "Hello Pridurok", Toast.LENGTH_LONG).show()
         );
 
-        Glide
-            .with(this)
+        Glide.with(this)
             .load("https://pbs.twimg.com/profile_images/502109671600033792/QOAC0YGo.png")
             .into(image);
     }

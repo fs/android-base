@@ -112,3 +112,5 @@ configurations {
     testCompile.exclude module: 'commons-logging'
     testCompile.exclude module: 'httpclient'
 }
+
+apply from: "quality.gradle"
