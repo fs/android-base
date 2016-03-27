@@ -17,7 +17,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
     * Building
     * Running *Android Lint*
     * Running *Robolectric* tests
-    * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20] for CircleCi
+    * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
 * Release build signing and naming configuration
 
 ##What's not included
@@ -37,7 +37,7 @@ Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)
     	git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
     	git push -u origin master
 
- 3. Import the project into your favourite IDE (only [Android Studio](https://developer.android.com/sdk/installing/studio.html) and [IntelliJ IDEA 13](http://www.jetbrains.com/idea/) are supported at the moment).
+ 3. Import the project into your favourite IDE (only [Android Studio](https://developer.android.com/sdk/installing/studio.html) and [IntelliJ IDEA](http://www.jetbrains.com/idea/) are supported).
 Just select the root `build.gradle` and your IDE will do the rest.
 It will ask you to change the language level - do it, we're using Java 8 now
 
@@ -48,13 +48,13 @@ It will ask you to change the language level - do it, we're using Java 8 now
 * Just uncomment [these lines](https://github.com/fs/android-base/blob/master/app/build.gradle#L41-L48) and fill them up with your credentials
 
 ##Notes on ProGuarding
-Initial project already has proguard config for included libraries.
-If you add library check proguard section of documentation and update [proguard-rules.pro](https://github.com/fs/android-base/blob/master/app/proguard-rules.pro)
+Project already has proguard config for included libraries.
+If you add library check proguard section of documentation and update [proguard-rules.pro](https://github.com/fs/android-base/blob/master/app/proguard-rules.pr)
 
-##Notes on Java 8 lambdas support: retrolambda and jack and jil
-Now Jack and Jil allow to use lambdas. Also aims to speed up compilation process.
-But it's very buggy and does not support annotation processing (we can't use even butterknife).
-When these drawbacks will be eliminated we move from retrolambda to jack&jil
+##Notes on lambdas support: retrolambda and jack and Jill
+Now Jack and Jil allow to use lambdas. Also it aims to speed up compilation process.
+But it's buggy and does not support annotation processing (butterknife, dart, greenrobot eventbus3, dagger use it).
+When these drawbacks will be eliminated we move from retrolambda to jack&jill
 
 ## Credits
 Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adelnizamutdinov) and [Ilya Eremin](http://github.com/ilyaeremin).
