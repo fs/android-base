@@ -78,8 +78,6 @@ android {
     lintOptions {
         textReport true
         textOutput "stdout"
-        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-        disable 'InvalidPackage', 'GradleDependency'
         lintConfig file("$projectDir/lint.xml")
         warningsAsErrors true
     }
