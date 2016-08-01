@@ -5,9 +5,7 @@ apply from: '../deps.gradle'
 
 ext {
     APPLICATION_ID = "com.flatstack.android"
-
-    isTravis = "true".equals(System.getenv("TRAVIS")) // change if use not travis
-
+    isCI = "true".equals(System.getenv("CI"))
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 }
 
@@ -22,10 +20,6 @@ android {
         applicationId APPLICATION_ID
         versionCode 1
         versionName '0.1.0'
-
-//        TODO uncomment after fix https://code.google.com/p/android/issues/detail?id=202973
-//        and after annotation processing completed
-//        jackOptions { enabled true }
     }
 
     productFlavors {
@@ -65,8 +59,8 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = !isTravis
-        incremental = !isTravis
+        preDexLibraries = !isCI
+        incremental = !isCI
     }
 
     packagingOptions {
