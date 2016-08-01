@@ -1,11 +1,4 @@
 // project wide version settings for all submodules
-ext {
-  MIN_SDK_VERSION = 14
-  TARGET_SDK_VERSION = 23
-  BUILD_TOOLS_VERSION = '23.0.2'
-  SUPPORT_LIBRARY_VERSION = '23.2.1'
-}
-
 buildscript {
   repositories {
     jcenter()
