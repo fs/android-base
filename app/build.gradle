@@ -89,7 +89,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
 
-    testCompile androidTestsLibs
+    testCompile unitTestLibs
+    androidTestCompile androidTestsLibs
 }
 
 apply from: "quality.gradle"
