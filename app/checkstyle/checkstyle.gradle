@@ -1,0 +1,17 @@
+apply plugin: 'checkstyle'
+
+check.dependsOn 'checkstyle'
+
+checkstyle {
+    toolVersion '6.5'
+
+    configFile file("checkstyle/checkstyle.xml")
+    configProperties.checkstyleSuppressionFilterPath = file("checkstyle/suppressions.xml")
+            .absolutePath
+}
+task checkstyle(type: Checkstyle, group: 'verification') {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+}

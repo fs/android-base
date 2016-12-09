@@ -23,18 +23,19 @@ import static org.robolectric.RuntimeEnvironment.application;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(sdk = 18, constants = BuildConfig.class, packageName = "com.flatstack.android")
 public class MainFragmentTest {
-    MainFragment fragment;
+
+    private MainFragment fragment;
 
     @Before
     public void setUp() throws Exception {
         final FragmentManager fm = Robolectric.buildActivity(BaseActivity.class)
-                .create()
-                .get()
-                .getSupportFragmentManager();
+            .create()
+            .get()
+            .getSupportFragmentManager();
         fragment = new MainFragment();
         fm.beginTransaction()
-                .add(android.R.id.content, fragment)
-                .commit();
+            .add(android.R.id.content, fragment)
+            .commit();
     }
 
     @Test
@@ -43,7 +44,8 @@ public class MainFragmentTest {
     }
 
     private View onCreateView() {
-        return fragment.onCreateView(LayoutInflater.from(application), new FrameLayout(application), null);
+        return fragment.onCreateView(LayoutInflater.from(application),
+            new FrameLayout(application), null);
     }
 
     @Test
