@@ -1,7 +1,6 @@
 package com.flatstack.android;
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import java.io.File;
@@ -15,7 +14,8 @@ import java.io.File;
  * then create new flavors: mock and producation and move these dependencies there
  */
 public class DI {
-    public static @NonNull File getCacheDir(@NonNull Context context) {
+
+    @NonNull public static File getCacheDir(@NonNull Context context) {
         final File external = context.getExternalCacheDir();
         return external != null ? external : context.getCacheDir();
     }
