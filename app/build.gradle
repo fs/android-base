@@ -89,7 +89,8 @@ repositories {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION" // appcompat
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
 
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
     compile 'com.jakewharton.timber:timber:2.5.0' // logging
