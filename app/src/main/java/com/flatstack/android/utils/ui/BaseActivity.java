@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar) View toolbar;
 
-    public abstract @NonNull UiInfo getUiInfo();
+    @NonNull public abstract UiInfo getUiInfo();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

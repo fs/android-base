@@ -27,7 +27,9 @@ public class TestDialog extends BaseDialogFragment {
         return R.layout.dialog_test;
     }
 
-    public static void show(@Nullable String title, @Nullable String message, @NonNull FragmentManager fm) {
+    public static void show(@Nullable String title,
+                            @Nullable String message,
+                            @NonNull FragmentManager fm) {
         TestDialog dialog = new TestDialog();
 
         Bundle args = new Bundle();

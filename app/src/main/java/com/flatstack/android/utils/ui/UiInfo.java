@@ -11,11 +11,15 @@ import android.support.annotation.StringRes;
 
 public class UiInfo {
 
-    private final @LayoutRes int     layoutRes;
-    private @StringRes       int     titleRes;
+    @LayoutRes private final int     layoutRes;
+    @StringRes private       int     titleRes;
+    @MenuRes private         int     menuRes;
     private                  String  titleStr;
     private                  boolean hasBackButton;
-    private @MenuRes         int     menuRes;
+
+    public UiInfo(@LayoutRes int layoutRes) {
+        this.layoutRes = layoutRes;
+    }
 
     public int getMenuRes() {
         return menuRes;
@@ -24,10 +28,6 @@ public class UiInfo {
     public UiInfo setMenuRes(int menuRes) {
         this.menuRes = menuRes;
         return this;
-    }
-
-    public UiInfo(@LayoutRes int layoutRes) {
-        this.layoutRes = layoutRes;
     }
 
     public int getLayoutRes() {

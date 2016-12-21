@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.flatstack.android.utils.ui.BaseActivity;
 import com.flatstack.android.BuildConfig;
 import com.flatstack.android.R;
 
@@ -28,7 +27,7 @@ public class MainFragmentTest {
 
     @Before
     public void setUp() throws Exception {
-        final FragmentManager fm = Robolectric.buildActivity(BaseActivity.class)
+        final FragmentManager fm = Robolectric.buildActivity(MainActivity.class)
             .create()
             .get()
             .getSupportFragmentManager();
