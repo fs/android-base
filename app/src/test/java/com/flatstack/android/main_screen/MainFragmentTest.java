@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.flatstack.android.BaseActivity;
+import com.flatstack.android.utils.ui.BaseActivity;
 import com.flatstack.android.BuildConfig;
 import com.flatstack.android.R;
 
