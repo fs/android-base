@@ -50,6 +50,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     protected void parseArguments(@NonNull Bundle args) {
+        throw new IllegalStateException("should be overridden");
     }
 
     @NonNull @Override

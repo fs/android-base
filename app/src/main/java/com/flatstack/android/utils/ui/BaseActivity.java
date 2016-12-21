@@ -54,6 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void parseArguments(@NonNull Bundle extras) {
+        throw new IllegalStateException("should be overridden");
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
