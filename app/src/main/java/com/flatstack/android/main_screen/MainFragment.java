@@ -33,11 +33,7 @@ public class MainFragment extends BaseFragment {
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(R.string.app_name);
-        setHasOptionsMenu(true);
-        HomeAsUp.disable((AppCompatActivity) getActivity());
 
-        // just show that lambdas work
         image.setOnClickListener(listener ->
             TestDialog.show("Example Hello", "Ublyudok, mat' tvoyu, a nu idi syuda, " +
                     "govno sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' tvoyu, a?",
