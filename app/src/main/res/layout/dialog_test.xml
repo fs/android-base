@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
->
+    >
 
     <TextView
         android:id="@+id/dialog_title"
@@ -12,13 +12,13 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:textIsSelectable="true"
-    />
+        />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@android:color/background_dark"
-    />
+        />
 
     <TextView
         android:id="@+id/dialog_message"
@@ -27,6 +27,6 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:textIsSelectable="true"
-    />
+        />
 
 </LinearLayout>
