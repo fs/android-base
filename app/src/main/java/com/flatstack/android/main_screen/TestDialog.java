@@ -30,18 +30,13 @@ public class TestDialog extends BaseDialogFragment {
     public static void show(@Nullable String title,
                             @Nullable String message,
                             @NonNull FragmentManager fm) {
+
         TestDialog dialog = new TestDialog();
 
         Bundle args = new Bundle();
-        if (title != null) {
-            args.putString(KEY_TITLE, title);
-            dialog.setArguments(args);
-        }
-
-        if (message != null) {
-            args.putString(KEY_MESSAGE, message);
-            dialog.setArguments(args);
-        }
+        args.putString(KEY_TITLE, title != null ? title : "");
+        args.putString(KEY_MESSAGE, message != null ? message : "");
+        dialog.setArguments(args);
 
         dialog.show(fm, TestDialog.class.getName());
     }
