@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.f2prateek.dart.Dart;
 import com.flatstack.android.R;
 import com.flatstack.android.utils.Keyboard;
 
@@ -25,7 +24,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Dart.inject(this);
         setContentView(getUiInfo().getLayoutRes());
         ButterKnife.bind(this);
         if (getIntent() != null && getIntent().getExtras() != null) {

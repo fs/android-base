@@ -21,14 +21,6 @@ public class MainFragment extends BaseFragment {
         return R.layout.fragment_main;
     }
 
-    @Override public View onCreateView(LayoutInflater inflater,
-                                       ViewGroup container,
-                                       Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
-
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
