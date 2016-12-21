@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.flatstack.android.BuildConfig;
-import com.flatstack.android.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,8 +51,6 @@ public class MainFragmentTest {
         final Application ctx = application;
         onCreateView();
         fragment.onViewCreated(new View(ctx), null);
-        assertThat(fragment.getActivity().getTitle()).isEqualTo(ctx.getString(R.string.app_name));
         assertThat(fragment.image).isNotNull();
-        assertThat(fragment.hasOptionsMenu()).isTrue();
     }
 }
