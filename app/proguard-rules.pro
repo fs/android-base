@@ -4,6 +4,9 @@
 #if you store models under different models packages then use:
 #-keep class **.models.** { *; }
 
+#retrolambda
+-dontwarn java.lang.invoke.*
+
 #butterknife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
