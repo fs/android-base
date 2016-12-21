@@ -4,6 +4,9 @@
 #if you store models under different models packages then use:
 #-keep class **.models.** { *; }
 
+#retrolambda
+-dontwarn java.lang.invoke.*
+
 #butterknife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
@@ -37,13 +40,6 @@
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 -dontwarn sun.misc.Unsafe
-
-#dart
--dontwarn com.f2prateek.dart.internal.**
--keep class **$$ExtraInjector { *; }
--keepclasseswithmembernames class * {
-    @com.f2prateek.dart.* <fields>;
-}
 
 #start gson
 -keepattributes Signature

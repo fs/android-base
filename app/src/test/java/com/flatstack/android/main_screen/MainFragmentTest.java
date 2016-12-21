@@ -6,9 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.flatstack.android.BaseActivity;
 import com.flatstack.android.BuildConfig;
-import com.flatstack.android.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +26,7 @@ public class MainFragmentTest {
 
     @Before
     public void setUp() throws Exception {
-        final FragmentManager fm = Robolectric.buildActivity(BaseActivity.class)
+        final FragmentManager fm = Robolectric.buildActivity(MainActivity.class)
             .create()
             .get()
             .getSupportFragmentManager();
@@ -53,8 +51,6 @@ public class MainFragmentTest {
         final Application ctx = application;
         onCreateView();
         fragment.onViewCreated(new View(ctx), null);
-        assertThat(fragment.getActivity().getTitle()).isEqualTo(ctx.getString(R.string.app_name));
         assertThat(fragment.image).isNotNull();
-        assertThat(fragment.hasOptionsMenu()).isTrue();
     }
 }
