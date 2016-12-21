@@ -57,7 +57,7 @@ If you add library check proguard section of documentation and update [proguard-
 
 ##Notes on lambdas support: retrolambda and jack and Jill
 Now Jack and Jil allow to use lambdas. Also it aims to speed up compilation process.
-But it's buggy and does not support annotation processing (butterknife, dart, greenrobot eventbus3, dagger use it).
+But it's buggy and does not support annotation processing (butterknife, greenrobot eventbus3, dagger use it).
 When these drawbacks will be eliminated we move from retrolambda to jack&jill
 
 ## Credits

@@ -97,8 +97,6 @@ dependencies {
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
-    compile 'com.f2prateek.dart:dart:1.1.0' // activity arguments arguments inject
-
     compile 'com.google.code.gson:gson:2.4'
 
     compile 'io.reactivex:rxandroid:1.0.1' // async job and events
