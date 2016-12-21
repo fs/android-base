@@ -44,6 +44,10 @@ It will ask you to change the language level - do it, we're using Java 8 now
 ###Configuration
 * Change your app's package by either [renaming the folder structure for Java sources](https://github.com/fs/android-base/tree/master/app/src/main/java/com/flatstack/android) or by just changing this [constant](https://github.com/fs/android-base/blob/master/app/build.gradle#L5) in `build.gradle`
 
+#Codestyles
+Project contains default codestyle scheme at `./idea/codestyleSettings.xml`. Make sure that you use default project scheme to avoid mess with codestyle with your collegues.
+Go to the Settings (`cmd + ,`) -> Editor -> Code Style look on top of right panel and select `Project` from `Scheme` dropdown. Apply -> Ok.
+
 ###Making a release build
 * Just uncomment [these lines](https://github.com/fs/android-base/blob/master/app/build.gradle#L41-L48) and fill them up with your credentials
 
