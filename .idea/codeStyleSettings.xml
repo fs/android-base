@@ -33,21 +33,21 @@
         <option name="RIGHT_MARGIN" value="100" />
         <AndroidXmlCodeStyleSettings>
           <option name="USE_CUSTOM_SETTINGS" value="true" />
-            <option name="LAYOUT_SETTINGS">
-                <value>
-                    <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
-                </value>
-            </option>
-            <option name="MANIFEST_SETTINGS">
-                <value>
-                    <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
-                </value>
-            </option>
-            <option name="OTHER_SETTINGS">
-                <value>
-                    <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
-                </value>
-            </option>
+          <option name="LAYOUT_SETTINGS">
+            <value>
+              <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
+            </value>
+          </option>
+          <option name="MANIFEST_SETTINGS">
+            <value>
+              <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
+            </value>
+          </option>
+          <option name="OTHER_SETTINGS">
+            <value>
+              <option name="INSERT_LINE_BREAK_AFTER_LAST_ATTRIBUTE" value="true" />
+            </value>
+          </option>
         </AndroidXmlCodeStyleSettings>
         <Objective-C-extensions>
           <option name="GENERATE_INSTANCE_VARIABLES_FOR_PROPERTIES" value="ASK" />
@@ -80,6 +80,11 @@
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
+        <codeStyleSettings language="JAVA">
+          <option name="METHOD_ANNOTATION_WRAP" value="1" />
+          <option name="CLASS_ANNOTATION_WRAP" value="1" />
+          <option name="FIELD_ANNOTATION_WRAP" value="1" />
+        </codeStyleSettings>
         <codeStyleSettings language="XML">
           <option name="FORCE_REARRANGE_MODE" value="1" />
           <indentOptions>
