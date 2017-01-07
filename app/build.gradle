@@ -85,6 +85,8 @@ repositories {
 dependencies {
     compile supportLibs
     compile rxJavaLibs
+//    compile retrofitLibs
+//    compile okHttpLibs
 
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -92,6 +94,13 @@ dependencies {
 
     testCompile unitTestLibs
     androidTestCompile androidTestsLibs
+
+    compile 'com.google.code.gson:gson:2.4'
+}
+
+configurations {
+    testCompile.exclude module: 'commons-logging'
+    testCompile.exclude module: 'httpclient'
 }
 
 apply from: "quality.gradle"

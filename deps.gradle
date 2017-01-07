@@ -1,19 +1,21 @@
 ext {
     versions = [
             okHttp             : '3.3.1',
-            support            : '23.3.0',
+            support            : '25.1.0',
             retrofit           : '2.0.2',
             espressoVersion    : '2.2.2',
-            BUILD_TOOLS_VERSION: '23.0.2',
+            BUILD_TOOLS_VERSION: '25.0.1',
             MIN_SDK_VERSION    : 14,
-            TARGET_SDK_VERSION : 23
+            TARGET_SDK_VERSION : 25
     ]
     supportDeps = [
             appcompatV7      : "com.android.support:appcompat-v7:$versions.support",
             recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
-//            design           : "com.android.support:design:$versions.support",
-//            gridLayout       : "com.android.support:gridlayout-v7:$versions.support"
+//          design           : "com.android.support:design:$versions.support",
+//          gridLayout       : "com.android.support:gridlayout-v7:$versions.support"
+//          cardView         : "com.android.support:cardview-v7:$versions.support"
+//          palette          : "com.android.support:palette-v7:$versions.support"
     ]
     rxJava = [
             rxJava   : 'io.reactivex:rxjava:1.1.6',
