@@ -105,6 +105,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.1' // async job and events
     compile 'io.reactivex:rxjava:1.0.14'
 
+    provided 'org.jetbrains:annotations:13.0'
+
     testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0'
