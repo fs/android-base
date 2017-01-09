@@ -1,5 +1,9 @@
-Android app skeleton [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base)
+Android app skeleton
 =======================================
+## Continuous integration
+* Travis CI [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base/pull_requests)
+* Circle CI [![Build Status](https://circleci.com/gh/fs/android-base.png)](https://circleci.com/gh/fs/android-base)
+
 ##Prerequisites
 * JDK 8
 * `JAVA_HOME` pointing to your jdk8
