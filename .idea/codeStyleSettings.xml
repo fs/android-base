@@ -82,6 +82,8 @@
         </XML>
         <codeStyleSettings language="JAVA">
           <option name="METHOD_ANNOTATION_WRAP" value="1" />
+          <option name="CLASS_ANNOTATION_WRAP" value="1" />
+          <option name="FIELD_ANNOTATION_WRAP" value="1" />
         </codeStyleSettings>
         <codeStyleSettings language="XML">
           <option name="FORCE_REARRANGE_MODE" value="1" />

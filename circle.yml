@@ -13,7 +13,7 @@ dependencies:
 
 test:
   override:
-    - ./gradlew build check
+    - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
 
 #deployment:
 #  production: # just a label; label names are completely up to you

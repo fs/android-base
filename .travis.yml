@@ -31,7 +31,7 @@ before_install:
 
 # Robolectric tests
 script:
-    - ./gradlew build check
+    - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
 
 # Instrument tests
 # script: ./gradlew build check connectedCheck
