@@ -27,11 +27,7 @@ public class RuntimeStorage implements IStorage {
 
     @Override public long getLong(@NonNull String key, long defaultValue) {
         Object o = map.get(key);
-        if (o != null) {
-            return ((Long) o);
-        } else {
-            return defaultValue;
-        }
+        return o != null ? (long) o : defaultValue;
     }
 
     @Override public void putInt(@NonNull String key, int number) {
@@ -40,11 +36,7 @@ public class RuntimeStorage implements IStorage {
 
     @Override public int getInt(@NonNull String key, int defaultValue) {
         Object o = map.get(key);
-        if (o != null) {
-            return ((Integer) o);
-        } else {
-            return defaultValue;
-        }
+        return o != null ? (int) o : defaultValue;
     }
 
     @Override public void putBoolean(@NonNull String key, boolean value) {
@@ -53,11 +45,7 @@ public class RuntimeStorage implements IStorage {
 
     @Override public boolean getBoolean(@NonNull String key, boolean defaultValue) {
         Object o = map.get(key);
-        if (o != null) {
-            return ((Boolean) o);
-        } else {
-            return defaultValue;
-        }
+        return o != null ? (boolean) o : defaultValue;
     }
 
     @Override public void putString(@NonNull String key, @NonNull String str) {
