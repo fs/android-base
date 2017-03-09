@@ -19,6 +19,7 @@ import rx.functions.Func1;
  */
 public class Lists {
 
+    @Contract("null -> true")
     public static boolean isEmpty(@Nullable List list) {
         return list == null || list.isEmpty();
     }
@@ -39,21 +40,9 @@ public class Lists {
         return filteredList;
     }
 
-    /**
-     * MUTATE original list
-     */
-    @Contract(pure = false)
-    public static <T> List<T> updateItem(@NonNull List<T> list, @NonNull T item) {
-        int index = list.indexOf(item);
-        if (index >= 0) {
-            list.set(index, item);
-        }
-        return list;
-    }
-
     @Nullable
     @Contract(value = "null, null -> null; !null, _ -> !null; _, !null -> !null", pure = true)
-    public static <T> List<T> merge(List<T> list1, List<T> list2) {
+    public static <T> List<T> merge(@Nullable List<T> list1, @Nullable List<T> list2) {
         if (list1 == null && list2 == null) return null;
         List<T> finalList = new ArrayList<T>();
         if (list1 != null) {
@@ -76,7 +65,6 @@ public class Lists {
         return list;
     }
 
-    @Contract("null, _ -> fail; _, null -> fail")
     public static <T> void forEach(@NonNull List<T> list, @NonNull Action1<T> action) {
         for (T item : list) {
             action.call(item);
@@ -87,7 +75,7 @@ public class Lists {
      * @return Pair of two lists. First list contains values which satisfy groupBy
      * i.e. condition.call(item) returns true. Second list contains rest of items from #list.
      */
-    @Contract(pure = true, value = "null,_ -> fail; _,null -> fail; null, null -> fail")
+    @Contract(pure = true)
     public static <T> Pair<List<T>, List<T>> groupBy(@NonNull List<T> list,
                                                      @NonNull Func1<T, Boolean> condition) {
         List<T> list1 = new ArrayList<>();

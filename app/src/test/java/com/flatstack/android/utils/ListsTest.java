@@ -15,28 +15,7 @@ import java.util.List;
 public class ListsTest {
 
     @Test
-    public void updateItem() throws Exception {
-        List<TestClass> testList = new ArrayList<>();
-        testList.add(new TestClass("1", "a"));
-        testList.add(new TestClass("2", "b"));
-        testList.add(new TestClass("3", "c"));
-        Lists.updateItem(testList, new TestClass("1", "d"));
-        Assert.assertEquals(3, testList.size());
-        Assert.assertEquals("d", testList.get(0).anotherField);
-    }
-
-    @Test
-    public void updateItemNoItem() throws Exception {
-        List<TestClass> list = new ArrayList<>();
-        list.add(new TestClass("1", "a"));
-        Lists.updateItem(list, new TestClass("2", "b"));
-        Assert.assertEquals(1, list.size());
-        Assert.assertEquals("1", list.get(0).id);
-        Assert.assertEquals("a", list.get(0).anotherField);
-    }
-
-    @Test
-    public void testGroupBy() throws Exception {
+    public void groupBy() {
         List<TestClass> testList = new ArrayList<>();
         testList.add(new TestClass("1", "kokoko"));
         testList.add(new TestClass("3", "kekeke"));
