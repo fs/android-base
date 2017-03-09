@@ -57,13 +57,6 @@
   public *;
 }
 
-#dart
--dontwarn com.f2prateek.dart.internal.**
--keep class **$$ExtraInjector { *; }
--keepclasseswithmembernames class * {
-    @com.f2prateek.dart.* <fields>;
-}
-
 #debug
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
