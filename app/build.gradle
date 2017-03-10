@@ -2,29 +2,25 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply from: 'checkstyle/checkstyle.gradle'
 
+apply from: '../deps.gradle'
+
 ext {
     APPLICATION_ID = "com.flatstack.android"
-
-    isTravis = "true".equals(System.getenv("TRAVIS")) // change if use not travis
-
+    isCI = "true".equals(System.getenv("CI"))
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 }
 
 android {
-    compileSdkVersion TARGET_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion versions.TARGET_SDK_VERSION
+    buildToolsVersion versions.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
+        minSdkVersion versions.MIN_SDK_VERSION
+        targetSdkVersion versions.TARGET_SDK_VERSION
 
         applicationId APPLICATION_ID
         versionCode 1
-        versionName '0.1.0'
-
-//        TODO uncomment after fix https://code.google.com/p/android/issues/detail?id=202973
-//        and after annotation processing completed
-//        jackOptions { enabled true }
+        versionName '1.0-beta'
     }
 
     productFlavors {
@@ -64,8 +60,8 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = !isTravis
-        incremental = !isTravis
+        preDexLibraries = !isCI
+        incremental = !isCI
     }
 
     packagingOptions {
@@ -77,8 +73,6 @@ android {
     lintOptions {
         textReport true
         textOutput "stdout"
-        enable 'IconExpectedSize', 'EasterEgg', 'SelectableText', 'StopShip', 'TypographyQuotes', 'UnusedIds'
-        disable 'InvalidPackage', 'GradleDependency'
         lintConfig file("$projectDir/lint.xml")
         warningsAsErrors true
     }
@@ -89,25 +83,18 @@ repositories {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-//    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-//    compile "com.android.support:gridlayout-v7:$SUPPORT_LIBRARY_VERSION"
-//    compile "com.android.support:palette-v7:$SUPPORT_LIBRARY_VERSION"
+    compile supportLibs
+    compile rxJavaLibs
+//    compile retrofitLibs
+//    compile okHttpLibs
 
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
-    compile 'com.jakewharton.timber:timber:2.5.0' // logging
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    testCompile unitTestLibs
+    androidTestCompile androidTestsLibs
+
     compile 'com.google.code.gson:gson:2.4'
-
-    compile 'io.reactivex:rxandroid:1.0.1' // async job and events
-    compile 'io.reactivex:rxjava:1.0.14'
-
-    testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
 }
 
 configurations {

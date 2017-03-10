@@ -1,27 +1,16 @@
-// project wide version settings for all submodules
-ext {
-  MIN_SDK_VERSION = 14
-  TARGET_SDK_VERSION = 25
-  BUILD_TOOLS_VERSION = '25.0.1'
-  SUPPORT_LIBRARY_VERSION = '25.1.0'
-}
-
 buildscript {
-  repositories {
-    jcenter()
-  }
+    repositories {
+        jcenter()
+    }
 
-  dependencies {
-    // android plugin
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    // use Java 8 lambdas on android
-    // TODO replace with jack and jill in near future
-    classpath 'me.tatarka:gradle-retrolambda:3.2.5'
-  }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5' // use Java 8 lambdas on android
+    }
 }
 
 allprojects {
-  repositories {
-    jcenter()
-  }
+    repositories {
+        jcenter()
+    }
 }
