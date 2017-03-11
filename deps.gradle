@@ -1,10 +1,15 @@
 ext {
     versions = [
-            okHttp             : '3.3.1',
-            support            : '25.1.0',
-            retrofit           : '2.0.2',
+            okHttp             : '3.6.0',
+            support            : '25.2.0',
+            retrofit           : '2.2.0',
             espressoVersion    : '2.2.2',
-            BUILD_TOOLS_VERSION: '25.0.1',
+            BUILD_TOOLS_VERSION: '25.0.2',
+            rxJava: '2.0.1',
+            rxAndroid: '2.0.1',
+            butterknife: '8.5.1',
+            gson: '2.4',
+            glide: '3.7.0',
             MIN_SDK_VERSION    : 14,
             TARGET_SDK_VERSION : 25
     ]
@@ -18,17 +23,27 @@ ext {
 //          palette          : "com.android.support:palette-v7:$versions.support"
     ]
     rxJava = [
-            rxJava   : 'io.reactivex:rxjava:1.1.6',
-            rxAndroid: 'io.reactivex:rxandroid:1.2.1'
+            rxJava   : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     ]
     retrofit = [
             retrofit     : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             rxAdapter    : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
             gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+
     ]
     okHttp = [
             logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             self  : "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    ]
+
+    tools = [
+            butterknife: "com.jakewharton:butterknife:$versions.butterknife",
+            glide: "com.github.bumptech.glide:glide:$versions.glide",
+            gson: "com.google.code.gson:gson:$versions.gson"
+    ]
+    annotations = [
+            butterknife: "com.jakewharton:butterknife-compiler:$versions.butterknife"
     ]
     unitTests = [
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
@@ -49,5 +64,7 @@ ext {
     okHttpLibs = okHttp.values()
     rxJavaLibs = rxJava.values()
     unitTestLibs = unitTests.values()
+    toolsLibs = tools.values()
+    annotationLibs = annotations.values()
     androidTestsLibs = androidTests.values() + supportLibs
 }
