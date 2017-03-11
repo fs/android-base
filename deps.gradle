@@ -8,6 +8,7 @@ ext {
             rxJava: '2.0.1',
             rxAndroid: '2.0.1',
             butterknife: '8.5.1',
+            gson: '2.4',
             glide: '3.7.0',
             MIN_SDK_VERSION    : 14,
             TARGET_SDK_VERSION : 25
@@ -38,7 +39,8 @@ ext {
 
     tools = [
             butterknife: "com.jakewharton:butterknife:$versions.butterknife",
-            glide: "com.github.bumptech.glide:glide:$versions.glide"
+            glide: "com.github.bumptech.glide:glide:$versions.glide",
+            gson: "com.google.code.gson:gson:$versions.gson"
     ]
     annotations = [
             butterknife: "com.jakewharton:butterknife-compiler:$versions.butterknife"
