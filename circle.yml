@@ -12,7 +12,7 @@ general:
 
 dependencies:
   pre:
-    - chmod +x set_animation_permissions.sh
+    - chmod +x app/set_animation_permissions.sh
 
 test:
   pre:
