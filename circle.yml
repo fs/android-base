@@ -1,19 +1,37 @@
 machine:
    environment:
-     ANDROID_HOME: /usr/local/android-sdk-linux
-     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+      TERM: "dumb"
+      ADB_INSTALL_TIMEOUT: "10"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
    java:
-     version: oraclejdk8
+      version: oraclejdk8
+
+general:
+  artifacts:
+    - "/home/ubuntu/android-base/app/build/reports"
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository"
-    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.1"
-    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+    - chmod +x set_animation_permissions.sh
 
 test:
+  pre:
+    - emulator -avd circleci-android22 -no-audio -no-window:
+        background: true
+        parallel: true
   override:
     - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
+    - circle-android wait-for-boot
+    - sleep 30
+    - adb shell input keyevent 82
+    - adb shell settings put global window_animation_scale 0.0 
+    - adb shell settings put global transition_animation_scale 0.0
+    - adb shell settings put global animator_duration_scale 0.0
+    - (./gradlew spoon):
+        timeout: 1200
+    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    - cp -r app/spoon $CIRCLE_ARTIFACTS
+    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 
 #deployment:
 #  production: # just a label; label names are completely up to you
