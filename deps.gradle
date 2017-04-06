@@ -9,10 +9,9 @@ ext {
             TARGET_SDK_VERSION : 25
     ]
     supportDeps = [
-            appcompatV7      : "com.android.support:appcompat-v7:$versions.support",
-            recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
-            supportAnnotation: "com.android.support:support-annotations:$versions.support",
-//          design           : "com.android.support:design:$versions.support",
+            appcompatV7 : "com.android.support:appcompat-v7:$versions.support",
+            recyclerView: "com.android.support:recyclerview-v7:$versions.support",
+            design      : "com.android.support:design:$versions.support"
 //          gridLayout       : "com.android.support:gridlayout-v7:$versions.support"
 //          cardView         : "com.android.support:cardview-v7:$versions.support"
 //          palette          : "com.android.support:palette-v7:$versions.support"
@@ -33,7 +32,6 @@ ext {
     unitTests = [
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
             junit            : 'junit:junit:4.12',
-            robolectric      : 'org.robolectric:robolectric:3.0',
             assertj          : 'com.squareup.assertj:assertj-android:1.0.0'
     ]
     androidTests = [
