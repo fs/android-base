@@ -22,6 +22,7 @@ android {
         applicationId APPLICATION_ID
         versionCode 1
         versionName '1.0-beta'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     productFlavors {
