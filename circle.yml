@@ -1,10 +1,10 @@
 machine:
-   java:
-       version: oraclejdk8
-     environment:
-       TERM: "dumb"
-       ADB_INSTALL_TIMEOUT: "10"
-       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+  java:
+    version: oraclejdk8
+  environment:
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: "10"
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 general:
   artifacts:
