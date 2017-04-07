@@ -1,10 +1,10 @@
 machine:
-   environment:
-      TERM: "dumb"
-      ADB_INSTALL_TIMEOUT: "10"
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
    java:
-      version: oraclejdk8
+       version: oraclejdk8
+     environment:
+       TERM: "dumb"
+       ADB_INSTALL_TIMEOUT: "10"
+       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 general:
   artifacts:
@@ -13,6 +13,9 @@ general:
 dependencies:
   pre:
     - chmod +x app/set_animation_permissions.sh
+    - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository"
+    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.1"
+    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
 
 test:
   pre:
