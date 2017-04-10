@@ -31,4 +31,10 @@ public class MainScreenTest {
         onView(allOf(withId(R.id.title), withText(R.string.app_name)))
                 .check(matches(isDisplayed()));
     }
+
+    @Test
+    public void brokenTest() throws Exception {
+        onView(allOf(withId(R.id.title), withText("non existent text")))
+                .check(matches(isDisplayed()));
+    }
 }
