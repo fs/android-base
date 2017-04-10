@@ -9,6 +9,7 @@ machine:
 general:
   artifacts:
     - "/home/ubuntu/android-base/app/build/reports"
+    - "/home/ubuntu/android-base/app/build/spoon"
 
 dependencies:
   pre:
