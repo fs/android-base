@@ -32,13 +32,13 @@ test:
         parallel: true
   override:
     - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
-    - circle-android wait-for-boot; sleep 10
+    - circle-android wait-for-boot
+    - sleep 20
     - adb shell input keyevent 82
     - adb shell settings put global window_animation_scale 0.0 
     - adb shell settings put global transition_animation_scale 0.0
     - adb shell settings put global animator_duration_scale 0.0
-    - (./gradlew spoonProductionDebugAndroidTest):
-        timeout: 1200
+    - ./gradlew spoonProductionDebugAndroidTest
 
 #deployment:
 #  production: # just a label; label names are completely up to you
