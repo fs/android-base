@@ -33,9 +33,6 @@ test:
     - adb shell settings put global animator_duration_scale 0.0
     - (./gradlew spoonProductionDebugAndroidTest):
         timeout: 1200
-    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
-    - cp -r app/spoon $CIRCLE_ARTIFACTS
-    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 
 #deployment:
 #  production: # just a label; label names are completely up to you
