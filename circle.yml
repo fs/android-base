@@ -20,7 +20,7 @@ dependencies:
 
 test:
   pre:
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    - emulator -avd circleci-android22 -no-audio -no-window -sdcard mysdcard.img:
         background: true
         parallel: true
   override:
