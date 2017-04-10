@@ -3,7 +3,7 @@ machine:
     version: oraclejdk8
   environment:
     TERM: "dumb"
-    ADB_INSTALL_TIMEOUT: "10"
+    ADB_INSTALL_TIMEOUT: 5000
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 general:
@@ -18,15 +18,21 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.1"
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
 
+  post:
+    # Create the android emulator
+    - echo n | android create avd -n test_android_17 -f -t android-17
+    #  [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
+    # Make a SD Card image file for the android emulator
+    - mksdcard -l e 128M sdcard.img
+
 test:
   pre:
-    - emulator -avd circleci-android22 -no-audio -no-window -sdcard mysdcard.img:
+    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
         background: true
         parallel: true
   override:
     - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
-    - circle-android wait-for-boot
-    - sleep 30
+    - circle-android wait-for-boot; sleep 10
     - adb shell input keyevent 82
     - adb shell settings put global window_animation_scale 0.0 
     - adb shell settings put global transition_animation_scale 0.0
