@@ -92,7 +92,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     testCompile unitTestLibs
-    androidTestCompile androidTestsLibs
+//    androidTestCompile androidTestsLibs
 
     compile 'com.google.code.gson:gson:2.4'
 }
