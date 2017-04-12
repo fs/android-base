@@ -25,12 +25,14 @@ android {
 
     productFlavors {
         staging {
-            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
+            buildConfigField "String", "API_URL", "\"http://api.openweathermap.org/\""
+            buildConfigField "String", "API_KEY", "\"2e9e447d7839fa8cd54ac940f3689d9e\""
             applicationIdSuffix ".staging"
         }
 
         production {
-            buildConfigField "String", "API_URL", "\"https://example.com\""
+            buildConfigField "String", "API_URL", "\"http://api.openweathermap.org/\""
+            buildConfigField "String", "API_KEY", "\"2e9e447d7839fa8cd54ac940f3689d9e\""
         }
     }
 
