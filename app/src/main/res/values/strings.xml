@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Base</string>
+    <string name="humidity">Humidity: %1$d%%</string>
+    <string name="temperature_celsius">%1$d°C</string>
+    <string name="network_error">Check your network connection you mudak</string>
+    <string name="refresh">Refresh</string>
+    <string name="refresh_in_progess">Refreshing in progress, podojdi blat</string>
 </resources>
