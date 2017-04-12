@@ -45,8 +45,7 @@ ext {
     ]
 
     supportLibs = supportDeps.values()
-    retrofitLibs = retrofit.values()
-    okHttpLibs = okHttp.values()
+    networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
     unitTestLibs = unitTests.values()
     androidTestsLibs = androidTests.values() + supportLibs
