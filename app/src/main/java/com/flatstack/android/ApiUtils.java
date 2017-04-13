@@ -16,21 +16,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiUtils {
 
-    private static volatile Api instance;
+    private static volatile Api sApiInstance;
 
     public static Api getInstance() {
-        Api localInstance = instance;
+        Api localInstance = sApiInstance;
         if (localInstance == null) {
             synchronized (Api.class) {
-                localInstance = instance;
+                localInstance = sApiInstance;
                 if (localInstance == null) {
-                    instance = localInstance = new Retrofit.Builder()
+                    localInstance = new Retrofit.Builder()
                             .client(getHttpClient())
                             .baseUrl(Api.BASE_URL)
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create())
                             .build()
                             .create(Api.class);
+                    sApiInstance = localInstance;
                 }
             }
         }

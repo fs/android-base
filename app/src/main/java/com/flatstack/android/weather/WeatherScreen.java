@@ -22,17 +22,17 @@ import butterknife.OnClick;
 
 public class WeatherScreen extends BaseActivity implements WeatherView {
 
-    @Bind(R.id.general)  TextView  uiGeneral;
-    @Bind(R.id.humidity) TextView  uiHumidity;
-    @Bind(R.id.icon)     ImageView uiIcon;
-    @Bind(R.id.temp)     TextView  uiTemp;
-    @Bind(R.id.progress) View      uiProgress;
+    @Bind(R.id.general)          TextView  uiGeneral;
+    @Bind(R.id.humidity)         TextView  uiHumidity;
+    @Bind(R.id.iv_weather_state) ImageView uiIcon;
+    @Bind(R.id.temp)             TextView  uiTemp;
+    @Bind(R.id.progress)         View      uiProgress;
+
+    private WeatherPresenter weatherPresenter;
 
     @NonNull @Override public UiInfo getUiInfo() {
         return new UiInfo(R.layout.screen_weather);
     }
-
-    private WeatherPresenter weatherPresenter;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
