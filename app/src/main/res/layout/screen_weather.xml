@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#202020"
+    android:background="@color/weather_screen_bg"
+    tools:ignore="Overdraw"
     >
 
     <LinearLayout
@@ -28,7 +29,7 @@
             >
 
             <ImageView
-                android:id="@+id/icon"
+                android:id="@+id/iv_weather_state"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 tools:src="@drawable/ic_launcher"
@@ -83,6 +84,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/refresh"
+        tools:ignore="RtlHardcoded"
         />
 
 </FrameLayout>
