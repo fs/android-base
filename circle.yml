@@ -1,19 +1,44 @@
 machine:
-   environment:
-     ANDROID_HOME: /usr/local/android-sdk-linux
-     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-   java:
-     version: oraclejdk8
+  java:
+    version: oraclejdk8
+  environment:
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: 5000
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+
+general:
+  artifacts:
+    - "/home/ubuntu/android-base/app/build/reports"
+    - "/home/ubuntu/android-base/app/build/spoon"
 
 dependencies:
   pre:
+    - chmod +x app/set_animation_permissions.sh
     - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository"
     - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.1"
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
 
+  post:
+    # Create the android emulator
+    - echo n | android create avd -n test_android_17 -f -t android-17
+    #  [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
+    # Make a SD Card image file for the android emulator
+    - mksdcard -l e 128M sdcard.img
+
 test:
+  pre:
+    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
+        background: true
+        parallel: true
   override:
     - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
+    - circle-android wait-for-boot
+    - sleep 20
+    - adb shell input keyevent 82
+    - adb shell settings put global window_animation_scale 0.0 
+    - adb shell settings put global transition_animation_scale 0.0
+    - adb shell settings put global animator_duration_scale 0.0
+    - ./gradlew spoonProductionDebugAndroidTest
 
 #deployment:
 #  production: # just a label; label names are completely up to you
