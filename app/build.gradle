@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'spoon'
+apply plugin: 'pl.droidsonroids.pitest'
 apply from: 'checkstyle/checkstyle.gradle'
 
 apply from: '../deps.gradle'
@@ -120,6 +121,13 @@ afterEvaluate {
             task.dependsOn grantAnimationPermissions
         }
     }
+}
+
+pitest {
+    targetClasses = ['com.flatstack.android.*']
+    threads = 5
+    outputFormats = ['HTML']
+    verbose = true
 }
 
 apply from: "quality.gradle"
