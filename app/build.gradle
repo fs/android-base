@@ -32,6 +32,12 @@ android {
             applicationIdSuffix ".staging"
         }
 
+        dev {
+            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
+            applicationIdSuffix ".staging"
+            minSdkVersion 21
+        }
+
         production {
             buildConfigField "String", "API_URL", "\"https://example.com\""
         }
