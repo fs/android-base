@@ -39,6 +39,9 @@ test:
     - adb shell settings put global transition_animation_scale 0.0
     - adb shell settings put global animator_duration_scale 0.0
     - ./gradlew spoonProductionDebugAndroidTest
+  post:
+    - ./gradlew jacocoTestReport
+    - bash <(curl -s https://codecov.io/bash) -t 4d7a6c7a-f551-49dc-8f68-87697f1b79db
 
 #deployment:
 #  production: # just a label; label names are completely up to you
