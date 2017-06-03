@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5' // use Java 8 lambdas on android
         classpath('com.stanfy.spoon:spoon-gradle-plugin:1.2.2') {
             exclude module: 'guava'
