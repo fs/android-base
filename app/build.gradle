@@ -80,13 +80,15 @@ android {
     }
 
     configurations.all {
-//        resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
+        resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
     }
 }
 
 repositories {
     mavenCentral()
 }
+
+apply from: '../test-deps.gradle'
 
 dependencies {
     compile supportLibs

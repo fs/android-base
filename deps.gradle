@@ -1,10 +1,9 @@
 ext {
     versions = [
             okHttp             : '3.3.1',
-            support            : '25.1.0',
+            support            : '25.3.1',
             retrofit           : '2.0.2',
-            espressoVersion    : '2.2.2',
-            BUILD_TOOLS_VERSION: '25.0.1',
+            BUILD_TOOLS_VERSION: '25.0.3',
             MIN_SDK_VERSION    : 14,
             TARGET_SDK_VERSION : 25
     ]
@@ -29,24 +28,9 @@ ext {
             logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             self  : "com.squareup.okhttp3:okhttp:$versions.okHttp"
     ]
-    unitTests = [
-            supportAnnotation: "com.android.support:support-annotations:$versions.support",
-            junit            : 'junit:junit:4.12',
-            assertj          : 'com.squareup.assertj:assertj-android:1.0.0'
-    ]
-    androidTests = [
-            espressoCore   : "com.android.support.test.espresso:espresso-core:$versions.espressoVersion",
-            espressoContrib: "com.android.support.test.espresso:espresso-contrib:$versions.espressoVersion",
-            espressoIntents: "com.android.support.test.espresso:espresso-intents:$versions.espressoVersion",
-            testRunner     : "com.android.support.test:runner:0.5",
-            testRules      : "com.android.support.test:rules:0.5",
-            spoon          : 'com.squareup.spoon:spoon-client:1.6.4'
-    ]
 
     supportLibs = supportDeps.values()
     retrofitLibs = retrofit.values()
     okHttpLibs = okHttp.values()
     rxJavaLibs = rxJava.values()
-    unitTestLibs = unitTests.values()
-    androidTestsLibs = androidTests.values() + supportLibs
 }
