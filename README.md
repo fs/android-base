@@ -23,7 +23,7 @@ Android app skeleton
     * Running *Android Lint*
     * Running *Robolectric* tests
     * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
-* *Greenhouse CI* setup. [Nevercode](http://greenhouseci.com/) created webhooks when you connected to GitHub and will build your app automatically for every git push. 
+* *Greenhouse CI* setup. [Nevercode](http://greenhouseci.com/) created webhooks when you connected to GitHub and will build your app automatically for every git push
 * Release build signing and naming configuration
 * Java8 lambdas support (thanks retrolambda)
 
