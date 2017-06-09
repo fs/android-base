@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'spoon'
 apply from: 'checkstyle/checkstyle.gradle'
+apply from: './jacoco.gradle'
 
 apply from: '../deps.gradle'
 
@@ -63,10 +64,23 @@ android {
 
     buildTypes {
         debug {
+            if (isCI) {
+                testCoverageEnabled true
+            }
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        if (isCI) {
+            unitTests.all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
         }
     }
 

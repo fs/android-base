@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.base.DefaultFailureHandler;
-import android.support.test.rule.ActivityTestRule;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 
 import com.squareup.spoon.Spoon;
 
@@ -16,7 +16,7 @@ import org.junit.runners.model.Statement;
  * Created by ereminilya on 6/4/17.
  */
 
-public class ScreenshotActivityRule<T extends Activity> extends ActivityTestRule<T> {
+public class ScreenshotActivityRule<T extends Activity> extends IntentsTestRule<T> {
 
     public ScreenshotActivityRule(Class<T> activityClass) {
         super(activityClass);
