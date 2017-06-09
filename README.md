@@ -3,7 +3,8 @@ Android app skeleton
 ## Continuous integration
 * Travis CI [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base/pull_requests)
 * Circle CI [![Build Status](https://circleci.com/gh/fs/android-base.png?style=shield&circle-token=c932b3e8650c436df970e9d1e9e06e8ef8fc9893)](https://circleci.com/gh/fs/android-base)
-* Greenhouse CI [![Nevercode build status](https://app.nevercode.io/api/projects/edc274f0-e0f0-42c9-864c-8b9777b34a75/workflows/bd3246e8-bcf9-4c2b-8820-c4cc2bba4135/status_badge.svg?branch=master&style=shields)](https://app.nevercode.io/#/project/edc274f0-e0f0-42c9-864c-8b9777b34a75/workflow/bd3246e8-bcf9-4c2b-8820-c4cc2bba4135/latestBuild?branch=master)
+* Greenhouse CI [![Nevercode build status](https://app.nevercode.io/api/projects/e593d665-7dba-480e-955d-59e7935c61b9/workflows/271f3337-1abb-4504-82f6-a037c50cddf4/status_badge.svg?branch=master&style=shields)](https://app.nevercode.io/#/project/e593d665-7dba-480e-955d-59e7935c61b9/workflow/271f3337-1abb-4504-82f6-a037c50cddf4/latestBuild?branch=master)
+* Codecov [![codecov](https://codecov.io/gh/fs/android-base/branch/master/graph/badge.svg)](https://codecov.io/gh/fs/android-base)
 
 ## Prerequisites
 * Android Studio 2.x
