@@ -36,7 +36,7 @@ public class MainScreenTest {
     }
 
     @Test
-    public void whenButtonClick_statedActivity() {
+    public void whenButtonClick_startedActivity() {
         onView(withId(R.id.button)).perform(click());
         intended(hasComponent(SecondActivity.class.getName()));
     }
