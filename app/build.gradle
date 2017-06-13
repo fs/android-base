@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'spoon'
 apply from: 'checkstyle/checkstyle.gradle'
+apply from: './jacoco.gradle'
 
 apply from: '../deps.gradle'
 
@@ -8,6 +10,9 @@ ext {
     APPLICATION_ID = "com.flatstack.android"
     isCI = "true".equals(System.getenv("CI"))
     commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
+//    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
+//    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
+//    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
 }
 
 android {
@@ -21,6 +26,8 @@ android {
         applicationId APPLICATION_ID
         versionCode 1
         versionName '1.0-beta'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        com.android.ddmlib.DdmPreferences.setTimeOut(60000)
     }
 
     productFlavors {
@@ -29,28 +36,51 @@ android {
             applicationIdSuffix ".staging"
         }
 
+        dev {
+            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
+            applicationIdSuffix ".staging"
+            minSdkVersion 21
+        }
+
         production {
             buildConfigField "String", "API_URL", "\"https://example.com\""
         }
     }
 
-//    signingConfigs {
+    signingConfigs {
+        debug {
+            storeFile file("$rootDir/debug.jks")
+            storePassword "12345678"
+            keyAlias "debug"
+            keyPassword "12345678"
+        }
 //        release {
-//            def props = new Properties()
-//            props.load(new FileInputStream(file("$rootDir/keys.properties")))
-//            storeFile file("$rootDir/your.jks")
-//            storePassword props['storePassword']
-//            keyAlias props['keyAlias']
-//            keyPassword props['keyPassword']
+//            storeFile file("$rootDir/project_name.jks")
+//            storePassword STORE_PASSWORD
+//            keyAlias KEY_ALIAS
+//            keyPassword KEY_PASSWORD
 //        }
-//    }
+    }
 
     buildTypes {
         debug {
+            if (isCI) {
+                testCoverageEnabled true
+            }
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        if (isCI) {
+            unitTests.all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
         }
     }
 
@@ -61,7 +91,6 @@ android {
 
     dexOptions {
         preDexLibraries = !isCI
-        incremental = !isCI
     }
 
     packagingOptions {
@@ -76,6 +105,10 @@ android {
         lintConfig file("$projectDir/lint.xml")
         warningsAsErrors true
     }
+
+    configurations.all {
+//        resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
+    }
 }
 
 repositories {
@@ -88,25 +121,33 @@ dependencies {
 //    compile retrofitLibs
 //    compile okHttpLibs
 
+    provided 'org.jetbrains:annotations:13.0'
+    compile 'com.google.code.gson:gson:2.4'
     compile 'com.jakewharton:butterknife:7.0.0' // view injection
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     testCompile unitTestLibs
     androidTestCompile androidTestsLibs
-
-    compile 'com.google.code.gson:gson:2.4'
-
-    provided 'org.jetbrains:annotations:13.0'
-
-    testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.0'
-    testCompile 'com.squareup.assertj:assertj-android:1.0.0'
 }
 
-configurations {
-    testCompile.exclude module: 'commons-logging'
-    testCompile.exclude module: 'httpclient'
+// Grant animation permissions to avoid test failure because of ui sync.
+task grantAnimationPermissions(type: Exec, dependsOn: ['installStagingDebug', 'installProductionDebug']) {
+    group = 'test'
+    description = 'Grant permissions for testing.'
+
+    def absolutePath = file('..') // Get project absolute path
+    commandLine "$absolutePath/app/set_animation_permissions.sh com.flatstack.android".split(" ")
+}
+
+// Source: http://stackoverflow.com/q/29908110/112705
+afterEvaluate {
+    // When launching individual tests from Android Studio, it seems that only the assemble tasks
+    // get called directly, not the install* versions
+    tasks.each { task ->
+        if (task.name.endsWith('AndroidTest')) {
+            task.dependsOn grantAnimationPermissions
+        }
+    }
 }
 
 apply from: "quality.gradle"
