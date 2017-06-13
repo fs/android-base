@@ -45,18 +45,5 @@ public class ListsTest {
             this.id = id;
             this.anotherField = anotherField;
         }
-
-        @Override public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            TestClass testClass = (TestClass) o;
-
-            return id != null ? id.equals(testClass.id) : testClass.id == null;
-        }
-
-        @Override public int hashCode() {
-            return id != null ? id.hashCode() : 0;
-        }
     }
 }
