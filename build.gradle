@@ -1,15 +1,17 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.5' // use Java 8 lambdas on android
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0' // use Java 8 lambdas on android
         classpath('com.stanfy.spoon:spoon-gradle-plugin:1.2.2') {
             exclude module: 'guava'
         }
         classpath 'com.google.guava:guava:17.0'
+        classpath 'pl.droidsonroids.gradle:gradle-pitest-plugin:0.0.4'
     }
 }
 
