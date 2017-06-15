@@ -3,7 +3,7 @@ Android app skeleton
 ## Continuous integration
 * Travis CI [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base/pull_requests)
 * Circle CI [![Build Status](https://circleci.com/gh/fs/android-base.png?style=shield&circle-token=c932b3e8650c436df970e9d1e9e06e8ef8fc9893)](https://circleci.com/gh/fs/android-base)
-* Greenhouse CI [![Nevercode build status](https://app.nevercode.io/api/projects/af770237-5763-47d5-be12-14feee6adeb6/workflows/fc995e46-43fa-4edf-b261-6e11d97de632/status_badge.svg?branch=master&style=shields)](https://app.nevercode.io/#/project/af770237-5763-47d5-be12-14feee6adeb6/workflow/fc995e46-43fa-4edf-b261-6e11d97de632/latestBuild?branch=master)
+* Nevercode CI [![Nevercode build status](https://app.nevercode.io/api/projects/af770237-5763-47d5-be12-14feee6adeb6/workflows/fc995e46-43fa-4edf-b261-6e11d97de632/status_badge.svg?branch=master&style=shields)](https://app.nevercode.io/#/project/af770237-5763-47d5-be12-14feee6adeb6/workflow/fc995e46-43fa-4edf-b261-6e11d97de632/latestBuild?branch=master)
 * Codecov [![codecov](https://codecov.io/gh/fs/android-base/branch/master/graph/badge.svg)](https://codecov.io/gh/fs/android-base)
 
 ## Prerequisites
@@ -24,7 +24,7 @@ Android app skeleton
     * Running *Android Lint*
     * Running *Robolectric* tests
     * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
-* *Greenhouse CI* setup. [Nevercode](http://greenhouseci.com/) created webhooks when you connected to GitHub and will build your app automatically for every git push
+* *Nevercode CI* setup. [Nevercode](https://nevercode.io/) (previously known as GreenhouseCI) created webhooks when you connected to GitHub and will build your app automatically for every git push
 * Release build signing and naming configuration
 * Java8 lambdas support (thanks retrolambda)
 
