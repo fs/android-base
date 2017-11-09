@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'spoon'
 apply from: 'checkstyle/checkstyle.gradle'
 apply from: './jacoco.gradle'
@@ -28,22 +27,21 @@ android {
         versionName '1.0-beta'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         com.android.ddmlib.DdmPreferences.setTimeOut(60000)
+        javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     }
+
+    flavorDimensions "environment"
 
     productFlavors {
         staging {
             buildConfigField "String", "API_URL", "\"https://example-staging.com\""
             applicationIdSuffix ".staging"
-        }
-
-        dev {
-            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationIdSuffix ".staging"
-            minSdkVersion 21
+            dimension "environment"
         }
 
         production {
             buildConfigField "String", "API_URL", "\"https://example.com\""
+            dimension "environment"
         }
     }
 
@@ -109,6 +107,7 @@ android {
     configurations.all {
         resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
     }
+    buildToolsVersion '26.0.2'
 }
 
 repositories {
@@ -118,18 +117,18 @@ repositories {
 apply from: '../test-deps.gradle'
 
 dependencies {
-    compile supportLibs
-    compile rxJavaLibs
-//    compile retrofitLibs
-//    compile okHttpLibs
+    implementation supportLibs
+    implementation rxJavaLibs
+//    implementation retrofitLibs
+//    implementation okHttpLibs
 
-    provided 'org.jetbrains:annotations:13.0'
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.jakewharton:butterknife:7.0.0' // view injection
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compileOnly 'org.jetbrains:annotations:13.0'
+    implementation 'com.google.code.gson:gson:2.4'
+    implementation 'com.jakewharton:butterknife:7.0.0' // view injection
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
-    testCompile unitTestLibs
-    androidTestCompile androidTestsLibs
+    testImplementation unitTestLibs
+    androidTestImplementation androidTestsLibs
 }
 
 // Grant animation permissions to avoid test failure because of ui sync.
