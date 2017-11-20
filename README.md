@@ -7,10 +7,9 @@ Android app skeleton
 * Codecov [![codecov](https://codecov.io/gh/fs/android-base/branch/master/graph/badge.svg)](https://codecov.io/gh/fs/android-base)
 
 ## Prerequisites
-* Android Studio 2.x
+* [Android Studio](https://developer.android.com/sdk/installing/studio.html) 3.x
 * JDK 8
 * Android SDK
-* `JAVA_HOME` pointing to your jdk8
 
 ## Recommended plugins:
 * [Parcelable generator](https://github.com/mcharmas/android-parcelable-intellij-plugin)
@@ -22,11 +21,10 @@ Android app skeleton
     * Downloading an *Android SDK*
     * Building
     * Running *Android Lint*
-    * Running *Robolectric* tests
     * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
 * *Nevercode CI* setup. [Nevercode](https://nevercode.io/) (previously known as GreenhouseCI) created webhooks when you connected to GitHub and will build your app automatically for every git push
 * Release build signing and naming configuration
-* Java8 lambdas support (thanks retrolambda)
+* Java8 lambdas support (thanks Android Studio 3.0)
 
 ## Setup
  1. Clone application as new project with original remote named "android-base"
@@ -41,9 +39,8 @@ Android app skeleton
     	git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
     	git push -u origin master
 
- 3. Import the project into your favourite IDE (only [Android Studio](https://developer.android.com/sdk/installing/studio.html) and [IntelliJ IDEA](http://www.jetbrains.com/idea/) are supported).
+ 3. Import the project into your favourite IDE.
 Just select the root `build.gradle` and your IDE will do the rest.
-It will ask you to change the language level - do it, we're using Java 8 now
 
 ### Configuration
 * Change your app's package by either [renaming the folder structure for Java sources](https://github.com/fs/android-base/tree/master/app/src/main/java/com/flatstack/android) or by just changing this [constant](https://github.com/fs/android-base/blob/master/app/build.gradle#L5) in `build.gradle`
@@ -57,7 +54,7 @@ Go to the Settings (`cmd + ,`) -> Editor -> Code Style look on top of right pane
 
 ### ProGuard
 Project already has proguard config for included libraries.
-Maintaint [proguard-rules.pro](https://github.com/fs/android-base/blob/master/app/proguard-rules.pro) updated when you add new libraries or play with reflection.
+Maintain [proguard-rules.pro](https://github.com/fs/android-base/blob/master/app/proguard-rules.pro) updated when you add new libraries or play with reflection.
 
 ## Credits
 Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adelnizamutdinov) and [Ilya Eremin](http://github.com/ilyaeremin).
