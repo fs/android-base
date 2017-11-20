@@ -14,9 +14,14 @@ general:
 dependencies:
   pre:
     - chmod +x app/set_animation_permissions.sh
-    - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository"
-    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.3"
-    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+    - if [ ! -d "/usr/local/android-sdk-linux/platforms/android-26" ]; then echo y | android update sdk --no-ui --all --filter "android-26"; fi
+    - if [ ! -d "/usr/local/android-sdk-linux/build-tools/26.0.2" ]; then echo y | android update sdk --no-ui --all --filter "build-tools-26.0.2"; fi
+    - if [ ! -d "/usr/local/android-sdk-linux/extras/android/m2repository/com/android/support/design/27.0.1" ]; then echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"; fi
+
+  cache_directories:
+    - /usr/local/android-sdk-linux/platforms/android-26
+    - /usr/local/android-sdk-linux/build-tools/26.0.2
+    - /usr/local/android-sdk-linux/extras/android/m2repository
 
   post:
     # Create the android emulator
