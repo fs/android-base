@@ -5,8 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
-        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.2.2') {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath('com.jaredsburrows:gradle-spoon-plugin:1.0.0') {
             exclude module: 'guava'
         }
         classpath 'com.google.guava:guava:17.0'
