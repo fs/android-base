@@ -40,9 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
-        if (savedInstanceState != null) {
-            restoreState(savedInstanceState);
-        }
     }
 
     @Override public void setContentView(int layoutResID) {
@@ -50,11 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    protected void restoreState(@NonNull Bundle savedState) {
-    }
-
     protected void parseArguments(@NonNull Bundle extras) {
-        throw new IllegalStateException("should be overridden");
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
