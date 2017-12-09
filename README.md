@@ -11,9 +11,6 @@ Android app skeleton
 * JDK 8
 * Android SDK
 
-## Recommended plugins:
-* [Parcelable generator](https://github.com/mcharmas/android-parcelable-intellij-plugin)
-
 ## What's included:
 * [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L29-L38) build flavors with different package names ([read more](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Product-flavors))
 * *Android Lint* [configuration](https://github.com/fs/android-base/blob/master/app/build.gradle#L56-L61)
@@ -24,7 +21,6 @@ Android app skeleton
     * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
 * *Nevercode CI* setup. [Nevercode](https://nevercode.io/) (previously known as GreenhouseCI) created webhooks when you connected to GitHub and will build your app automatically for every git push
 * Release build signing and naming configuration
-* Java8 lambdas support (thanks Android Studio 3.0)
 
 ## Setup
  1. Clone application as new project with original remote named "android-base"
