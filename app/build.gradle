@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'spoon'
 apply from: 'checkstyle/checkstyle.gradle'
 apply from: './jacoco.gradle'
 
