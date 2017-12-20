@@ -87,13 +87,13 @@
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
         <codeStyleSettings language="JAVA">
-            <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
-            <option name="KEEP_SIMPLE_LAMBDAS_IN_ONE_LINE" value="true" />
-            <option name="METHOD_ANNOTATION_WRAP" value="1" />
-            <option name="FIELD_ANNOTATION_WRAP" value="0" />
-            <indentOptions>
-                <option name="CONTINUATION_INDENT_SIZE" value="4" />
-            </indentOptions>
+          <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+          <option name="KEEP_SIMPLE_LAMBDAS_IN_ONE_LINE" value="true" />
+          <option name="METHOD_ANNOTATION_WRAP" value="1" />
+          <option name="FIELD_ANNOTATION_WRAP" value="0" />
+          <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="4" />
+          </indentOptions>
         </codeStyleSettings>
         <codeStyleSettings language="XML">
           <option name="FORCE_REARRANGE_MODE" value="1" />
