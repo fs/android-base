@@ -1,6 +1,6 @@
 apply plugin: 'jacoco'
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testStagingDebugUnitTest', 'createStagingDebugCoverageReport']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testStagingDebugUnitTest']) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports"
 
