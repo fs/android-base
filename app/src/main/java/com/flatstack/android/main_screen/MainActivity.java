@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.flatstack.android.utils.Intents;
 import com.flatstack.android.utils.ui.BaseActivity;
 import com.flatstack.android.R;
 import com.flatstack.android.utils.ui.UiInfo;
@@ -18,7 +19,9 @@ public class MainActivity extends BaseActivity {
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
+        if (Intents.isActivtyExpandedFromLauncherIcon(this)) {
+            finish();
+        } else if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new MainFragment())
                 .commit();
