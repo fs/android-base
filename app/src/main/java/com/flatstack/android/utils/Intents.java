@@ -16,10 +16,10 @@ public class Intents {
     }
 
     public static boolean isActivityStartedFromLauncherIcon(@Nullable Intent intent) {
-        return intent != null
-                && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
-                && intent.getAction() != null
-                && intent.getAction().equals(Intent.ACTION_MAIN);
+        return intent != null &&
+                intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
+                intent.getAction() != null &&
+                intent.getAction().equals(Intent.ACTION_MAIN);
     }
 
 }
