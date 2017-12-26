@@ -11,8 +11,8 @@ import android.support.annotation.Nullable;
 
 public class Intents {
 
-    public static boolean isActivtyExpandedFromLauncherIcon(@NonNull Activity activity) {
-        return activity.isTaskRoot() && isActivityStartedFromLauncherIcon(activity.getIntent());
+    public static boolean isActivityExpandedFromLauncherIcon(@NonNull Activity activity) {
+        return !activity.isTaskRoot() && isActivityStartedFromLauncherIcon(activity.getIntent());
     }
 
     public static boolean isActivityStartedFromLauncherIcon(@Nullable Intent intent) {

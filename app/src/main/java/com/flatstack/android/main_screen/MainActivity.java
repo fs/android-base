@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Intents.isActivtyExpandedFromLauncherIcon(this)) {
+        if (Intents.isActivityExpandedFromLauncherIcon(this)) {
             finish();
         } else if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
