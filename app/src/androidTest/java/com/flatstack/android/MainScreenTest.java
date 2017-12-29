@@ -18,10 +18,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-/**
- * Created by ereminilya on 6/4/17.
- */
-
 @RunWith(AndroidJUnit4.class)
 public class MainScreenTest {
 
@@ -40,5 +36,4 @@ public class MainScreenTest {
         onView(withId(R.id.button)).perform(click());
         intended(hasComponent(SecondActivity.class.getName()));
     }
-
 }

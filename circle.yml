@@ -9,36 +9,40 @@ machine:
 general:
   artifacts:
     - "/home/ubuntu/android-base/app/build/reports"
-    - "/home/ubuntu/android-base/app/build/spoon"
 
 dependencies:
   pre:
     - chmod +x app/set_animation_permissions.sh
-    - echo y | android update sdk --no-ui --all --filter "tools,platform-tools,android-25,extra-google-m2repository"
-    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.3"
-    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+    - if [ ! -d "/usr/local/android-sdk-linux/platforms/android-26" ]; then echo y | android update sdk --no-ui --all --filter "android-26"; fi
+    - if [ ! -d "/usr/local/android-sdk-linux/build-tools/26.0.2" ]; then echo y | android update sdk --no-ui --all --filter "build-tools-26.0.2"; fi
+    - if [ ! -d "/usr/local/android-sdk-linux/extras/android/m2repository/com/android/support/design/27.0.1" ]; then echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"; fi
+
+  cache_directories:
+    - /usr/local/android-sdk-linux/platforms/android-26
+    - /usr/local/android-sdk-linux/build-tools/26.0.2
+    - /usr/local/android-sdk-linux/extras/android/m2repository
 
   post:
     # Create the android emulator
-    - echo n | android create avd -n test_android_17 -f -t android-17
-    #  [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
+#    - echo n | android create avd -n test_android_17 -f -t android-17
+    # [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
     # Make a SD Card image file for the android emulator
-    - mksdcard -l e 128M sdcard.img
+#    - mksdcard -l e 128M sdcard.img
 
 test:
-  pre:
-    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
-        background: true
-        parallel: true
+#  pre:
+#    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
+#        background: true
+#        parallel: true
   override:
     - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
-    - circle-android wait-for-boot
-    - sleep 20
-    - adb shell input keyevent 82
-    - adb shell settings put global window_animation_scale 0.0 
-    - adb shell settings put global transition_animation_scale 0.0
-    - adb shell settings put global animator_duration_scale 0.0
-    - ./gradlew spoonProductionDebugAndroidTest
+#    - circle-android wait-for-boot
+#    - sleep 20
+#    - adb shell input keyevent 82
+#    - adb shell settings put global window_animation_scale 0.0 
+#    - adb shell settings put global transition_animation_scale 0.0
+#    - adb shell settings put global animator_duration_scale 0.0
+#    - ./gradlew spoonProductionDebugAndroidTest
   post:
     - ./gradlew jacocoTestReport
     - bash <(curl -s https://codecov.io/bash) -t 4d7a6c7a-f551-49dc-8f68-87697f1b79db

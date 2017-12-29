@@ -7,14 +7,8 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.base.DefaultFailureHandler;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
-import com.squareup.spoon.Spoon;
-
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-
-/**
- * Created by ereminilya on 6/4/17.
- */
 
 public class ScreenshotActivityRule<T extends Activity> extends IntentsTestRule<T> {
 
@@ -28,10 +22,8 @@ public class ScreenshotActivityRule<T extends Activity> extends IntentsTestRule<
         String testMethodName = description.getMethodName();
         Context context = InstrumentationRegistry.getTargetContext();
         Espresso.setFailureHandler((error, matcher) -> {
-            Spoon.screenshot(getActivity(), "failure", testClassName, testMethodName);
             new DefaultFailureHandler(context).handle(error, matcher);
         });
         return super.apply(base, description);
     }
-
 }
