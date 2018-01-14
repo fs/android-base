@@ -27,6 +27,11 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
 
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
       - run:
           name: Checkstyle
           command: ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest testProductionDebugUnitTest
