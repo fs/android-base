@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-26-alpha
+    environment:
+      JVM_OPTS: -Xms512m -Xmx1024m
+      ADB_INSTALL_TIMEOUT: 5000
+      GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
+      TERM: dumb
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      - run:
+          name: Android SDK
+          command: |
+            if [ ! -d "/usr/local/android-sdk-linux/platforms/android-26" ]; then echo y | android update sdk --no-ui --all --filter "android-25"; fi
+            if [ ! -d "/usr/local/android-sdk-linux/build-tools/26.0.2" ]; then echo y | android update sdk --no-ui --all --filter "build-tools-26.0.2"; fi
+            if [ ! -d "/usr/local/android-sdk-linux/extras/android/m2repository/com/android/support/design/27.0.1" ]; then echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"; fi
+
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      - run:
+          name: Checkstyle
+          command: ./gradlew checkstyle
+
+      - run:
+          name: Linter
+          command: ./gradlew lintProductionRelease
+
+      - run:
+          name: UnitTest
+          command: ./gradlew testProductionReleaseUnitTest testProductionDebugUnitTest
+
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: apks/
