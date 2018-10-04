@@ -42,29 +42,17 @@ id компонентов в layout должны соответствовать 
 в сокращенном ввиде из заглавных букв (пакет саппорта в учет не входит). Пример, самых распространенных элементов:
 
 - tv_ - TextView
-
 - iv_ - ImageView
-
 - btn_ - Button
-
 - ibtn_ - ImageButton
-
 - et_ - EditText
-
 - ti_ - TextInputLayout
-
 - pb_ - ProgressBar
-
 - chb_ - CheckBox
-
 - rv_ - RecyclerView
-
 - containter_ - любой ViewGroup, выступающий ввиде родителя-контейнера
-
 - view_ - кастомная вью
-
 - divider_ - view-разделитель
-
 - cv_ - CardView
 
 ### Порядок атрибутов в layout-е
@@ -78,7 +66,7 @@ id компонентов в layout должны соответствовать 
 
 ### Имена констант в xml:
 
-postfix_screen_semantic_size, где:
+- postfix_screen_semantic_size, где:
     - screen - имя экрана, где используется константа, может отсутствовать, если используется на многих экранах
     - semantic - смысл
 	- size - размер ресурса, может отсутствовать(small, medium, large, xlarge or Xdp)
@@ -105,21 +93,21 @@ postfix_screen_semantic_size, где:
 
 #### Вариант 1, на уровнях абстракции:
 
-	Берем метод самого высокого уровня абстракции. После него располагаются
+Берем метод самого высокого уровня абстракции. После него располагаются
 методы которые он вызывает, после этих методов, методы которые вызываются в них,
 и так пока не будет достигнут самый нижний уровень абстракции. После этого
 берется следующий метод из верхнего, неупорядоченного, уровня абстракции, и повторяем шаги.
 
-	Его несколько тяжелее поддерживать, но это позволяет легче читать код класса
+Его несколько тяжелее поддерживать, но это позволяет легче читать код класса
 сверху вниз, не прибегая к переходам.
 
 #### Вариант 2:
 
-	- abstract methods
-	- override methods
-	- public methods
-	- protected methods
-	- private methods
+- abstract methods
+- override methods
+- public methods
+- protected methods
+- private methods
 	
 ### Именование и порядок переменных
 
@@ -132,7 +120,6 @@ postfix_screen_semantic_size, где:
 Пример: 
 	public static final int SOME_CONSTANT = 42;
 	private static MyClass sSingleton; 	
-	
 	public int publicField; 
 	int packagePrivate; 
 	protected int protected;
@@ -203,11 +190,11 @@ postfix_screen_semantic_size, где:
 
 - Цепочечные вызовы следует располагать друг под другом на новой строке. Пример: 
 
-Picasso.with(context)
-	  .load("https://www.a90skid.com/.../800x800.jpg")
-	  .error(R.drawable.ic_error)
-      .transform(PaletteTransformation.instance())
-	  .into(imageView);
+	Picasso.with(context)
+		.load("https://www.a90skid.com/.../800x800.jpg")
+		.error(R.drawable.ic_error)
+		.transform(PaletteTransformation.instance())
+		.into(imageView);
 
 - большинство методов, возвращающих boolean должны начинаться с `is***`, `are***`.
 Допустимо также использовать префиксы `can***`, `should***`, `has***`, `not***`.
