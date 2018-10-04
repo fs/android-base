@@ -118,12 +118,15 @@ id компонентов в layout должны соответствовать 
 - constants are ALL_CAPS_WITH_UNDERSCORES
 
 Пример: 
-	public static final int SOME_CONSTANT = 42;
-	private static MyClass sSingleton; 	
-	public int publicField; 
-	int packagePrivate; 
-	protected int protected;
-	private int private; 
+```
+public static final int SOME_CONSTANT = 42;
+private static MyClass sSingleton; 	
+	
+public int publicField; 
+int packagePrivate; 
+protected int protected;
+private int private; 
+```
 
 ### Комментарии
 
@@ -188,16 +191,18 @@ id компонентов в layout должны соответствовать 
 
 ### Остальное
 
-- Цепочечные вызовы следует располагать друг под другом на новой строке. Пример: 
-
-	Picasso.with(context)
-		.load("https://www.a90skid.com/.../800x800.jpg")
-		.error(R.drawable.ic_error)
-		.transform(PaletteTransformation.instance())
-		.into(imageView);
+- Цепочечные вызовы следует располагать друг под другом на новой строке. 
+Пример: 
+```
+Picasso.with(context)
+	.load("https://www.a90skid.com/.../800x800.jpg")
+	.error(R.drawable.ic_error)
+	.transform(PaletteTransformation.instance())
+	.into(imageView);
+```
 
 - большинство методов, возвращающих boolean должны начинаться с `is***`, `are***`.
 Допустимо также использовать префиксы `can***`, `should***`, `has***`, `not***`.
-**Примечание:** соблюдаем грамматику английского языка.
+**Примечание:** соблюдаем грамматику английского языка, не будь как я!
 
 [oracle_conv]: http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
