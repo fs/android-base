@@ -53,15 +53,10 @@ val someBeautifulLambda: (Int) -> Int = { it * 2 }
 **1 вариант**:
 
 * abstract методы
-
 * override методы
-
 * публичные методы
-
 * internal методы
-
 * protected методы
-
 * приватные методы
 
 **по видам модификатора**
@@ -203,20 +198,20 @@ someList.map { objInList ->
 
 ```kotlin
 subscribeBy(onSuccess = {
-				// your code   
+			// your code   
 			}, onError = {
-                // your code   
+			// your code   
             })
 ```
 
 **Примечание:** Если Observable большой, то стоит выности в переменную (или даже метод), 
 а то метод может стать очень большим
 ```kotlin
-    subscribeBy(onSuccess = {
+subscribeBy(onSuccess = {
 				// your code   
 			}, onError = {
-                handleError(it) // or handleError, если это переменная, которая принимает лямбду 
-            })
+				handleError(it) // or handleError, если это переменная, которая принимает лямбду 
+			})
 ```
 
 ## Идиомы
@@ -239,7 +234,8 @@ var nullableInt: Int? = null
 
 nullableInt = 11
 
-if (nullableInt != null) <- эта проверка ничего не даст, ибо мутабельная переменная не гаратирует того, что он не измениться 
+if (nullableInt != null) <- эта проверка ничего не даст, 
+							ибо мутабельная переменная не гаратирует того, что он не измениться 
 //  code
 
 nullableInt?.let {
