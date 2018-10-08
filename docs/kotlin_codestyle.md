@@ -1,5 +1,3 @@
-[TOC]
-
 # Kotlin CodeStyle
 
 ## Основные положения
@@ -115,7 +113,7 @@ override fun onPageScrolled(
 
 * Если выражение однострочного метода не помещается в одну строку:
 ```kotlin
- fun signIn(password: String): Single<Profile> =
+fun signIn(password: String): Single<Profile> =
             api.signIn(ProfileBody.Holder(ProfileBody(login, password)))
                     .compose(RxUtils.subscribeSingleOnIoObserveOnUi())
 ```
@@ -173,14 +171,14 @@ class Person(
 без круглых скобок
 
 ```kotlin
-    doSomething { //do something }
+doSomething { //do something }
 ```
 
 Внутри лямбды удобно использовать `it`, если *не требуется* уточнения или
 внутри *не используется* еще одна лямбда, требующая параметр внешней лямбды(см. 2)
 1)
 ``` kotlin
- api.signUp(ProfileBody.Holder(ProfileBody(login, password)))
+api.signUp(ProfileBody.Holder(ProfileBody(login, password)))
                 .map { it.profile }
                 .compose(RxUtils.subscribeSingleOnIoObserveOnUi())
 ```
