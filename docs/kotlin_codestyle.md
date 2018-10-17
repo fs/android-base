@@ -4,8 +4,8 @@
 
 Основано на [Coding Conventions][conv] и [Android Style Guide][style]
 
-Перед *Pull Request* **ОБЯЗАТЕЛЬНО** делаем форматирование кода по `Ctrl+Alt+L`
-
+Перед *Pull Request* **ОБЯЗАТЕЛЬНО** делайте форматирование кода с `Ctrl+Alt+L` или 
+поставьте галочку *reformate code* before commit в ide.
 
 ## Правила оформления комментариев
 
@@ -22,7 +22,7 @@
 
 Используется `camelCase`. Тип свойства указывается **явно**.
 
-Если используются свойства с функциональном типом, то делаем постфикс `Lambda`
+Если используются свойства с функциональном типом, то делайте постфикс `Lambda`
 ```
 val someBeautifulLambda: (Int) -> Int = { it * 2 }
 ```
@@ -35,7 +35,7 @@ val someBeautifulLambda: (Int) -> Int = { it * 2 }
 
 ## Структура класса
 
-В отличии от [Coding Conventions][conv] намного удобнее видеть companion object наверху класса, как и статики в java
+В отличии от [Coding Conventions][conv] удобнее видеть companion object наверху класса, как и статики в java
 
 * companion object
 * приватные поля-ключи(константы)
@@ -202,8 +202,7 @@ subscribeBy(onSuccess = {
 })
 ```
 
-**Примечание:** Если Observable большой, то стоит выности в переменную (или даже метод), 
-а то метод может стать очень большим
+**Примечание:** Если Observable большой, то стоит выности в переменную (или даже метод)
 ```kotlin
 subscribeBy(onSuccess = {
 	// your code   
@@ -216,7 +215,7 @@ subscribeBy(onSuccess = {
 
 см. [Idiomatic use of language features](https://kotlinlang.org/docs/reference/coding-conventions.html#idiomatic-use-of-language-features)
 
-### Kotlin конструкции
+### Kotlin scope functions
 
 #### .apply{}
 
@@ -233,7 +232,7 @@ var nullableInt: Int? = null
 nullableInt = 11
 
 if (nullableInt != null)
-// эта проверка ничего не даст, ибо мутабельная переменная не гаратирует того, что он не измениться 
+// эта проверка ничего не даст, ибо мутабельная переменная не гаратирует того, что она не измениться 
 
 
 nullableInt?.let {
@@ -246,7 +245,7 @@ nullableInt?.let {
 ![Подсказка по выбору нужного скоупа](../docs/scope_image.png)
 
 
-## Лучшие практики
+## Практики и советы
 
 * Обращение к вью через kotlin.synthetic.* (через имена в xml в lower_snake_case).
 *Искл*: в контроллерах удобнее использовать findViewById или Anko.find(),
@@ -260,6 +259,22 @@ nullableInt?.let {
 println("Name: $name")
 ```
 
+* Измените настройку цветов в Settings(Preferences)-> Editor-> Color Scheme-> Kotlin для 
+	* *Android Extensions synthetic properties* в Properties and Variables
+	* *Lambda expression default parameter* в Parameters
+	* *Var* в Properties and Variables
+	* *Interface* в Classes and Interfaces
+	* *Named arguments*
+	* *Smart-cast implict receiver* в Smart-casts
+что увеличит читабельность кода в ide.
+
+* Создавайте свои templates(многих привычных шаблонов из java в kotlin пока нету)
+   
+Не забывайте, что код стайл, в первую очередь, должен помогать команде, и не стоит слепо следовать пастулатом
+из сети. Обдуймайте, почему же были приняты те или иные решения. В начале разработки проекта стоит обговорить
+общие правила по написанию кода. Как отправную точку, можете взять сей документ. Надеюсь, в будущем этот документ 
+будет пополняться и улучшаться уже вашими опыта.  
+   
 [conv]: https://kotlinlang.org/docs/reference/coding-conventions.html
 [style]: https://android.github.io/kotlin-guides/style.html
 [surf]: java_codestyle.md
