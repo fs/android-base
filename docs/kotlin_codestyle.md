@@ -259,14 +259,13 @@ nullableInt?.let {
 println("Name: $name")
 ```
 
-* Измените настройку цветов в Settings(Preferences)-> Editor-> Color Scheme-> Kotlin для 
+* Рекомендую изменить настройку цветов в Settings(Preferences)-> Editor-> Color Scheme-> Kotlin для 
 	* *Android Extensions synthetic properties* в Properties and Variables
 	* *Lambda expression default parameter* в Parameters
-	* *Var* в Properties and Variables
+	* *Var (mutable variable, parameter or property)* в Properties and Variables(e.g. check effect - underscored) 
 	* *Interface* в Classes and Interfaces
 	* *Named arguments*
 	* *Smart-cast implict receiver* в Smart-casts
-что увеличит читабельность кода в ide.
 
 * Создавайте свои templates(многих привычных шаблонов из java в kotlin пока нету)
    
