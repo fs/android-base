@@ -35,16 +35,15 @@ val someBeautifulLambda: (Int) -> Int = { it * 2 }
 
 ## Структура класса
 
-В отличии от [Coding Conventions][conv] удобнее видеть companion object наверху класса, как и статики в java
-
-* companion object
-* приватные поля-ключи(константы)
+* Copyright, package, import statements
+* Первичный конструктор
 * публичные val / var свойства
 * приватные val/ var свойства
-* init
+* вторичные конструкторы
 * публичные интерфейсы
 * методы
 * вложенные классы
+* companion object (Are they the most important thing? Put them first. Are they boring constants? Last.)
 
 #### Расположение методов в классе
 
@@ -95,7 +94,13 @@ package com.example.deep_space
 ## Форматирование
 
 ### Пустые/ не пустые блоки кода
-см [Non-empty/Empty Blocks](https://android.github.io/kotlin-guides/style.html#non-empty-blocks)
+см [Non-empty/Empty Blocks](https://developer.android.com/kotlin/style-guide#whitespace)
+
+### Скобки
+см [Braces](https://developer.android.com/kotlin/style-guide#braces)
+
+### Специфичные конструкции
+см [Specific constructs](https://developer.android.com/kotlin/style-guide#specific_constructs)
 
 ### Форматирование метода
 
@@ -275,5 +280,5 @@ println("Name: $name")
 будет пополняться и улучшаться уже вашими опыта.  
    
 [conv]: https://kotlinlang.org/docs/reference/coding-conventions.html
-[style]: https://android.github.io/kotlin-guides/style.html
+[style]: https://developer.android.com/kotlin/style-guide
 [surf]: java_codestyle.md

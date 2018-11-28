@@ -162,17 +162,16 @@ private int private;
 Именование переменных, соответствующих компонентам, должно соответствовать
 шаблону `postfixSemantic`, где `postfix`:
 
-- tv - TextView
-- btn - Button
-- ibtn - ImageButton
-- iv - ImageView
-- pb - ProgressBar
-- et - EditText
-- ti - TextInputLayout
-- rb - RadioButton
-- chb - CheckBox
-- rv - RecyclerView
-- cv - CardView
+- tv - TextView (tvName, tvDescription etc)
+- btn - Button (btnLogin, btnSendPhoto etc)
+- ibtn - ImageButton (ibtnSendMessage, ibtnCurrentLocation etc)
+- iv - ImageView (ivCover, ivAvatar etc)
+- et - EditText (etEmail, etPassword etc)
+- ti - TextInputLayout (tiEmail, tiPassword etc)
+- rb - RadioButton (rbNotifications etc)
+- chb - CheckBox (chbDefault, chbRememberMe etc)
+- rv - RecyclerView (rvCities, rvVehicles etc)
+- cv - CardView (cvPost, cvLocation etc)
 
 ### Использование аннотаций
 
@@ -181,7 +180,9 @@ private int private;
 `@Override protected void onCreate(Bundle state) {}`
 
 Если возвращаемое значение метода может быть `null`, необходимо добавить
-аннотацию `@Nullable`. То же и для параметров метода.
+аннотацию `@Nullable`, и если наоборот `@NonNull`. То же и для параметров метода. 
+Это не только добавит корректности в работу кода, но также обеспечит правильную 
+миграцию/интеграцию с Kotlin-ом
 
 Если параметры или возвращаемое значение метода являются id ресурса,
 то следует пометить их аннотациями `@StringRes`, `@LayoutRes`, `@DrawableRes` и тд.
@@ -202,7 +203,7 @@ Picasso.with(context)
 ```
 
 - большинство методов, возвращающих boolean должны начинаться с `is***`, `are***`.
-Допустимо также использовать префиксы `can***`, `should***`, `has***`, `not***`.
-**Примечание:** соблюдаем грамматику английского языка, не будь как я!
+Допустимо также использовать префиксы `can***`, `should***`, `has***`, зависит от контекста переменной.
+**Примечание:** соблюдай грамматику английского языка, не будь как я!
 
 [oracle_conv]: http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
