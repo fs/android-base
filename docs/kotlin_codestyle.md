@@ -4,9 +4,6 @@
 
 Основано на [Coding Conventions][conv] и [Android Style Guide][style]
 
-Перед *Pull Request* **ОБЯЗАТЕЛЬНО** делайте форматирование кода с `Ctrl+Alt+L` или 
-поставьте галочку *reformate code* before commit в ide.
-
 ## Правила оформления комментариев
 
 см. [Java Code Style][surf] 
@@ -39,6 +36,7 @@ val someBeautifulLambda: (Int) -> Int = { it * 2 }
 * Первичный конструктор
 * публичные val / var свойства
 * приватные val/ var свойства
+* init
 * вторичные конструкторы
 * публичные интерфейсы
 * методы
@@ -73,13 +71,13 @@ val someBeautifulLambda: (Int) -> Int = { it * 2 }
 если они не используются только в одном месте. Файл именуется с
 постфиксом Extensions, при этом префикс должен соответсвовать классу,
 который эти методы расширяют,
-т.е `EditTextExtensions`, `ListExtensions`, `ActivityExtensions` и тд.
+т.е `EditTextExtensions`, `ViewExtensions`, `ActivityExtensions` и тд.
 
 * Публичные глобальные константы хранить как `const val` свойства в отдельном файле,
 на глобальном уровне.
 
-* Утилитные функции удобно хранить либо в виде *глобальных функций*, либо
-оборачивать в `object`.
+* Утилитные функции удобно хранить либо в виде *глобальных функций* (Файл именуется с
+постфиксом Functions), либооборачивать в `object`.
 
 * Название пакетов 
 ```
@@ -212,7 +210,7 @@ subscribeBy(onSuccess = {
 subscribeBy(onSuccess = {
 	// your code   
 }, onError = {
-	handleError(it) // or handleError, если это переменная, которая принимает лямбду 
+	handleError(it) // or handleError - если это переменная, которая принимает лямбду 
 })
 ```
 
@@ -226,6 +224,14 @@ subscribeBy(onSuccess = {
 
 Удобно использовать, когда необходимо  проинициализировать свойства
 объекта при передачи, как аргумента, в метод. 
+```kotlin
+fun newInstance(userId: Int = -1) =
+                FooFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt(ARG_USER_ID, userId)
+                    }
+                }
+```
 
 #### .let{}
 
@@ -264,7 +270,7 @@ nullableInt?.let {
 println("Name: $name")
 ```
 
-* Рекомендую изменить настройку цветов в Settings(Preferences)-> Editor-> Color Scheme-> Kotlin для 
+* Рекомендую изменить настройку цветовой схемы в Settings(Preferences)-> Editor-> Color Scheme-> Kotlin для следующих полей:
 	* *Android Extensions synthetic properties* в Properties and Variables
 	* *Lambda expression default parameter* в Parameters
 	* *Var (mutable variable, parameter or property)* в Properties and Variables(e.g. check effect - underscored) 
@@ -275,7 +281,7 @@ println("Name: $name")
 * Создавайте свои templates(многих привычных шаблонов из java в kotlin пока нету)
    
 Не забывайте, что код стайл, в первую очередь, должен помогать команде, и не стоит слепо следовать пастулатом
-из сети. Обдуймайте, почему же были приняты те или иные решения. В начале разработки проекта стоит обговорить
+из сети. Обдуймайте, почему были приняты те или иные решения. В начале разработки проекта стоит обговорить
 общие правила по написанию кода. Как отправную точку, можете взять сей документ. Надеюсь, в будущем этот документ 
 будет пополняться и улучшаться уже вашими опыта.  
    

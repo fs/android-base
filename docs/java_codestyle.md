@@ -9,7 +9,8 @@
 Если информация этого документа конфликтует с
 информацией из приведенных ранее, то следует придерживаться этого документа.
 
-Перед *Pull Request* не забывай делать форматирование с помощью горящих клавиш `Ctrl+Alt+L ` or `Cmd+Alt+L`.
+Перед *Pull Request* **ОБЯЗАТЕЛЬНО** делайте форматирование кода с `Ctrl+Alt+L` или 
+поставьте галочку *reformate code* before commit в ide.
 
 ## Android xml style
 
@@ -41,19 +42,19 @@
 id компонентов в layout должны соответствовать шаблону *postfix_semantic*, где *postfix* тип компонента, 
 в сокращенном ввиде из заглавных букв (пакет саппорта в учет не входит). Пример, самых распространенных элементов:
 
-- tv_ - TextView
-- iv_ - ImageView
-- btn_ - Button
-- ibtn_ - ImageButton
-- et_ - EditText
-- ti_ - TextInputLayout
-- pb_ - ProgressBar
-- chb_ - CheckBox
-- rv_ - RecyclerView
-- containter_ - любой ViewGroup, выступающий ввиде родителя-контейнера
-- view_ - кастомная вью
-- divider_ - view-разделитель
-- cv_ - CardView
+- tv_ - TextView (tv_name, tv_description etc)
+- iv_ - ImageView (iv_avatar, iv_cover, iv_flower etc)
+- btn_ - Button (btn_login, btn_send etc)
+- ibtn_ - ImageButton (ibtn_current_location, ibtn_search etc)
+- et_ - EditText (et_email, et_password etc)
+- ti_ - TextInputLayout (ti_email, ti_password etc)
+- pb_ - ProgressBar (pb_locations, pb_cities)
+- cb_ - CheckBox (cb_default, cb_remember_me)
+- rv_ - RecyclerView (rv_messeges, rv_cities etc)
+- containter_ - любой ViewGroup, выступающий ввиде родителя-контейнера (containter_main, containter_login etc)
+- view_ - кастомная вью (view_date_picker, view_clock etc)
+- divider_ - view-разделитель (divider_cards, divider_payments etc)
+- cv_ - CardView (cv_post, cv_weather etc)
 
 ### Порядок атрибутов в layout-е
 
@@ -188,7 +189,7 @@ private int private;
 то следует пометить их аннотациями `@StringRes`, `@LayoutRes`, `@DrawableRes` и тд.
 
 Все поля в объектах `SomeResponse`, `SomeRequest` или другого Json объекта  должны быть
-помечены аннотацией `@SerializedName` или быть внесены в исключение в настройках ProGuard-а
+помечены аннотацией `@SerializedName` или класс дожны быть внесены в исключения в настройках ProGuard-а
 
 ### Остальное
 
