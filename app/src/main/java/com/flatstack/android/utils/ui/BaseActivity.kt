@@ -35,7 +35,7 @@ abstract class BaseActivity : AppCompatActivity() {
         ButterKnife.bind(this)
     }
 
-    internal fun parseArguments(extras: Bundle) {}
+    fun parseArguments(extras: Bundle) {}
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (screenConfig.menuRes != 0) {

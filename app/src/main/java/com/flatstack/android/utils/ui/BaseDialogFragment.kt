@@ -20,12 +20,8 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            parseArguments(arguments!!)
-        }
-        if (savedInstanceState != null) {
-            restoreState(savedInstanceState)
-        }
+        arguments?.let { parseArguments(it) }
+        savedInstanceState?.let { restoreState(it) }
     }
 
     protected fun restoreState(savedState: Bundle) {}
@@ -36,7 +32,7 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
 
@@ -51,12 +47,11 @@ abstract class BaseDialogFragment : DialogFragment() {
     }
 
     override fun onDestroyView() {
-        butterKnifeUnbinder!!.unbind()
+        butterKnifeUnbinder?.unbind()
         super.onDestroyView()
     }
 
     companion object {
-
         protected fun <T : BaseDialogFragment> show(
             dialogFragment: T,
             activity: FragmentActivity
@@ -64,8 +59,8 @@ abstract class BaseDialogFragment : DialogFragment() {
             val ft = activity.supportFragmentManager.beginTransaction()
             val prev = activity.supportFragmentManager
                     .findFragmentByTag(dialogFragment.javaClass.name)
-            if (prev != null) {
-                ft.remove(prev)
+            prev?.let {
+                ft.remove(it)
                 val df = prev as DialogFragment
                 df.dismissAllowingStateLoss()
             }

@@ -18,9 +18,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreate(savedState: Bundle?) {
         super.onCreate(savedState)
-        if (savedState != null) {
-            restoreState(savedState)
-        }
+        savedState?.let { restoreState(it) }
     }
 
     fun restoreState(savedState: Bundle) {}

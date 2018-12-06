@@ -12,12 +12,15 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Intents.isActivityExpandedFromLauncherIcon(this)) {
-            finish()
-        } else if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.content, MainFragment())
-                    .commit()
+        when {
+            Intents.isActivityExpandedFromLauncherIcon(this) -> finish()
+            savedInstanceState == null -> showMainFragment()
         }
+    }
+
+    private fun showMainFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content, MainFragment())
+            .commit()
     }
 }

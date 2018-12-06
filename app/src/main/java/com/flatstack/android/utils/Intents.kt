@@ -10,9 +10,8 @@ object Intents {
     }
 
     private fun isActivityStartedFromLauncherIcon(intent: Intent?): Boolean {
-        return intent != null &&
-                intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
-                intent.action != null &&
-                intent.action == Intent.ACTION_MAIN
+        if (intent != null) {
+            return intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intent.action == Intent.ACTION_MAIN
+        }
     }
 }
