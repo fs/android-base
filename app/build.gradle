@@ -1,16 +1,22 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: 'checkstyle/checkstyle.gradle'
 apply from: './jacoco.gradle'
 
 apply from: '../deps.gradle'
 
 ext {
-    APPLICATION_ID = "com.flatstack.android"
     isCI = "true".equals(System.getenv("CI"))
-    commitMessage = 'git log -1 --pretty=%B'.execute().text.trim()
 //    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
 //    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
 //    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
+}
+
+detekt {
+    toolVersion = "1.0.0-RC11"
+    input = files("src/main/java")
+    filters = ".*/resources/.*,.*/build/.*"
 }
 
 android {
@@ -21,7 +27,7 @@ android {
         minSdkVersion versions.MIN_SDK_VERSION
         targetSdkVersion versions.TARGET_SDK_VERSION
 
-        applicationId APPLICATION_ID
+        applicationId 'com.flatstack.android'
         versionCode 1
         versionName '0.9.1'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -112,9 +118,8 @@ repositories {
     mavenCentral()
 }
 
-apply from: '../test-deps.gradle'
-
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     implementation supportLibs
     implementation rxJavaLibs
     //    implementation retrofitLibs
@@ -123,7 +128,10 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:13.0'
     implementation 'com.google.code.gson:gson:2.4'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-    implementation 'com.jakewharton:butterknife:7.0.0'
+
+    implementation "com.jakewharton:butterknife:$versions.butterKnife"
+    kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
 }
