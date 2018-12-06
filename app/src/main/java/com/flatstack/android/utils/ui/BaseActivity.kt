@@ -20,10 +20,9 @@ abstract class BaseActivity : AppCompatActivity() {
         intent?.extras?.let { parseArguments(it) }
         findViewById<Toolbar>(R.id.toolbar)?.let {
             setSupportActionBar(it)
-            if (screenConfig.titleRes != 0) {
-                setTitle(screenConfig.titleRes)
-            } else if (screenConfig.title != null) {
-                title = screenConfig.title
+            when {
+                screenConfig.titleRes != 0 -> setTitle(screenConfig.titleRes)
+                screenConfig.title != null -> title = screenConfig.title
             }
             if (screenConfig.enableBackButton) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
