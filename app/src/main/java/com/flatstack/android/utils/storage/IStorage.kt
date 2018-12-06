@@ -2,6 +2,7 @@ package com.flatstack.android.utils.storage
 
 import java.lang.reflect.Type
 
+@Suppress("TooManyFunctions")
 interface IStorage {
 
     operator fun <T> get(key: String, type: Type): T?

@@ -2,7 +2,7 @@ package com.flatstack.android;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.flatstack.android.main_screen.MainActivity;
+import com.flatstack.android.mainscreen.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

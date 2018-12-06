@@ -1,4 +1,4 @@
-package com.flatstack.android.main_screen
+package com.flatstack.android.mainscreen
 
 import android.os.Bundle
 import com.flatstack.android.R

@@ -36,7 +36,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        butterKnifeUnbinder!!.unbind()
+        butterKnifeUnbinder?.unbind()
         super.onDestroyView()
     }
 }

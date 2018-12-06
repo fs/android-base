@@ -6,6 +6,7 @@ import com.google.gson.Gson
 
 import java.lang.reflect.Type
 
+@Suppress("TooManyFunctions")
 class Storage(private val sp: SharedPreferences, private val gson: Gson) : IStorage {
     override fun <T> get(key: String, type: Type): T? {
         val json = sp.getString(key, "")

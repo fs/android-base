@@ -32,7 +32,7 @@ before_install:
 #  - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
+    - ./gradlew checkstyle detekt lintProductionRelease testProductionReleaseUnitTest
 
 branches:
   only:

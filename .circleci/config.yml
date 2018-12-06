@@ -36,6 +36,10 @@ jobs:
           command: ./gradlew checkstyle
 
       - run:
+          name: kotlin checkstyle
+          command: ./gradlew detekt
+
+      - run:
           name: Linter
           command: ./gradlew lintProductionRelease
 

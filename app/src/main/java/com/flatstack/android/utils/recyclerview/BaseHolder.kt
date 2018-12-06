@@ -1,4 +1,4 @@
-package com.flatstack.android.utils.recycler_view
+package com.flatstack.android.utils.recyclerview
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
