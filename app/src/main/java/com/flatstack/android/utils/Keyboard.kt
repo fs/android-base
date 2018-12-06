@@ -31,5 +31,6 @@ object Keyboard {
         inputMethodManager(view.context)?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    private fun inputMethodManager(context: Context) = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    private fun inputMethodManager(context: Context) =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
 }

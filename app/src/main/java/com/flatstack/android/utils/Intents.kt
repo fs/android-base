@@ -13,5 +13,6 @@ object Intents {
         if (intent != null) {
             return intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intent.action == Intent.ACTION_MAIN
         }
+        return false
     }
 }
