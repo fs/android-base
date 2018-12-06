@@ -1,8 +1,9 @@
 buildscript {
     apply from: './deps.gradle'
     repositories {
-        jcenter()
         google()
+        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
     }
 
     dependencies {
@@ -10,6 +11,10 @@ buildscript {
         classpath 'com.google.guava:guava:17.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
+}
+
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC11")
 }
 
 allprojects {

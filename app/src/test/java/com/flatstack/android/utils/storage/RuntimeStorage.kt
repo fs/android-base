@@ -7,7 +7,6 @@ class RuntimeStorage : IStorage {
 
     private val map = HashMap<String, Any>()
 
-
     override fun <T> get(key: String, clazz: Type): T? {
         return map[key] as T?
     }

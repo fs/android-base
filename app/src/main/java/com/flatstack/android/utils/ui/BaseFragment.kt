@@ -25,9 +25,11 @@ abstract class BaseFragment : Fragment() {
 
     fun restoreState(savedState: Bundle) {}
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(layoutRes, container, false)
         butterKnifeUnbinder = ButterKnife.bind(this, rootView)
         return rootView
@@ -37,5 +39,4 @@ abstract class BaseFragment : Fragment() {
         butterKnifeUnbinder!!.unbind()
         super.onDestroyView()
     }
-
 }

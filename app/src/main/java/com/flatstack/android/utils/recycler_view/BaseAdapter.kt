@@ -5,8 +5,11 @@ import android.view.ViewGroup
 
 import rx.functions.Func1
 
-class BaseAdapter<T, VH : BaseHolder<T>> @JvmOverloads constructor(private val items: MutableList<T>, private val func0: Func1<ViewGroup, VH>,
-                                                                   private val onItemClickListener: OnItemClickListener<T>? = null) : RecyclerView.Adapter<VH>() {
+class BaseAdapter<T, VH : BaseHolder<T>> @JvmOverloads constructor(
+    private val items: MutableList<T>,
+    private val func0: Func1<ViewGroup, VH>,
+    private val onItemClickListener: OnItemClickListener<T>? = null
+) : RecyclerView.Adapter<VH>() {
 
     val data: List<T>
         get() = items

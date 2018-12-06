@@ -40,9 +40,11 @@ abstract class BaseDialogFragment : DialogFragment() {
         return dialog
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val v = inflater.inflate(layoutRes, container, false)
         butterKnifeUnbinder = ButterKnife.bind(this, v)
         return v
@@ -55,8 +57,10 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     companion object {
 
-        protected fun <T : BaseDialogFragment> show(dialogFragment: T,
-                                                    activity: FragmentActivity): T {
+        protected fun <T : BaseDialogFragment> show(
+            dialogFragment: T,
+            activity: FragmentActivity
+        ): T {
             val ft = activity.supportFragmentManager.beginTransaction()
             val prev = activity.supportFragmentManager
                     .findFragmentByTag(dialogFragment.javaClass.name)

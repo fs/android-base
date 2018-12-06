@@ -15,5 +15,4 @@ object Intents {
                 intent.action != null &&
                 intent.action == Intent.ACTION_MAIN
     }
-
 }

@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-
+import butterknife.ButterKnife
 import com.flatstack.android.R
 import com.flatstack.android.utils.Keyboard
-
-import butterknife.ButterKnife
 
 abstract class BaseActivity : AppCompatActivity() {
 

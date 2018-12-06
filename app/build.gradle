@@ -13,6 +13,12 @@ ext {
 //    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
 }
 
+detekt {
+    toolVersion = "1.0.0-RC11"
+    input = files("src/main/java")
+    filters = ".*/resources/.*,.*/build/.*"
+}
+
 android {
     compileSdkVersion versions.TARGET_SDK_VERSION
     buildToolsVersion versions.BUILD_TOOLS_VERSION

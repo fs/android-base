@@ -1,10 +1,9 @@
 package com.flatstack.android.main_screen
 
 import android.os.Bundle
-
+import com.flatstack.android.R
 import com.flatstack.android.utils.Intents
 import com.flatstack.android.utils.ui.BaseActivity
-import com.flatstack.android.R
 import com.flatstack.android.utils.ui.ScreenConfig
 
 class MainActivity : BaseActivity() {

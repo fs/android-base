@@ -37,9 +37,11 @@ class TestDialog : BaseDialogFragment() {
         private const val KEY_TITLE = "dialogTitle"
         private const val KEY_MESSAGE = "dialogMessage"
 
-        fun show(title: String?,
-                 message: String?,
-                 fm: FragmentManager) {
+        fun show(
+            title: String?,
+            message: String?,
+            fm: FragmentManager
+        ) {
 
             val dialog = TestDialog()
 
