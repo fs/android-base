@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.detekt
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -14,11 +16,11 @@ apply(from = "./jacoco.gradle")
 ////    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
 //}
 //
-//detekt {
-//    toolVersion = "1.0.0-RC11"
-//    input = files("src/main/java")
-//    filters = ".*/resources/.*,.*/build/.*"
-//}
+detekt {
+    toolVersion = "1.0.0-RC11"
+    input = files("src/main/java")
+    filters = ".*/resources/.*,.*/build/.*"
+}
 
 android {
     compileSdkVersion(28)
@@ -52,6 +54,19 @@ android {
 //        }
     }
 
+    productFlavors {
+        create("staging") {
+            buildConfigField("String", "API_URL", "\"https://example-staging.com\"")
+            applicationIdSuffix = ".staging"
+            setDimension("environment")
+        }
+
+        create("production") {
+            buildConfigField("String", "API_URL", "\"https://example.com\"")
+            setDimension("environment")
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             //            if (isCI) {
@@ -74,7 +89,7 @@ android {
 //    }
 
     compileOptions {
-        setSourceCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility = JavaVersion.VERSION_1_8
         setTargetCompatibility(JavaVersion.VERSION_1_8)
     }
 
