@@ -3,7 +3,6 @@ version: 2
 references:
 
   ## Cache
-
   cache_key: &cache_key
     key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
   restore_cache: &restore_cache
@@ -16,54 +15,15 @@ references:
         - ~/.gradle
         - ~/.m2
 
-  ## Workspace
-
-  workspace: &workspace
-    ~/workspace
-  attach_debug_workspace: &attach_debug_workspace
-    attach_workspace:
-      at: *workspace
-  persist_debug_workspace: &persist_debug_workspace
-    persist_to_workspace:
-      root: *workspace
-      paths:
-        - app/build/intermediates
-        - app/build/outputs/androidTest-results
-        - app/build/outputs/apk
-        - app/build/outputs/code-coverage
-        - app/build/test-results
-        - ~/.android/build-cache/
-
   ## Docker image configurations
-
   android_config: &android_config
-    working_directory: *workspace
+    working_directory: ~/workspace
     docker:
       - image: circleci/android:api-28-alpha
     environment:
       TERM: dumb
-      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
 
 jobs:
-
-  build_debug:
-    <<: *android_config
-    steps:
-      - checkout
-      - *restore_cache
-      - run:
-          name: Download dependencies
-          command: ./gradlew androidDependencies
-      - *save_cache
-      - run:
-          name: Gradle build (debug)
-          command: ./gradlew -PciBuild=true :app:assembleDebug
-      - *persist_debug_workspace
-      - store_artifacts:
-          path: app/build/outputs/apk/
-          destination: /apk/
-
   checkstyle:
     <<: *android_config
     steps:
@@ -95,7 +55,7 @@ jobs:
       - *restore_cache
       - run:
           name: Linter
-          command: ./gradlew lintProductionRelease
+          command: ./gradlew lintProductionDebug
       - store_artifacts:
           path: app/build/reports/
           destination: /reports/
@@ -111,8 +71,7 @@ jobs:
       - *save_cache
       - run:
           name: Run unit tests
-          command: ./gradlew -PciBuild=true :app:testProductionDebugUnitTest
-      - *persist_debug_workspace
+          command: ./gradlew testProductionDebugUnitTest
       - store_artifacts:
           path: app/build/reports/
           destination: /reports/
@@ -124,16 +83,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build_debug
-    - checkstyle:
-        requires:
-          - build_debug
-    - detekt:
-        requires:
-          - build_debug
-    - test_unit:
-        requires:
-          - build_debug
-    - lint_check:
-        requires:
-          - build_debug
+    - checkstyle
+    - detekt
+    - test_unit
+    - lint_check
