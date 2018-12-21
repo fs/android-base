@@ -16,12 +16,10 @@ class MainFragment : BaseFragment() {
     override val layoutRes: Int
         get() = R.layout.fragment_main
 
-    @BindView(R.id.ivImage) internal lateinit var uiImage: ImageView
-    @BindView(R.id.btnButton) internal lateinit var uiButton: Button
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val uiImage = view.findViewById<ImageView>(R.id.ivImage)
         uiImage.setOnClickListener {
             fragmentManager?.let {
                 TestDialog.show("Example Hello", "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
@@ -30,7 +28,7 @@ class MainFragment : BaseFragment() {
             }
         }
 
-        uiButton.setOnClickListener {
+        view.findViewById<View>(R.id.btnButton).setOnClickListener {
             startActivity(Intent(activity, SecondActivity::class.java))
         }
 
