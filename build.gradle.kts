@@ -8,8 +8,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.0-alpha09")
-        classpath("com.google.guava:guava:17.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.10")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}")
     }
 }
 

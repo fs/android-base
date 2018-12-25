@@ -5,17 +5,10 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentActivity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 
-import butterknife.ButterKnife
-import butterknife.Unbinder
-
 abstract class BaseDialogFragment : DialogFragment() {
-
-    private var butterKnifeUnbinder: Unbinder? = null
-
     internal abstract val layoutRes: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,16 +33,7 @@ abstract class BaseDialogFragment : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val v = inflater.inflate(layoutRes, container, false)
-        butterKnifeUnbinder = ButterKnife.bind(this, v)
-        return v
-    }
-
-    override fun onDestroyView() {
-        butterKnifeUnbinder?.unbind()
-        super.onDestroyView()
-    }
+    ) = inflater.inflate(layoutRes, container, false)
 
     companion object {
         protected fun <T : BaseDialogFragment> show(

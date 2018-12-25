@@ -2,12 +2,11 @@ object Versions {
     val TARGET_SDK_VERSION = 28
     val BUILD_TOOLS_VERSION = "28.0.3"
     val MIN_SDK_VERSION = 14
-    val kotlin = "1.3.10"
+    val KOTLIN = "1.3.11"
     val OKHTTP = "3.3.1"
     val SUPPORT = "28.0.0"
     val RETROFIT = "2.0.2"
-    val butterKnife = "9.0.0-rc2"
-    val espressoVersion = "2.2.2"
+    val DETEKT = "1.0.0-RC12"
 }
 
 object Libs {

@@ -2,7 +2,7 @@ import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
 plugins {
     id("com.android.application")
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
+    id("io.gitlab.arturbosch.detekt").version(Versions.DETEKT)
     kotlin("android")
     kotlin("android.extensions")
 }
@@ -10,12 +10,12 @@ plugins {
 apply(from = "checkstyle/checkstyle.gradle")
 apply(from = "./jacoco.gradle")
 
-//    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
-//    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
-//    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
+//   val STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
+//   val KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
+//   val KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
 
 detekt {
-    toolVersion = "1.0.0-RC12"
+    toolVersion = Versions.DETEKT
     input = files("src/main/java")
     filters = ".*/resources/.*,.*/build/.*"
 }
@@ -44,12 +44,12 @@ android {
             keyAlias = "debug"
             keyPassword = "12345678"
         }
-//        release {
+        create("release") {
 //            storeFile file("$rootDir/project_name.jks")
 //            storePassword STORE_PASSWORD
 //            keyAlias KEY_ALIAS
 //            keyPassword KEY_PASSWORD
-//        }
+        }
     }
 
     productFlavors {
@@ -70,6 +70,10 @@ android {
         }
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
+            isUseProguard = true
+//            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(getDefaultProguardFile ("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 
@@ -105,7 +109,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}")
     implementation(Libs.APPCOMPATV7)
     implementation(Libs.RECYCLER_VIEW)
     implementation(Libs.RX_JAVA)
@@ -113,9 +117,6 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.4")
     implementation("com.github.bumptech.glide:glide:3.7.0")
-
-    implementation("com.jakewharton:butterknife:9.0.0-rc2")
-    kapt("com.jakewharton:butterknife-compiler:9.0.0-rc2")
 
     testImplementation(Libs.JUNIT)
     testImplementation(Libs.ASSERTJ)
