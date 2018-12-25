@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.view.View
 import android.widget.TextView
-import butterknife.BindView
 
 import com.flatstack.android.R
 import com.flatstack.android.utils.ui.BaseDialogFragment
 
 class TestDialog : BaseDialogFragment() {
-    @BindView(R.id.dialog_title) internal lateinit var uiTitle: TextView
-    @BindView(R.id.dialog_message) internal lateinit var uiMessage: TextView
-
     private var title: String? = null
     private var message: String? = null
 
@@ -28,8 +24,8 @@ class TestDialog : BaseDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        uiTitle.text = title
-        uiMessage.text = message
+        view.findViewById<TextView>(R.id.dialog_title).text = title
+        view.findViewById<TextView>(R.id.dialog_message).text = message
     }
 
     companion object {
@@ -38,17 +34,16 @@ class TestDialog : BaseDialogFragment() {
         private const val KEY_MESSAGE = "dialogMessage"
 
         fun show(
-            title: String?,
-            message: String?,
-            fm: FragmentManager
+                title: String?,
+                message: String?,
+                fm: FragmentManager
         ) {
-
-            val dialog = TestDialog()
-
-            val args = Bundle()
-            args.putString(KEY_TITLE, title ?: "")
-            args.putString(KEY_MESSAGE, message ?: "")
-            dialog.arguments = args
+            val dialog = TestDialog().apply {
+                arguments = Bundle().apply {
+                    putString(KEY_TITLE, title ?: "")
+                    putString(KEY_MESSAGE, message ?: "")
+                }
+            }
 
             dialog.show(fm, TestDialog::class.java.name)
         }
