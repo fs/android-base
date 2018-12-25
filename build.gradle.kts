@@ -13,10 +13,6 @@ buildscript {
     }
 }
 
-plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC11")
-}
-
 allprojects {
     repositories {
         jcenter()

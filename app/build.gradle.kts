@@ -1,7 +1,8 @@
-import io.gitlab.arturbosch.detekt.detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
 plugins {
     id("com.android.application")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
     kotlin("android")
     kotlin("android.extensions")
 }
@@ -9,26 +10,23 @@ plugins {
 apply(from = "checkstyle/checkstyle.gradle")
 apply(from = "./jacoco.gradle")
 
-//ext {
-//    isCI = "true".equals(System.getenv("CI"))
-////    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
-////    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
-////    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
-//}
-//
+//    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
+//    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
+//    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
+
 detekt {
-    toolVersion = "1.0.0-RC11"
+    toolVersion = "1.0.0-RC12"
     input = files("src/main/java")
     filters = ".*/resources/.*,.*/build/.*"
 }
 
 android {
-    compileSdkVersion(28)
-    buildToolsVersion("28.0.3")
+    compileSdkVersion(Versions.TARGET_SDK_VERSION)
+    buildToolsVersion(Versions.BUILD_TOOLS_VERSION)
 
     defaultConfig {
-        minSdkVersion(14)
-        targetSdkVersion(28)
+        minSdkVersion(Versions.MIN_SDK_VERSION)
+        targetSdkVersion(Versions.TARGET_SDK_VERSION)
 
         applicationId = "com.flatstack.android"
         versionCode = 1
@@ -69,24 +67,11 @@ android {
 
     buildTypes {
         getByName("debug") {
-            //            if (isCI) {
-//            testCoverageEnabled = true
-//            }
         }
         getByName("release") {
             isMinifyEnabled = true
         }
     }
-
-//    testOptions {
-//        if (isCI) {
-//            unitTests.all {
-//                jacoco {
-//                    includeNoLocationClasses = true
-//                }
-//            }
-//        }
-//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -110,9 +95,9 @@ android {
         setWarningsAsErrors(true)
     }
 
-//    configurations.all {
-//        resolutionStrategy.force = "com.android.support:support-annotations:28.0.0"
-//    }
+    configurations.all {
+        resolutionStrategy.force(Libs.SUPPORT_ANNOTATIONS)
+    }
 }
 
 repositories {
@@ -121,24 +106,20 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.10")
-    implementation("com.android.support:appcompat-v7:28.0.0")
-    implementation("com.android.support:recyclerview-v7:28.0.0")
-    implementation("com.android.support:design:28.0.0")
-    implementation("io.reactivex:rxjava:1.1.6")
-    implementation("io.reactivex:rxandroid:1.2.1")
+    implementation(Libs.APPCOMPATV7)
+    implementation(Libs.RECYCLER_VIEW)
+    implementation(Libs.RX_JAVA)
+    implementation(Libs.RX_ANDROID)
 
-    //    implementation retrofitLibs
-    //    implementation okHttpLibs
-
-    compileOnly("org.jetbrains:annotations:13.0")
     implementation("com.google.code.gson:gson:2.4")
     implementation("com.github.bumptech.glide:glide:3.7.0")
 
     implementation("com.jakewharton:butterknife:9.0.0-rc2")
     kapt("com.jakewharton:butterknife-compiler:9.0.0-rc2")
 
-//    testImplementation(unitTestLibs)
-//    androidTestImplementation(androidTestsLibs)
+    testImplementation(Libs.JUNIT)
+    testImplementation(Libs.ASSERTJ)
+    testImplementation(Libs.SUPPORT_ANNOTATIONS)
 }
 
 
