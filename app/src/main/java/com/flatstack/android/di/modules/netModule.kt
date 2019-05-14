@@ -44,6 +44,7 @@ val netModule = Kodein.Module(name = "netModule") {
             .client(instance())
             .build()
     }
+    @Suppress("MagicNumber")
     bind<IApi>() with singleton {
         //        instance<Retrofit>().create(IApi::class.java)
         object : IApi {
@@ -88,4 +89,5 @@ val netModule = Kodein.Module(name = "netModule") {
 val session = Session(0, "token")
 
 val errorJson =
-    "{\n" + "           \"error\": {\n" + "               \"status\": 401,\n" + "               \"error\": \"Authentication failed\"\n" + "           }\n" + "       }"
+    "{\n" + "           \"error\": {\n" + "               \"status\": 401,\n" +
+    "               \"error\": \"Authentication failed\"\n" + "           }\n" + "       }"
