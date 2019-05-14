@@ -1,13 +1,13 @@
 package com.flatstack.android.mainscreen
 
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import butterknife.BindView
 
 import com.flatstack.android.R
-import com.flatstack.android.utils.ui.BaseDialogFragment
+import com.flatstack.android.util.ui.BaseDialogFragment
 
 class TestDialog : BaseDialogFragment() {
     @BindView(R.id.dialog_title) internal lateinit var uiTitle: TextView
@@ -26,7 +26,10 @@ class TestDialog : BaseDialogFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         uiTitle.text = title
         uiMessage.text = message
