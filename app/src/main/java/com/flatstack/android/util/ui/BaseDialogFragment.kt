@@ -21,10 +21,7 @@ abstract class BaseDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { parseArguments(it) }
-        savedInstanceState?.let { restoreState(it) }
     }
-
-    protected fun restoreState(savedState: Bundle) {}
 
     protected open fun parseArguments(args: Bundle) {
         throw IllegalStateException("should be overridden")

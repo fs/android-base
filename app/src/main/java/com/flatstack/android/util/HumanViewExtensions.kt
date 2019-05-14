@@ -7,9 +7,9 @@ import java.net.HttpURLConnection.HTTP_BAD_METHOD
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.HttpURLConnection.HTTP_CONFLICT
 import java.net.HttpURLConnection.HTTP_FORBIDDEN
+import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import java.net.HttpURLConnection.HTTP_NOT_MODIFIED
-import java.net.HttpURLConnection.HTTP_SERVER_ERROR
 import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
 
 fun Throwable.userMessage(resourceManager: StringResource) = when (this) {
@@ -21,7 +21,7 @@ fun Throwable.userMessage(resourceManager: StringResource) = when (this) {
         HTTP_NOT_FOUND -> resourceManager.getString(R.string.not_found_error)
         HTTP_BAD_METHOD -> resourceManager.getString(R.string.method_not_allowed_error)
         HTTP_CONFLICT -> resourceManager.getString(R.string.conflict_error)
-        HTTP_SERVER_ERROR -> resourceManager.getString(R.string.server_error_error)
+        HTTP_INTERNAL_ERROR -> resourceManager.getString(R.string.server_error_error)
         else -> resourceManager.getString(R.string.unknown_error)
     }
     is IOException -> resourceManager.getString(R.string.network_error)

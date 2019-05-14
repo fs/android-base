@@ -15,7 +15,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(screenConfig.layoutRes)
         ButterKnife.bind(this)
-        intent?.extras?.let { parseArguments(it) }
         when {
             screenConfig.titleRes != 0 -> setTitle(screenConfig.titleRes)
             screenConfig.title != null -> title = screenConfig.title
@@ -29,8 +28,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.setContentView(layoutResID)
         ButterKnife.bind(this)
     }
-
-    fun parseArguments(extras: Bundle) {}
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (screenConfig.menuRes != 0) {

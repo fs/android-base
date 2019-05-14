@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.flatstack.android.R
-import com.flatstack.android.R.layout
-import com.flatstack.android.R.menu
 import com.flatstack.android.R.string
 import com.flatstack.android.Router
 import com.flatstack.android.mainscreen.TestDialog
@@ -29,8 +27,8 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
 
     override val screenConfig: ScreenConfig
         get() = ScreenConfig(
-            layout.activity_profile, titleRes = string.app_name, enableBackButton = true,
-            menuRes = menu.menu_profile
+            R.layout.activity_profile, titleRes = string.app_name, enableBackButton = true,
+            menuRes = R.menu.menu_profile
         )
 
     private val viewModel: ProfileViewModel by provideViewModel()

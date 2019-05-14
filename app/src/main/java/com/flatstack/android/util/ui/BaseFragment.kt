@@ -16,13 +16,6 @@ abstract class BaseFragment : Fragment() {
 
     @get:LayoutRes abstract val layoutRes: Int
 
-    override fun onCreate(savedState: Bundle?) {
-        super.onCreate(savedState)
-        savedState?.let { restoreState(it) }
-    }
-
-    fun restoreState(savedState: Bundle) {}
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
