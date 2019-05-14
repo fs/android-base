@@ -4,10 +4,12 @@ import com.flatstack.android.BuildConfig
 import com.flatstack.android.login.entities.LoginRequest
 import com.flatstack.android.login.entities.LoginResponse
 import com.flatstack.android.model.entities.Session
+import com.flatstack.android.model.network.ApiErrorResponse
 import com.flatstack.android.model.network.ApiResponse
 import com.flatstack.android.model.network.ApiSuccessResponse
 import com.flatstack.android.model.network.IApi
 import com.flatstack.android.model.network.adapter.CoroutineCallAdapterFactory
+import com.flatstack.android.model.network.errors.ServerError
 import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.profile.entities.ProfileResponse
@@ -46,26 +48,44 @@ val netModule = Kodein.Module(name = "netModule") {
         //        instance<Retrofit>().create(IApi::class.java)
         object : IApi {
             override fun loadUserAsync(token: String): Deferred<ApiResponse<ProfileResponse>> =
-                CompletableDeferred<ApiResponse<ProfileResponse>>(
-                    ApiSuccessResponse(ProfileResponse(profile))
-                )
+                when (token) {
+                    "No Favorite Book Token" -> CompletableDeferred<ApiResponse<ProfileResponse>>(
+                        ApiSuccessResponse(ProfileResponse(noFavBookProfile))
+                    )
+                    else -> CompletableDeferred<ApiResponse<ProfileResponse>>(
+                        ApiSuccessResponse(ProfileResponse(profile))
+                    )
+                }
 
             override fun loginAsync(loginRequest: LoginRequest): Deferred<ApiResponse<LoginResponse>> =
-                CompletableDeferred<ApiResponse<LoginResponse>>(
-                    ApiSuccessResponse(LoginResponse(session))
-                )
+                when (loginRequest.username) {
+                    "Timur" -> CompletableDeferred<ApiResponse<LoginResponse>>(
+                        ApiErrorResponse(ServerError(401, errorJson))
+                    )
+                    else -> CompletableDeferred<ApiResponse<LoginResponse>>(
+                        ApiSuccessResponse(LoginResponse(session))
+                    )
+                }
         }
     }
 }
 
-@Suppress("MagicNumber")
-val profile = Profile(1, "username", null).also { profile ->
-    profile.favoriteBook = Book(7, "Favorite title", 77)
+@Suppress("MagicNumber") val profile = Profile(0, "John Snow", null).also { profile ->
+    profile.favoriteBook = Book(4, "#$%^&*( ./.", 16)
     profile.booksRead = ArrayList<Book>().also {
-        it.add(Book(1, "Title 1", 10))
-        it.add(Book(2, "Title 2", 20))
-        it.add(Book(3, "Title 3", 30))
+        it.add(Book(0, "Hey hey", 1))
+        it.add(Book(2, "GoT 5", 15))
     }
 }
 
-val session = Session(1, "access_token")
+@Suppress("MagicNumber") val noFavBookProfile = Profile(0, "John Snow", null).also { profile ->
+    profile.booksRead = ArrayList<Book>().also {
+        it.add(Book(0, "Hey hey", 1))
+        it.add(Book(2, "GoT 5", 15))
+    }
+}
+
+val session = Session(0, "token")
+
+val errorJson =
+    "{\n" + "           \"error\": {\n" + "               \"status\": 401,\n" + "               \"error\": \"Authentication failed\"\n" + "           }\n" + "       }"

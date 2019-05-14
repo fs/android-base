@@ -50,7 +50,7 @@ object ApiTest : Spek({
             mockServer.enqueue(mockResponse)
 
             val expectedLoginRequest =
-                LoginRequest("Timur", "Flatstack1234!")
+                LoginRequest("TimurSuccess", "Flatstack1234!")
             val expectedSession = Session(0, expectedToken)
             val expectedLoginResponse = LoginResponse(expectedSession)
             val expectedApiResponse = ApiSuccessResponse(expectedLoginResponse)
@@ -195,7 +195,7 @@ object ApiTest : Spek({
                 .setBody(expectedJson)
             mockServer.enqueue(mockResponse)
 
-            val expectedToken = "Hey Token is here"
+            val expectedToken = "No Favorite Book Token"
 
             val url = mockServer.url("/v1/profile/")
             val expectedBaseUrl = url.scheme() + "://" + url.host() + ":" + url.port()
