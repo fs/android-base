@@ -59,7 +59,8 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
         findViewById<View>(R.id.username_tv).setOnClickListener {
             TestDialog.show(
                 "Example Hello",
-                "Ublyudok, mat' tvoyu, a nu idi syuda, govno" + " sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' " + "tvoyu, a?",
+                "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
+                    " sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' " + "tvoyu, a?",
                 supportFragmentManager
             )
         }

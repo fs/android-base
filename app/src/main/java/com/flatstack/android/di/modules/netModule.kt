@@ -58,6 +58,7 @@ val netModule = Kodein.Module(name = "netModule") {
     }
 }
 
+@Suppress("MagicNumber")
 val profile = Profile(1, "username", null).also { profile ->
     profile.favoriteBook = Book(7, "Favorite title", 77)
     profile.booksRead = ArrayList<Book>().also {
