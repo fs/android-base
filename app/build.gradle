@@ -76,6 +76,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 repositories {
