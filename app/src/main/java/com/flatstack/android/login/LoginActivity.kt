@@ -42,10 +42,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initListeners() {
-        findViewById<Button>(R.id.login_bt).setOnClickListener {
+        findViewById<Button>(R.id.bt_login).setOnClickListener {
             login()
         }
-        findViewById<EditText>(R.id.password_et).apply {
+        findViewById<EditText>(R.id.et_password).apply {
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_GO) {
                     login()
@@ -57,18 +57,18 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun login() {
-        val username = findViewById<EditText>(R.id.login_et).text.toString()
-        val password = findViewById<EditText>(R.id.password_et).text.toString()
+        val username = findViewById<EditText>(R.id.et_login).text.toString()
+        val password = findViewById<EditText>(R.id.et_password).text.toString()
         viewModel.login(username, password)
     }
 
     private fun setProgress(isLoading: Boolean) {
         if (isLoading) {
             findViewById<View>(R.id.pb_progress).visibility = View.VISIBLE
-            findViewById<Button>(R.id.login_bt).isEnabled = false
+            findViewById<Button>(R.id.bt_login).isEnabled = false
         } else {
             findViewById<View>(R.id.pb_progress).visibility = View.GONE
-            findViewById<Button>(R.id.login_bt).isEnabled = true
+            findViewById<Button>(R.id.bt_login).isEnabled = true
         }
     }
 

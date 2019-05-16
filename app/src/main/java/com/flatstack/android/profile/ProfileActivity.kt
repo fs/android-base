@@ -54,7 +54,7 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
         }, onError = ::showError, onLoading = ::visibleProgress
         )
 
-        findViewById<View>(R.id.username_tv).setOnClickListener {
+        findViewById<View>(R.id.tv_username).setOnClickListener {
             TestDialog.show(
                 "Example Hello",
                 "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
@@ -68,10 +68,10 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
         // TODO
         val favGroup = findViewById<View>(R.id.gr_favorite)
         favGroup.visibility = favoriteBook?.let {
-            val favoriteBookView = findViewById<View>(R.id.fav_book)
-            favoriteBookView.findViewById<TextView>(R.id.title_tv)
+            val favoriteBookView = findViewById<View>(R.id.inc_fav_book)
+            favoriteBookView.findViewById<TextView>(R.id.tv_title)
                 .text = it.title
-            favoriteBookView.findViewById<TextView>(R.id.count_tv)
+            favoriteBookView.findViewById<TextView>(R.id.tv_count)
                 .text = it.numberOfTimesRead.toString()
             View.VISIBLE
         } ?: View.GONE
@@ -90,11 +90,11 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
     }
 
     private fun showUsername(username: String) {
-        findViewById<TextView>(R.id.username_tv).text = username
+        findViewById<TextView>(R.id.tv_username).text = username
     }
 
     private fun showBooks(bookList: List<Book>) {
-        findViewById<RecyclerView>(R.id.books_rv).apply {
+        findViewById<RecyclerView>(R.id.rv_books).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = BookAdapter(bookList)
@@ -113,7 +113,7 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
     }
 
     private fun showProfile() {
-        findViewById<View>(R.id.main_layout).visibility = View.VISIBLE
+        findViewById<View>(R.id.cl_main).visibility = View.VISIBLE
     }
 
     private fun showError(errorText: String?) {

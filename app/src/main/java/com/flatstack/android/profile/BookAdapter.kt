@@ -34,7 +34,7 @@ class BookAdapter(private val bookList: List<Book>) : RecyclerView.Adapter<BookV
     }
 
     class BookViewHolder(view: View) : ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.title_tv)
-        val count: TextView = view.findViewById(R.id.count_tv)
+        val title: TextView = view.findViewById(R.id.tv_title)
+        val count: TextView = view.findViewById(R.id.tv_count)
     }
 }

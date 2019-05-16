@@ -10,8 +10,8 @@ import com.flatstack.android.R
 import com.flatstack.android.util.ui.BaseDialogFragment
 
 class TestDialog : BaseDialogFragment() {
-    @BindView(R.id.dialog_title) internal lateinit var uiTitle: TextView
-    @BindView(R.id.dialog_message) internal lateinit var uiMessage: TextView
+    @BindView(R.id.tv_title) internal lateinit var uiTitle: TextView
+    @BindView(R.id.tv_message) internal lateinit var uiMessage: TextView
 
     private var title: String? = null
     private var message: String? = null

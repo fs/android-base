@@ -2,31 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dialog_title"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@android:color/white"
         android:gravity="center"
-        android:textIsSelectable="true"
-        />
+        android:textIsSelectable="true" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@android:color/background_dark"
-        />
+        android:background="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/dialog_message"
+        android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@android:color/white"
         android:gravity="center"
-        android:textIsSelectable="true"
-        />
+        android:textIsSelectable="true" />
 
 </LinearLayout>
