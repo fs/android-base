@@ -10,17 +10,16 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 abstract class NetworkBoundResource<ResultType, RequestType>(
-    override val coroutineContext: CoroutineContext,
-    private val errorHandler: ErrorHandler
+        override val coroutineContext: CoroutineContext,
+        private val errorHandler: ErrorHandler
 ) : CoroutineScope {
+
     private val result = MutableLiveData<Resource<ResultType>>()
 
     init {
         result.postValue(Resource.loading())
         fetchFromNetwork()
     }
-
-    protected open fun onFetchFailed() {}
 
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
@@ -39,6 +38,8 @@ abstract class NetworkBoundResource<ResultType, RequestType>(
             }
         }
     }
+
+    protected open fun onFetchFailed() {}
 
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 

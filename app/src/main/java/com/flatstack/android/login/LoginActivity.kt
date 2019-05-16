@@ -18,9 +18,9 @@ import org.kodein.di.generic.instance
 
 class LoginActivity : AppCompatActivity(), KodeinAware {
 
-    private val viewModel: LoginViewModel by provideViewModel()
-
     override val kodein: Kodein by kodein()
+
+    private val viewModel: LoginViewModel by provideViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,11 +7,7 @@ import com.flatstack.android.model.entities.Resource
 import com.flatstack.android.model.entities.Session
 import com.flatstack.android.test_utils.InstantLiveDataExecutor
 import com.flatstack.android.util.StringResource
-import io.mockk.Runs
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
