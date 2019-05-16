@@ -86,8 +86,8 @@ val netModule = Kodein.Module(name = "netModule") {
     }
 }
 
-val session = Session(0, "token")
+private val session = Session(0, "token")
 
-val errorJson =
+private val errorJson =
     "{\n" + "           \"error\": {\n" + "               \"status\": 401,\n" +
     "               \"error\": \"Authentication failed\"\n" + "           }\n" + "       }"

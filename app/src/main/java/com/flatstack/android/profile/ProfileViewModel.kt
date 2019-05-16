@@ -13,13 +13,13 @@ class ProfileViewModel(
     val profileBoundResource = profileRepository.loadProfile()
     val profileResponse = profileBoundResource.asLiveData()
 
-    fun updateProfile() {
-        profileBoundResource.fetchFromNetwork()
-    }
-
     override fun onCleared() {
         profileRepository.onDestroy()
         loginRepository.onDestroy()
+    }
+
+    fun updateProfile() {
+        profileBoundResource.fetchFromNetwork()
     }
 
     fun logout() {
