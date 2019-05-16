@@ -53,7 +53,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.logout -> {
+        R.id.action_logout -> {
             logout()
             true
         }
