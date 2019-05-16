@@ -37,7 +37,7 @@
 
             <include
                 android:id="@+id/inc_fav_book"
-                layout="@layout/book_item"
+                layout="@layout/item_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_books_title"
                 tools:itemCount="3"
-                tools:listitem="@layout/book_item" />
+                tools:listitem="@layout/item_book" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/gr_favorite"

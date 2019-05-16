@@ -15,7 +15,7 @@ import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.book_item.view.*
+import kotlinx.android.synthetic.main.item_book.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
