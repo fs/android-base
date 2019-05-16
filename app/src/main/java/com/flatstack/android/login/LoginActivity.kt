@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
         viewModel.loginResource.observeBy(
                 this,
-            onSuccess = ::navigateToProfile,
+                onSuccess = ::navigateToProfile,
                 onError = ::showError,
                 onLoading = ::setProgress
         )
