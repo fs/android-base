@@ -15,7 +15,6 @@ ext {
             retrofit           : '2.5.0',
             coroutines         : '1.1.1',
             room               : '2.1.0-beta01',
-            butterKnife        : '10.1.0',
             espressoVersion    : '3.1.1'
     ]
     androidx = [
@@ -57,7 +56,6 @@ ext {
     kapt = [
             room_compiler : "androidx.room:room-compiler:$versions.room",
             lifecycle     : "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle",
-            butterKnife   : "com.jakewharton:butterknife-compiler:$versions.butterKnife"
     ]
 
     androidLibs = androidx.values()

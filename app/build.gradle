@@ -65,15 +65,6 @@ android {
                     include 'spek2'
                 }
             }
-            jacocoOptions {
-                // here goes all jacoco config, for example
-                html.enabled = true
-                xml.enabled = false
-                csv.enabled = false
-                unitTests.all {
-                    testLogging.events = ["passed", "skipped", "failed"]
-                }
-            }
         }
     }
     lintOptions {
@@ -94,7 +85,6 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
-    implementation "com.jakewharton:butterknife:$versions.butterKnife"
 
     implementation androidLibs
     implementation retrofitLibs

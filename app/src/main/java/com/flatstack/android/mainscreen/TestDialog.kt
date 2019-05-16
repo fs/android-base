@@ -3,23 +3,17 @@ package com.flatstack.android.mainscreen
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import butterknife.BindView
 
-import com.flatstack.android.R
-import com.flatstack.android.util.ui.BaseDialogFragment
-
-class TestDialog : BaseDialogFragment() {
-    @BindView(R.id.tv_title) internal lateinit var uiTitle: TextView
-    @BindView(R.id.tv_message) internal lateinit var uiMessage: TextView
+class TestDialog : DialogFragment() {
+    private lateinit var uiTitle: TextView
+    internal lateinit var uiMessage: TextView
 
     private var title: String? = null
     private var message: String? = null
 
-    override val layoutRes: Int
-        get() = R.layout.dialog_test
-
-    override fun parseArguments(args: Bundle) {
+    private fun parseArguments() {
         arguments?.let {
             title = it.getString(KEY_TITLE)
             message = it.getString(KEY_MESSAGE)
@@ -31,6 +25,7 @@ class TestDialog : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        parseArguments()
         uiTitle.text = title
         uiMessage.text = message
     }
