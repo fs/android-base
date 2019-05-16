@@ -3,14 +3,13 @@ package com.flatstack.android.login
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.flatstack.android.R
 import com.flatstack.android.Router
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
+import kotlinx.android.synthetic.main.activity_login.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -27,10 +26,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_login)
 
         viewModel.loginResource.observeBy(
-            this, onSuccess = {
-                navigateToProfile()
-            }, onError = ::showError,
-            onLoading = ::setProgress
+                this,
+                onSuccess = { navigateToProfile() },
+                onError = ::showError,
+                onLoading = ::setProgress
         )
 
         initListeners()
@@ -42,10 +41,8 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initListeners() {
-        findViewById<Button>(R.id.bt_login).setOnClickListener {
-            login()
-        }
-        findViewById<EditText>(R.id.et_password).apply {
+        bt_login.setOnClickListener { login() }
+        et_password.apply {
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_GO) {
                     login()
@@ -57,18 +54,18 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun login() {
-        val username = findViewById<EditText>(R.id.et_login).text.toString()
-        val password = findViewById<EditText>(R.id.et_password).text.toString()
+        val username = et_login.text.toString()
+        val password = et_password.text.toString()
         viewModel.login(username, password)
     }
 
     private fun setProgress(isLoading: Boolean) {
         if (isLoading) {
-            findViewById<View>(R.id.pb_progress).visibility = View.VISIBLE
-            findViewById<Button>(R.id.bt_login).isEnabled = false
+            pb_progress.visibility = View.VISIBLE
+            bt_login.isEnabled = false
         } else {
-            findViewById<View>(R.id.pb_progress).visibility = View.GONE
-            findViewById<Button>(R.id.bt_login).isEnabled = true
+            pb_progress.visibility = View.GONE
+            bt_login.isEnabled = true
         }
     }
 

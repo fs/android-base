@@ -3,10 +3,8 @@ package com.flatstack.android.profile
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.flatstack.android.R
@@ -18,6 +16,8 @@ import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
 import com.flatstack.android.util.ui.BaseActivity
 import com.flatstack.android.util.ui.ScreenConfig
+import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.book_item.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -27,15 +27,13 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
 
     override val screenConfig: ScreenConfig
         get() = ScreenConfig(
-            R.layout.activity_profile, titleRes = string.app_name, enableBackButton = true,
-            menuRes = R.menu.menu_profile
+                R.layout.activity_profile, titleRes = string.app_name, enableBackButton = true,
+                menuRes = R.menu.menu_profile
         )
 
     private val viewModel: ProfileViewModel by provideViewModel()
 
-    private val refreshLayout: SwipeRefreshLayout by lazy {
-        findViewById<SwipeRefreshLayout>(R.id.swipe_layout)
-    }
+    private val refreshLayout: SwipeRefreshLayout by lazy { swipe_layout }
 
     override val kodein: Kodein by kodein()
 
@@ -45,8 +43,7 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
         refreshLayout.setOnRefreshListener(this)
         onRefresh()
 
-        viewModel.profileResponse.observeBy(
-            this, onNext = {
+        viewModel.profileResponse.observeBy(this, onNext = {
             showProfile()
             showUsername(it.username)
             showFavoriteBook(it.favoriteBook)
@@ -54,25 +51,23 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
         }, onError = ::showError, onLoading = ::visibleProgress
         )
 
-        findViewById<View>(R.id.tv_username).setOnClickListener {
+        tv_username.setOnClickListener {
             TestDialog.show(
-                "Example Hello",
-                "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
-                    " sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' " + "tvoyu, a?",
-                supportFragmentManager
+                    "Example Hello",
+                    "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
+                            " sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' " + "tvoyu, a?",
+                    supportFragmentManager
             )
         }
     }
 
     private fun showFavoriteBook(favoriteBook: Book?) {
         // TODO
-        val favGroup = findViewById<View>(R.id.gr_favorite)
+        val favGroup = gr_favorite
         favGroup.visibility = favoriteBook?.let {
-            val favoriteBookView = findViewById<View>(R.id.inc_fav_book)
-            favoriteBookView.findViewById<TextView>(R.id.tv_title)
-                .text = it.title
-            favoriteBookView.findViewById<TextView>(R.id.tv_count)
-                .text = it.numberOfTimesRead.toString()
+            val favoriteBookView = inc_fav_book
+            favoriteBookView.tv_title.text = it.title
+            favoriteBookView.tv_count.text = it.numberOfTimesRead.toString()
             View.VISIBLE
         } ?: View.GONE
     }
@@ -90,11 +85,11 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
     }
 
     private fun showUsername(username: String) {
-        findViewById<TextView>(R.id.tv_username).text = username
+        tv_username.text = username
     }
 
     private fun showBooks(bookList: List<Book>) {
-        findViewById<RecyclerView>(R.id.rv_books).apply {
+        rv_books.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = BookAdapter(bookList)
@@ -113,13 +108,12 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
     }
 
     private fun showProfile() {
-        findViewById<View>(R.id.cl_main).visibility = View.VISIBLE
+        cl_main.visibility = View.VISIBLE
     }
 
     private fun showError(errorText: String?) {
         errorText?.let {
-            Toast.makeText(this, errorText, Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(this, errorText, Toast.LENGTH_LONG).show()
         }
     }
 }
