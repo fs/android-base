@@ -6,13 +6,11 @@ import com.flatstack.android.model.db.daos.SessionDao
 import com.flatstack.android.model.entities.Session
 
 class AuthorizationModel(
-    private val sessionDao: SessionDao,
-    private val appDatabase: AppDatabase
+        private val sessionDao: SessionDao,
+        private val appDatabase: AppDatabase
 ) {
-    suspend fun unAuthorize() {
-        appDatabase.withTransaction {
-            appDatabase.clearAllTables()
-        }
+    suspend fun unAuthorize() = appDatabase.withTransaction {
+        appDatabase.clearAllTables()
     }
 
     suspend fun getToken(): String = sessionDao.getToken()

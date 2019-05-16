@@ -1,21 +1,19 @@
 package com.flatstack.android.profile
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.flatstack.android.R
-import com.flatstack.android.R.string
 import com.flatstack.android.Router
-import com.flatstack.android.mainscreen.TestDialog
 import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
-import com.flatstack.android.util.ui.BaseActivity
-import com.flatstack.android.util.ui.ScreenConfig
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.book_item.view.*
 import org.kodein.di.Kodein
@@ -23,42 +21,47 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
+class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
 
-    override val screenConfig: ScreenConfig
-        get() = ScreenConfig(
-                R.layout.activity_profile, titleRes = string.app_name, enableBackButton = true,
-                menuRes = R.menu.menu_profile
-        )
+    override val kodein: Kodein by kodein()
 
     private val viewModel: ProfileViewModel by provideViewModel()
 
     private val refreshLayout: SwipeRefreshLayout by lazy { swipe_layout }
 
-    override val kodein: Kodein by kodein()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_profile)
 
         refreshLayout.setOnRefreshListener(this)
-        onRefresh()
 
-        viewModel.profileResponse.observeBy(this, onNext = {
-            showProfile()
-            showUsername(it.username)
-            showFavoriteBook(it.favoriteBook)
-            showBooks(it.booksRead)
-        }, onError = ::showError, onLoading = ::visibleProgress
-        )
+        viewModel.profileResponse.observeBy(
+                this,
+                onNext = {
+                    showProfile()
+                    showUsername(it.username)
+                    showFavoriteBook(it.favoriteBook)
+                    showBooks(it.booksRead)
+                },
+                onError = ::showError,
+                onLoading = ::visibleProgress)
+    }
 
-        tv_username.setOnClickListener {
-            TestDialog.show(
-                    "Example Hello",
-                    "Ublyudok, mat' tvoyu, a nu idi syuda, govno" +
-                            " sobachye, reshil ko mne lezt'? Ti, zasranec vonyuchiy, mat' " + "tvoyu, a?",
-                    supportFragmentManager
-            )
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_profile, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.logout -> {
+            logout()
+            true
         }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onRefresh() {
+        viewModel.updateProfile()
     }
 
     private fun showFavoriteBook(favoriteBook: Book?) {
@@ -70,18 +73,6 @@ class ProfileActivity : BaseActivity(), KodeinAware, OnRefreshListener {
             favoriteBookView.tv_count.text = it.numberOfTimesRead.toString()
             View.VISIBLE
         } ?: View.GONE
-    }
-
-    override fun onRefresh() {
-        viewModel.updateProfile()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.logout -> {
-            logout()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
     }
 
     private fun showUsername(username: String) {
