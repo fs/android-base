@@ -1,55 +1,37 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: 'checkstyle/checkstyle.gradle'
-apply from: './jacoco.gradle'
+apply plugin: 'io.fabric'
+apply plugin: "de.mannodermaus.android-junit5"
+apply from: './scripts/versioning.gradle'
 
-apply from: '../deps.gradle'
-
-ext {
-    isCI = "true".equals(System.getenv("CI"))
-//    STORE_PASSWORD = System.getenv("PROJECT_NAME_STORE_PASSWORD")
-//    KEY_ALIAS = System.getenv("PROJECT_NAME_KEY_ALIAS")
-//    KEY_PASSWORD = System.getenv("PROJECT_NAME_KEY_PASSWORD")
-}
+def props = new Properties()
+def secretFile = rootProject.file("secrets/keys.properties")
+if (secretFile.exists())
+    secretFile.withInputStream { props.load(it) }
 
 detekt {
-    toolVersion = "1.0.0-RC11"
+    toolVersion = "$versions.detekt"
     input = files("src/main/java")
     filters = ".*/resources/.*,.*/build/.*"
+    config = files("../default-detekt-config.yml")
 }
 
 android {
     compileSdkVersion versions.TARGET_SDK_VERSION
-    buildToolsVersion versions.BUILD_TOOLS_VERSION
 
     defaultConfig {
+        applicationId "com.flatstack.android"
         minSdkVersion versions.MIN_SDK_VERSION
         targetSdkVersion versions.TARGET_SDK_VERSION
-
-        applicationId 'com.flatstack.android'
-        versionCode 1
-        versionName '0.9.1'
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        com.android.ddmlib.DdmPreferences.setTimeOut(60000)
-        javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+        versionCode appVersionCode.toInteger()
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "runnerBuilder",
+                "de.mannodermaus.junit5.AndroidJUnit5Builder"
+        buildConfigField 'String', 'BASE_URL', "\"https://api.com\""
     }
-
-    flavorDimensions "environment"
-
-    productFlavors {
-        staging {
-            buildConfigField "String", "API_URL", "\"https://example-staging.com\""
-            applicationIdSuffix ".staging"
-            dimension "environment"
-        }
-
-        production {
-            buildConfigField "String", "API_URL", "\"https://example.com\""
-            dimension "environment"
-        }
-    }
-
     signingConfigs {
         debug {
             storeFile file("$rootDir/debug.jks")
@@ -57,103 +39,70 @@ android {
             keyAlias "debug"
             keyPassword "12345678"
         }
-//        release {
-//            storeFile file("$rootDir/project_name.jks")
-//            storePassword STORE_PASSWORD
-//            keyAlias KEY_ALIAS
-//            keyPassword KEY_PASSWORD
-//        }
-    }
-
-    buildTypes {
-        debug {
-            if (isCI) {
-                testCoverageEnabled true
-            }
-        }
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            keyAlias props.getProperty('keyAlias')
+            keyPassword props.getProperty('keyPassword')
+            storeFile file("$rootDir/secrets/keystore.jks")
+            storePassword props.getProperty('storePassword')
         }
     }
-
+    buildTypes {
+        release {
+            ext.betaDistributionGroupAliases = "androidbase"
+            ext.betaDistributionNotifications = true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    sourceSets.each {
+        it.java.srcDirs += "src/$it.name/kotlin"
+    }
     testOptions {
-        if (isCI) {
-            unitTests.all {
-                jacoco {
-                    includeNoLocationClasses = true
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek2'
                 }
             }
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    dexOptions {
-        preDexLibraries = !isCI
-    }
-
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-    }
-
     lintOptions {
-        textReport true
-        textOutput "stdout"
-        lintConfig file("$projectDir/lint.xml")
         warningsAsErrors true
+        htmlOutput file("build/reports/lint/lint-report.html")
+        xmlOutput file("build/reports/lint/lint-report.xml")
     }
-
-    configurations.all {
-        resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    androidExtensions {
+        experimental = true
     }
 }
 
 repositories {
-    mavenCentral()
+    maven { url = uri("https://dl.bintray.com/kodein-framework/Kodein-DI") }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-    implementation supportLibs
-    implementation rxJavaLibs
-    //    implementation retrofitLibs
-    //    implementation okHttpLibs
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
 
-    compileOnly 'org.jetbrains:annotations:13.0'
-    implementation 'com.google.code.gson:gson:2.4'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
-
-    implementation "com.jakewharton:butterknife:$versions.butterKnife"
-    kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+    implementation androidLibs
+    implementation retrofitLibs
+    implementation coroutinesLibs
+    implementation kodeinLibs
+    implementation roomLibs
+    kapt compilerLibs
 
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
-}
 
-// Grant animation permissions to avoid test failure because of ui sync.
-task grantAnimationPermissions(type: Exec, dependsOn: ['installStagingDebug', 'installProductionDebug']) {
-    group = 'test'
-    description = 'Grant permissions for testing.'
-
-    def absolutePath = file('..') // Get project absolute path
-    commandLine "$absolutePath/app/set_animation_permissions.sh com.flatstack.android".split(" ")
-}
-
-// Source: http://stackoverflow.com/q/29908110/112705
-afterEvaluate {
-    // When launching individual tests from Android Studio, it seems that only the assemble tasks
-    // get called directly, not the install* versions
-    tasks.each { task ->
-        if (task.name.endsWith('AndroidTest')) {
-            task.dependsOn grantAnimationPermissions
-        }
+    //Crashlytics
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
+        transitive = true
     }
-}
 
-apply from: "quality.gradle"
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+}

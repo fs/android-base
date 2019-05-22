@@ -1,25 +1,34 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     apply from: './deps.gradle'
     repositories {
+        maven { url 'https://maven.fabric.io/public' }
         google()
-        maven { url "https://plugins.gradle.org/m2/" }
         jcenter()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.google.guava:guava:17.0'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath 'io.fabric.tools:gradle:1.28.1'
+        classpath "de.mannodermaus.gradle.plugins:android-junit5:$versions.android_junit5"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC11")
+    id 'io.gitlab.arturbosch.detekt' version '1.0.0-RC14'
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
+        maven { url "https://dl.bintray.com/spekframework/spek-dev" }
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

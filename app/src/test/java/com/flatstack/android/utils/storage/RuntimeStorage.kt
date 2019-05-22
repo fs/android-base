@@ -1,5 +1,6 @@
 package com.flatstack.android.utils.storage
 
+import com.flatstack.android.util.storage.IStorage
 import java.lang.reflect.Type
 import java.util.HashMap
 

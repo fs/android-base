@@ -25,14 +25,15 @@ before_install:
     - chmod +x gradlew
 
 # Uncomment this if you need emulator
-# before_script:
+ before_script:
+   - sh secrets/decrypt-keys.sh
 #  - echo no | android create avd --force -n test -t android-21 --abi x86
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - android-wait-for-emulator
 #  - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew checkstyle detekt lintProductionRelease testProductionReleaseUnitTest
+    - ./gradlew detekt lintRelease testReleaseUnitTest
 
 branches:
   only:

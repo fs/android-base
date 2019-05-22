@@ -1,10 +1,8 @@
 version: 2
-
 references:
 
-  ## Cache
   cache_key: &cache_key
-    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+    key: cache-v1-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
   restore_cache: &restore_cache
     restore_cache:
       <<: *cache_key
@@ -15,75 +13,139 @@ references:
         - ~/.gradle
         - ~/.m2
 
-  ## Docker image configurations
+  workspace: &workspace
+    ~/workspace
+  attach_release_workspace: &attach_release_workspace
+    attach_workspace:
+      at: *workspace
+  persist_release_workspace: &persist_release_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - .
+
+  decrypt: &decrypt
+    run:
+      name: Decrypting secret keys
+      command: |
+        sh secrets/decrypt-keys.sh
+
   android_config: &android_config
-    working_directory: ~/workspace
+    working_directory: *workspace
     docker:
-      - image: circleci/android:api-28-alpha
+      - image: circleci/android:api-28
+    dependencies:
+      pre:
+        - echo y | android update sdk --no-ui --all --filter "tools"
+        - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2"
     environment:
       TERM: dumb
+      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
 
 jobs:
-  checkstyle:
+  build:
     <<: *android_config
     steps:
       - checkout
-      - *restore_cache
-      - run:
-          name: Checksyle
-          command: ./gradlew checkstyle
-      - store_artifacts:
-          path: app/build/reports/
-          destination: /reports/
-
-  detekt:
-    <<: *android_config
-    steps:
-      - checkout
-      - *restore_cache
-      - run:
-          name: kotlin checkstyle
-          command: ./gradlew detekt
-      - store_artifacts:
-          path: build/reports/
-          destination: /reports/
-
-  lint_check:
-    <<: *android_config
-    steps:
-      - checkout
-      - *restore_cache
-      - run:
-          name: Linter
-          command: ./gradlew lintProductionDebug
-      - store_artifacts:
-          path: app/build/reports/
-          destination: /reports/
-
-  test_unit:
-    <<: *android_config
-    steps:
-      - checkout
+      - *decrypt
       - *restore_cache
       - run:
           name: Download dependencies
           command: ./gradlew androidDependencies
       - *save_cache
       - run:
-          name: Run unit tests
-          command: ./gradlew testProductionDebugUnitTest
+          name: Gradle build (release)
+          command: ./gradlew assembleRelease
+      - *persist_release_workspace
       - store_artifacts:
-          path: app/build/reports/
+          path: app/build/outputs/apk/
+          destination: /apk/
+      - store_artifacts:
+          path: app/build/outputs/mapping/
+          destination: /mapping/
+
+  linter:
+    <<: *android_config
+    steps:
+      - *attach_release_workspace
+      - *restore_cache
+      - run:
+          name: Run linter
+          command: ./gradlew lintRelease
+      - store_artifacts:
+          path: app/build/reports/lint/
+          destination: /reports/
+
+  test_unit:
+    <<: *android_config
+    steps:
+      - *attach_release_workspace
+      - *restore_cache
+      - run:
+          name: Run unit tests
+          command: ./gradlew testReleaseUnitTest
+      - store_artifacts:
+          path: app/build/reports/tests/
           destination: /reports/
       - store_test_results:
           path: app/build/test-results/
           destination: /test-results/
 
+  detekt:
+    <<: *android_config
+    steps:
+      - *attach_release_workspace
+      - *restore_cache
+      - run:
+          name: Kotlin checkstyle
+          command: ./gradlew detekt
+      - store_artifacts:
+          path: build/reports/detekt/
+          destination: /reports/
+
+  deploy:
+    <<: *android_config
+    steps:
+      - *attach_release_workspace
+      - *restore_cache
+      - run:
+          name: Deploy to Fabric Beta
+          command: ./gradlew crashlyticsUploadDistributionRelease
+
 workflows:
   version: 2
   workflow:
     jobs:
-    - checkstyle
-    - detekt
-    - test_unit
-    - lint_check
+      - build:
+          filters:
+            tags:
+              only: /^.*/
+      - linter:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^.*/
+      - test_unit:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^.*/
+      - detekt:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^.*/
+      - deploy:
+          filters:
+            tags:
+              only: /^v{0,1}\d+[.]\d+[.]\d+$/
+            branches:
+              ignore: /^.*/
+          requires:
+            - linter
+            - detekt
+            - test_unit
