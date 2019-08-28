@@ -12,8 +12,8 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-26.0.2
-    - android-26
+    - build-tools-28.0.3
+    - android-28
     - extra-android-m2repository
     # Uncomment this if you need emulator
     # - sys-img-x86-android-23
@@ -25,14 +25,15 @@ before_install:
     - chmod +x gradlew
 
 # Uncomment this if you need emulator
-# before_script:
+ before_script:
+   - sh secrets/decrypt-keys.sh
 #  - echo no | android create avd --force -n test -t android-21 --abi x86
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - android-wait-for-emulator
 #  - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew checkstyle lintProductionRelease testProductionReleaseUnitTest
+    - ./gradlew detekt lintRelease testReleaseUnitTest
 
 branches:
   only:
