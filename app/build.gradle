@@ -100,7 +100,7 @@ dependencies {
     androidTestImplementation androidTestsLibs
 
     //Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
         transitive = true
     }
 
