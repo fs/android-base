@@ -18,25 +18,25 @@ This project will help you quickly start developing a new android app
 ## Setup
 ### Starting from base project
 1. `git clone --depth 1 git://github.com/fs/android-base.git --origin android-base [NEW-PROJECT-NAME]`
-2. `cd [NEW-PROJECT-NAME]`
-3. `git remote add origin https://github.com/[NEW-PROJECT-GITHUB-ACCOUNT]/[NEW-PROJECT-NAME].git`
-4. `git push -u origin master`
-5. Update `APPLICATION_ID` in `app/build.gradle`.
-6. Rename package under `app/src/main/java`.
-7. Remove current and Credits sections from `README.MD`.
+1. `cd [NEW-PROJECT-NAME]`
+1. `git remote add origin https://github.com/[NEW-PROJECT-GITHUB-ACCOUNT]/[NEW-PROJECT-NAME].git`
+1. `git push -u origin master`
+1. Update `APPLICATION_ID` in `app/build.gradle`.
+1. Rename package under `app/src/main/java`.
+1. Remove current and Credits sections from `README.MD`.
 
 ### IDE
 1. Download latest Android Studio from https://developer.android.com/studio/index.html
-2. Follow Android Studio installation instruction.
-3. Download and install latest JDK8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
-4. Open Android Studio - Open Existing Android Project - find folder with project and click `OK`
-5. Wait a while. Follow Android Studio instructions to install missing items.
-6. Press `cmd + shift + a` and type `AVD Manager` and press Enter.
-7. Press `Create Virtual Device...` button.
-8. Select `Nexus 5X`
-9. Select latest API level (in case if latest is not available then click `Download` and wait, it's going to take a while).
-10. Click `Next`
-11. Click `Finish`
+1. Follow Android Studio installation instruction.
+1. Download and install latest JDK8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
+1. Open Android Studio - Open Existing Android Project - find folder with project and click `OK`
+1. Wait a while. Follow Android Studio instructions to install missing items.
+1. Press `cmd + shift + a` and type `AVD Manager` and press Enter.
+1. Press `Create Virtual Device...` button.
+1. Select `Nexus 5X`
+1. Select latest API level (in case if latest is not available then click `Download` and wait, it's going to take a while).
+1. Click `Next`
+1. Click `Finish`
 
 ### Updating secret keys
 1. Decrypt file:
@@ -69,13 +69,17 @@ $ ./gradlew installDebug
 ```
 
 ### Deploying to Fabric
-1. Increase app version & build number.
-2. Commit changes.
-3. Create git tag.
-4. `git push && git push --tags`
-5. Wait until https://circleci.com finish build.
-6. Open crashlytics application on Android device
-7. Find Android Base app, click on it and click "Update".
+1. Increase app version, build number, create git tag:
+```bash
+$ ./gradlew bumperInit              //  starting point
+$ ./gradlew bumperVersionMajor      //  increase major number
+$ ./gradlew bumperVersionMinor      //  increase minor number
+$ ./gradlew bumperVersionPatch      //  increase patch number
+```
+2. `git push && git push --tags`
+2. Wait until https://circleci.com finish build.
+2. Open crashlytics application on Android device
+2. Find Android Base app, click on it and click "Update".
 
 ### Build a release APK
 When you're ready to release and distribute your app, you must build a release APK that is signed with your private key:
