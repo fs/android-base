@@ -12,7 +12,6 @@ This project will help you quickly start developing a new android app
 1. [How to Deploy](#deploying-to-fabric)
 1. [How to Release](#build-a-release-apk)
 1. [Run tests](#run-tests)
-1. [Codestyles](#codestyles)
 1. [ProGuard](#proguard)
 1. [Credits](#credits)
 
@@ -93,10 +92,6 @@ Instrumented unit test:
 ```bash
 $ ./gradlew connectedAndroidTest
 ```
-
-## Codestyles
-Project contains default codestyle scheme at `./idea/codestyleSettings.xml`. Make sure that you use default project scheme to avoid mess with codestyle with your collegues.
-Go to the Settings (`cmd + ,`) -> Editor -> Code Style look on top of right panel and select `Project` from `Scheme` dropdown. Apply -> Ok.
 
 ## ProGuard
 Project already has proguard config for included libraries.
