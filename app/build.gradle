@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'com.antonchaynikov.oneclickpublish'
-apply from: './scripts/versioning.gradle'
 
 def props = new Properties()
 def secretFile = rootProject.file("secrets/keys.properties")
