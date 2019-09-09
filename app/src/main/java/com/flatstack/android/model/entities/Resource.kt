@@ -1,8 +1,6 @@
 package com.flatstack.android.model.entities
 
-import com.flatstack.android.model.entities.Status.ERROR
-import com.flatstack.android.model.entities.Status.LOADING
-import com.flatstack.android.model.entities.Status.SUCCESS
+import com.flatstack.android.model.entities.Status.*
 
 data class Resource<out T>(val status: Status, val data: T?, val error: String?) {
     companion object {

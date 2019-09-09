@@ -1,16 +1,43 @@
 Android app skeleton
 =======================================
-## Continuous integration
-* Travis CI [![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base/pull_requests)
-* Circle CI [![Build Status](https://circleci.com/gh/fs/android-base.png?style=shield&circle-token=c932b3e8650c436df970e9d1e9e06e8ef8fc9893)](https://circleci.com/gh/fs/android-base)
-* Codecov [![codecov](https://codecov.io/gh/fs/android-base/branch/master/graph/badge.svg)](https://codecov.io/gh/fs/android-base)
+[![Build Status](https://circleci.com/gh/fs/android-base.png?style=shield&circle-token=c932b3e8650c436df970e9d1e9e06e8ef8fc9893)](https://circleci.com/gh/fs/android-base)
+[![Build Status](https://travis-ci.org/fs/android-base.png)](https://travis-ci.org/fs/android-base/pull_requests)
+[![codecov](https://codecov.io/gh/fs/android-base/branch/master/graph/badge.svg)](https://codecov.io/gh/fs/android-base)
 
-## Prerequisites
-* [Android Studio](https://developer.android.com/sdk/installing/studio.html) 3.x
-* JDK 8
-* Android SDK
+This project will help you quickly start developing a new android app
 
-## Updating secret keys
+## Table of Contents
+1. [Setup. Install IDE, secret environment](#setup)
+1. [Build. Create apk](#building)
+1. [How to Deploy](#deploying-to-fabric)
+1. [Run tests](#run-tests)
+1. [ProGuard](#proguard)
+1. [Credits](#credits)
+
+## Setup
+### Starting from base project
+1. `git clone --depth 1 git://github.com/fs/android-base.git --origin android-base [NEW-PROJECT-NAME]`
+1. `cd [NEW-PROJECT-NAME]`
+1. `git remote add origin https://github.com/[NEW-PROJECT-GITHUB-ACCOUNT]/[NEW-PROJECT-NAME].git`
+1. `git push -u origin master`
+1. Update `APPLICATION_ID` in `app/build.gradle`.
+1. Rename package under `app/src/main/java`.
+1. Remove current and Credits sections from `README.MD`.
+
+### IDE
+1. Download latest Android Studio from https://developer.android.com/studio/index.html
+1. Follow Android Studio installation instruction.
+1. Download and install latest JDK8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
+1. Open Android Studio - Open Existing Android Project - find folder with project and click `OK`
+1. Wait a while. Follow Android Studio instructions to install missing items.
+1. Press `cmd + shift + a` and type `AVD Manager` and press Enter.
+1. Press `Create Virtual Device...` button.
+1. Select `Nexus 5X`
+1. Select latest API level (in case if latest is not available then click `Download` and wait, it's going to take a while).
+1. Click `Next`
+1. Click `Finish`
+
+### Updating secret keys
 1. Decrypt file:
 
 ```bash
@@ -27,41 +54,66 @@ openssl aes-256-cbc -e -md sha256 -nosalt -a -pass pass:{KEY} -in temp.propertie
 
 4. Clean up: `rm temp.properties`.
 
-## What's included:
-* [Staging and Production](https://github.com/fs/android-base/blob/master/app/build.gradle#L29-L38) build flavors with different package names ([read more](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Product-flavors))
-* *Android Lint* [configuration](https://github.com/fs/android-base/blob/master/app/build.gradle#L56-L61)
-* *Travis CI* and *CircleCI* build [script1](https://github.com/fs/android-base/blob/master/.travis.yml) [script2](https://github.com/fs/android-base/blob/master/circle.yml):
-    * Downloading an *Android SDK*
-    * Building
-    * Running *Android Lint*
-    * Hook up your continuous deployment target in [`after_success`](https://github.com/fs/android-base/blob/master/.travis.yml#L40) for travis and in ['deployment'](https://github.com/fs/android-base/blob/master/circle.yml#L20) for CircleCi
-* Release build signing and naming configuration
-
-## Setup
- 1. Clone application as new project with original remote named "android-base"
-
-    	git clone --depth 1 git://github.com/fs/android-base.git --origin android-base [MY-NEW-PROJECT]
-
-    **Note: we use depth parameter here in order to not copy the history of changes in base project**
-
- 2. Create your new repository on the GitHub and push master into it. Make sure master branch is tracking origin repo.
-
-      cd [MY-NEW-PROJECT]
-    	git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
-    	git push -u origin master
-
- 3. Import the project into your favourite IDE.
-Just select the root `build.gradle` and your IDE will do the rest.
-
-### Configuration
-* Change your app's package by either [renaming the folder structure for Java sources](https://github.com/fs/android-base/tree/master/app/src/main/java/com/flatstack/android) or by just changing this [constant](https://github.com/fs/android-base/blob/master/app/build.gradle#L5) in `build.gradle`
-
+## Building
+### Create APK
+After you complete the `Gradle` project configuration, you can use `gradlew` executable to build the APK:
+```bash
+$ ./gradlew assembleDebug       // to build a debug APK
+$ ./gradlew assembleRelease     // to build a release signed APK, can upload to Market
+```
+### Install
+To install app on emulator or connected real device:
+```bash
+$ ./gradlew installDebug
+```
 
 ### Deploying to Fabric
-1. Increase app version & build number.
-2. Commit changes.
-3. Create git tag.
-4. `git push && git push --tags`
-5. Wait until https://circleci.com finish build.
-6. Open crashlytics application on Android device
-7. Find Android Base app, click on it and click "Update".
+#### Deploy plugin configuring
+Module build.gradle:
+```groovy
+defaultConfig {
+    ...
+    oneClickPublish {
+        branchNames = ["master"]    // branch names from which you can deploy, master by default
+        remoteRepoName = "origin"   // alias repository, origin by default
+    }
+    ...
+}
+```
+
+#### Deploy steps:
+1. To promote a new version run:
+```bash
+$ ./gradlew deployMajorVersion      //  increase major number
+$ ./gradlew deployMinorVersion      //  increase minor number
+$ ./gradlew deployPatchVersion      //  increase patch number
+```
+2. Wait until https://circleci.com finish build.
+2. Open crashlytics application on Android device
+2. Find Android Base app, click on it and click "Update".
+
+<details>
+<summary>TODO publishing and tester's inviting</summary>
+ 
+### Publish to production
+ 
+### Invitation for testers
+</details>
+
+### Run tests:
+```bash
+$ ./gradlew test
+```
+
+## ProGuard
+Project already has proguard config for included libraries.
+Maintain [proguard-rules.pro](https://github.com/fs/android-base/blob/master/app/proguard-rules.pro) updated when you add new libraries or play with reflection.
+When you add new library or check out its Proguard section and add rules to `proguard-rules.pro`.
+When you add code which uses reflection add rules to `proguard-rules.pro`.
+
+## Credits
+Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adelnizamutdinov) and [Ilya Eremin](http://github.com/ilyaeremin).
+It was written by [Flatstack](http://www.flatstack.com) with the help of our
+[contributors](http://github.com/fs/android-base/contributors)
+
+[<img src="http://www.flatstack.com/logo.svg" width="100"/>](http://www.flatstack.com)

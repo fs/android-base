@@ -8,11 +8,7 @@ import com.flatstack.android.model.network.NetworkBoundResource
 import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.profile.entities.ProfileResponse
 import com.flatstack.android.test_utils.InstantLiveDataExecutor
-import io.mockk.Runs
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain

@@ -1,11 +1,7 @@
 package com.flatstack.android.di
 
 import android.app.Application
-import com.flatstack.android.di.modules.appModule
-import com.flatstack.android.di.modules.dbModule
-import com.flatstack.android.di.modules.netModule
-import com.flatstack.android.di.modules.repoModule
-import com.flatstack.android.di.modules.viewModelModule
+import com.flatstack.android.di.modules.*
 import org.kodein.di.Kodein
 import org.kodein.di.android.x.androidXModule
 

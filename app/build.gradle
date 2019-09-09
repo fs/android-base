@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 apply plugin: "de.mannodermaus.android-junit5"
-apply from: './scripts/versioning.gradle'
+apply plugin: 'com.antonchaynikov.oneclickpublish'
 
 def props = new Properties()
 def secretFile = rootProject.file("secrets/keys.properties")
@@ -31,6 +31,11 @@ android {
         testInstrumentationRunnerArgument "runnerBuilder",
                 "de.mannodermaus.junit5.AndroidJUnit5Builder"
         buildConfigField 'String', 'BASE_URL', "\"https://api.com\""
+
+        oneClickPublish {
+            branchNames = ["master"]  // branch names from which you can deploy, master by default
+            remoteRepoName = "origin" // alias repository, origin by default
+        }
     }
     signingConfigs {
         debug {
@@ -100,7 +105,7 @@ dependencies {
     androidTestImplementation androidTestsLibs
 
     //Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
         transitive = true
     }
 

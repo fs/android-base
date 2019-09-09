@@ -4,11 +4,7 @@ import com.flatstack.android.login.entities.LoginRequest
 import com.flatstack.android.login.entities.LoginResponse
 import com.flatstack.android.profile.entities.ProfileResponse
 import kotlinx.coroutines.Deferred
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface IApi {
     @Headers("Accept: application/json", "Content-Type: application/json")

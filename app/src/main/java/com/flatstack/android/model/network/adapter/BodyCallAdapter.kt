@@ -3,11 +3,7 @@ package com.flatstack.android.model.network.adapter
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
-import retrofit2.CallAdapter
-import retrofit2.Callback
-import retrofit2.HttpException
-import retrofit2.Response
+import retrofit2.*
 import java.lang.reflect.Type
 
 internal class BodyCallAdapter<T>(

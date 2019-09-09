@@ -7,11 +7,7 @@ import com.flatstack.android.model.network.NetworkBoundResource
 import com.flatstack.android.model.network.errors.ErrorHandler
 import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.profile.entities.ProfileResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.*
 
 class ProfileRepository(
     private val profileDao: ProfileDao,

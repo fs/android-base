@@ -13,7 +13,6 @@ import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.spekframework.spek2.Spek
-import org.junit.jupiter.api.Assertions.assertEquals as assertEquals1
 
 object LoginViewModelTest : Spek({
     val mainThreadSurrogate = newSingleThreadContext("UI thread")

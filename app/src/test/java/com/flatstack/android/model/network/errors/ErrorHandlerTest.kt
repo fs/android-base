@@ -6,21 +6,12 @@ import com.flatstack.android.util.StringResource
 import com.flatstack.android.util.userMessage
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import io.mockk.Runs
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.mockkStatic
-import io.mockk.spyk
+import io.mockk.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.spekframework.spek2.Spek
 import retrofit2.HttpException
-import java.net.HttpURLConnection.HTTP_BAD_REQUEST
-import java.net.HttpURLConnection.HTTP_OK
-import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
+import java.net.HttpURLConnection.*
 
 object ErrorHandlerTest : Spek({
     group("proceed") {
