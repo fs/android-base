@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 apply plugin: "de.mannodermaus.android-junit5"
+apply plugin: 'com.antonchaynikov.oneclickpublish'
 apply from: './scripts/versioning.gradle'
 
 def props = new Properties()
@@ -31,6 +32,11 @@ android {
         testInstrumentationRunnerArgument "runnerBuilder",
                 "de.mannodermaus.junit5.AndroidJUnit5Builder"
         buildConfigField 'String', 'BASE_URL', "\"https://api.com\""
+
+        oneClickPublish {
+            branchNames = ["master"]  // branch names from which you can deploy, master by default
+            remoteRepoName = "origin" // alias repository, origin by default
+        }
     }
     signingConfigs {
         debug {
