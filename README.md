@@ -69,14 +69,26 @@ $ ./gradlew installDebug
 ```
 
 ### Deploying to Fabric
+#### Deploy plugin configuring
+Module build.gradle:
+```groovy
+defaultConfig {
+    ...
+    oneClickPublish {
+        branchNames = ["master"]    // branch names from which you can deploy, master by default
+        remoteRepoName = "origin"   // alias repository, origin by default
+    }
+    ...
+}
+```
+
+#### Deploy steps:
 1. Increase app version, build number, create git tag:
 ```bash
-$ ./gradlew bumperInit              //  starting point
-$ ./gradlew bumperVersionMajor      //  increase major number
-$ ./gradlew bumperVersionMinor      //  increase minor number
-$ ./gradlew bumperVersionPatch      //  increase patch number
+$ ./gradlew deployMajorVersion      //  increase major number
+$ ./gradlew deployMinorVersion      //  increase minor number
+$ ./gradlew deployPatchVersion      //  increase patch number
 ```
-2. `git push && git push --tags`
 2. Wait until https://circleci.com finish build.
 2. Open crashlytics application on Android device
 2. Find Android Base app, click on it and click "Update".
