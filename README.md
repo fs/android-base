@@ -10,7 +10,6 @@ This project will help you quickly start developing a new android app
 1. [Setup. Install IDE, secret environment](#setup)
 1. [Build. Create apk](#building)
 1. [How to Deploy](#deploying-to-fabric)
-1. [How to Release](#build-a-release-apk)
 1. [Run tests](#run-tests)
 1. [ProGuard](#proguard)
 1. [Credits](#credits)
