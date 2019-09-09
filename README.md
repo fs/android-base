@@ -63,7 +63,7 @@ $ ./gradlew assembleDebug       // to build a debug APK
 $ ./gradlew assembleRelease     // to build a release signed APK, can upload to Market
 ```
 ### Install
-After build the APK and immediately install it on a running emulator or connected device, instead invoke installDebug:
+To install app on emulator or connected real device:
 ```bash
 $ ./gradlew installDebug
 ```
@@ -83,7 +83,7 @@ defaultConfig {
 ```
 
 #### Deploy steps:
-1. Increase app version, build number, create git tag:
+1. To promote a new version run:
 ```bash
 $ ./gradlew deployMajorVersion      //  increase major number
 $ ./gradlew deployMinorVersion      //  increase minor number
@@ -93,20 +93,17 @@ $ ./gradlew deployPatchVersion      //  increase patch number
 2. Open crashlytics application on Android device
 2. Find Android Base app, click on it and click "Update".
 
-### Build a release APK
-When you're ready to release and distribute your app, you must build a release APK that is signed with your private key:
-```bash
-$ ./gradlew assembleRelease
-```
+<details>
+<summary>TODO publishing and tester's inviting</summary>
+ 
+### Publish to production
+ 
+### Invitation for testers
+</details>
 
-### Run tests
-Local unit test:
+### Run tests:
 ```bash
 $ ./gradlew test
-```
-Instrumented unit test:
-```bash
-$ ./gradlew connectedAndroidTest
 ```
 
 ## ProGuard
