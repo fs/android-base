@@ -10,6 +10,6 @@ import org.kodein.di.generic.singleton
 
 val appModule = Kodein.Module(name = "appModule") {
     bind<StringResource>() with singleton { StringResource(instance()) }
-    bind<ErrorHandler>() with singleton { ErrorHandler(instance(), instance(), instance(), instance()) }
+    bind<ErrorHandler>() with singleton { ErrorHandler(instance(), instance(), instance()) }
     bind<Router>() with singleton { Router(instance()) }
 }

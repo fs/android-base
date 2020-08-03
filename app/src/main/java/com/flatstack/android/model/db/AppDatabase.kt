@@ -5,11 +5,10 @@ import androidx.room.RoomDatabase
 import com.flatstack.android.model.db.daos.ProfileDao
 import com.flatstack.android.model.db.daos.SessionDao
 import com.flatstack.android.model.entities.Session
-import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.profile.entities.Profile
 
 @Database(
-    entities = [Profile::class, Book::class, Session::class],
+    entities = [Profile::class, Session::class],
     version = 1,
     exportSchema = false
 )

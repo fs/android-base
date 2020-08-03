@@ -8,7 +8,6 @@ import com.flatstack.android.model.network.ApiErrorResponse
 import com.flatstack.android.model.network.ApiSuccessResponse
 import com.flatstack.android.model.network.IApi
 import com.flatstack.android.model.network.errors.ServerError
-import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.profile.entities.ProfileResponse
 import kotlinx.coroutines.runBlocking

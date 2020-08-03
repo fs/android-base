@@ -6,16 +6,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.flatstack.android.R
 import com.flatstack.android.Router
-import com.flatstack.android.profile.entities.Book
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.item_book.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -39,9 +36,8 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
                 this,
                 onNext = {
                     showProfile()
-                    showUsername(it.username)
-                    showFavoriteBook(it.favoriteBook)
-                    showBooks(it.booksRead)
+                    showFirstName(it.firstName)
+                    showLastName(it.lastName)
                 },
                 onError = ::showError,
                 onLoading = ::visibleProgress)
@@ -64,27 +60,12 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
         viewModel.updateProfile()
     }
 
-    private fun showFavoriteBook(favoriteBook: Book?) {
-        // TODO
-        val favGroup = gr_favorite
-        favGroup.visibility = favoriteBook?.let {
-            val favoriteBookView = inc_fav_book
-            favoriteBookView.tv_title.text = it.title
-            favoriteBookView.tv_count.text = it.numberOfTimesRead.toString()
-            View.VISIBLE
-        } ?: View.GONE
+    private fun showFirstName(firstName: String) {
+        tv_first_name.text = firstName
     }
 
-    private fun showUsername(username: String) {
-        tv_username.text = username
-    }
-
-    private fun showBooks(bookList: List<Book>) {
-        rv_books.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = BookAdapter(bookList)
-        }
+    private fun showLastName(lastName: String) {
+        tv_last_name.text = lastName
     }
 
     private fun logout() {

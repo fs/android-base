@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Android Base</string>
     <string name="login">Login</string>
-    <string name="username_hint">Username</string>
+    <string name="email_hint">Email address</string>
+    <string name="first_name_hint">John</string>
+    <string name="last_name_hint">Snow</string>
     <string name="password_hint">Password</string>
     <string name="empty_error">Username and Password should not be empty</string>
     <string name="logout">Logout</string>
@@ -17,6 +19,4 @@
     <string name="method_not_allowed_error">405 Method Not Allowed</string>
     <string name="conflict_error">409 Conflict</string>
     <string name="server_error_error">500 Server Error</string>
-    <string name="favorite_book">Favorite book</string>
-    <string name="books">Books</string>
 </resources>
