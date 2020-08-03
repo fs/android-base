@@ -30,6 +30,12 @@ references:
       command: |
         sh secrets/decrypt-keys.sh
 
+  download_schema: &download_schema
+    run:
+      name: Downloading GraphQL schema
+      command: |
+        sh secrets/download-graphql-schema.sh $GRAPHQL_TOKEN
+
   android_config: &android_config
     working_directory: *workspace
     docker:
@@ -49,6 +55,7 @@ jobs:
     steps:
       - checkout
       - *decrypt
+      - *download_schema
       - *restore_cache
       - run:
           name: Download dependencies
