@@ -3,8 +3,9 @@ ext {
             BUILD_TOOLS_VERSION: '28.0.3',
             MIN_SDK_VERSION    : 17,
             TARGET_SDK_VERSION : 28,
-            kotlin             : '1.3.31',
-            detekt             : '1.0.0-RC14',
+            kotlin             : '1.3.72',
+            apollo             : '2.2.3',
+            detekt             : '1.10.0',
             android_junit5     : '1.2.0.0',
             kodein             : '6.2.0',
             lifecycle          : '2.0.0',
@@ -25,6 +26,10 @@ ext {
             cardview         : 'androidx.cardview:cardview:1.0.0',
             lifecycle        : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
     ]
+    apollo = [
+            apollo_runtime    : "com.apollographql.apollo:apollo-runtime:$versions.apollo",
+            apollo_coroutines : "com.apollographql.apollo:apollo-coroutines-support:$versions.apollo"
+    ]
     room = [
             room    : "androidx.room:room-runtime:$versions.room",
             roomktx : "androidx.room:room-ktx:$versions.room"
@@ -36,10 +41,6 @@ ext {
     kodein = [
             kodein  : "org.kodein.di:kodein-di-generic-jvm:$versions.kodein",
             android : "org.kodein.di:kodein-di-framework-android-x:$versions.kodein"
-    ]
-    retrofit = [
-            retrofit     : "com.squareup.retrofit2:retrofit:$versions.retrofit",
-            gsonConverter: "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
     unitTests = [
             spek          : "org.spekframework.spek2:spek-dsl-jvm:$versions.spek",
@@ -59,7 +60,7 @@ ext {
     ]
 
     androidLibs = androidx.values()
-    retrofitLibs = retrofit.values()
+    apolloLibs = apollo.values()
     coroutinesLibs = coroutines.values()
     kodeinLibs = kodein.values()
     roomLibs = room.values()

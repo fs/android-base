@@ -1,0 +1,4 @@
+fragment UserGqlFragment on User {
+    firstName
+    lastName
+}

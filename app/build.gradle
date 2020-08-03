@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'com.antonchaynikov.oneclickpublish'
+apply plugin: 'com.apollographql.apollo'
 
 def props = new Properties()
 def secretFile = rootProject.file("secrets/keys.properties")
@@ -14,7 +15,6 @@ if (secretFile.exists())
 detekt {
     toolVersion = "$versions.detekt"
     input = files("src/main/java")
-    filters = ".*/resources/.*,.*/build/.*"
     config = files("../default-detekt-config.yml")
 }
 
@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument "runnerBuilder",
                 "de.mannodermaus.junit5.AndroidJUnit5Builder"
-        buildConfigField 'String', 'BASE_URL', "\"https://api.com\""
+        buildConfigField 'String', 'GQL_URL', "\"https://rails-base-graphql-api.herokuapp.com/graphql\""
 
         oneClickPublish {
             branchNames = ["master"]  // branch names from which you can deploy, master by default
@@ -81,9 +81,20 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=enable',
+                            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                            "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"]
+    }
     androidExtensions {
         experimental = true
     }
+}
+
+apollo {
+    // instruct the compiler to generate Kotlin models
+    generateKotlinModels.set(true)
 }
 
 repositories {
@@ -93,9 +104,10 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation androidLibs
-    implementation retrofitLibs
+    implementation apolloLibs
     implementation coroutinesLibs
     implementation kodeinLibs
     implementation roomLibs
