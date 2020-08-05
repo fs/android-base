@@ -1,0 +1,11 @@
+mutation PresignAvatar(
+    $input: PresignDataInput!
+) {
+    presignData(input: $input) {
+        fields {
+            key
+            value
+        }
+        url
+    }
+}

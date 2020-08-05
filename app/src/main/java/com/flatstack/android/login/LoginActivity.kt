@@ -37,11 +37,17 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
     private fun navigateToProfile() {
         val router by kodein.instance<Router>()
-        router.profile(context = this, clearStack = true)
+        router.profile(context = this, shouldClearStack = true)
+    }
+
+    private fun navigateToRegistration() {
+        val router by kodein.instance<Router>()
+        router.registration(context = this, shouldClearStack = false)
     }
 
     private fun initListeners() {
         bt_login.setOnClickListener { login() }
+        bt_sign_up.setOnClickListener { navigateToRegistration() }
         et_password.apply {
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_GO) {
@@ -54,7 +60,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun login() {
-        val username = et_login.text.toString()
+        val username = et_email.text.toString()
         val password = et_password.text.toString()
         viewModel.login(username, password)
     }

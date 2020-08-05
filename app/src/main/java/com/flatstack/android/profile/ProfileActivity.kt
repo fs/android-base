@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
+import com.bumptech.glide.Glide
 import com.flatstack.android.R
 import com.flatstack.android.Router
 import com.flatstack.android.util.observeBy
@@ -38,6 +39,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
                     showProfile()
                     showFirstName(it.firstName)
                     showLastName(it.lastName)
+                    showAvatar(it.avatarUrl)
                 },
                 onError = ::showError,
                 onLoading = ::visibleProgress)
@@ -68,11 +70,17 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
         tv_last_name.text = lastName
     }
 
+    private fun showAvatar(avatarUrl: String) {
+        Glide.with(this)
+            .load(avatarUrl)
+            .into(iv_avatar)
+    }
+
     private fun logout() {
         viewModel.logout()
 
         val router by kodein.instance<Router>()
-        router.login(context = this, clearStack = true)
+        router.login(context = this, shouldClearStack = true)
     }
 
     private fun visibleProgress(show: Boolean) {

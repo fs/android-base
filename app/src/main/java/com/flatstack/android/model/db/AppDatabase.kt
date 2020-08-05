@@ -9,7 +9,7 @@ import com.flatstack.android.profile.entities.Profile
 
 @Database(
     entities = [Profile::class, Session::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

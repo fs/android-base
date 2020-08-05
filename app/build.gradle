@@ -95,6 +95,9 @@ android {
 
 apollo {
     generateKotlinModels.set(true)
+    customTypeMapping = [
+            "Upload" : "com.apollographql.apollo.api.FileUpload"
+    ]
 }
 
 repositories {
@@ -107,10 +110,12 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation androidLibs
+    implementation retrofitLibs
     implementation apolloLibs
     implementation coroutinesLibs
     implementation kodeinLibs
     implementation roomLibs
+    implementation glideLibs
     kapt compilerLibs
 
     testImplementation unitTestLibs

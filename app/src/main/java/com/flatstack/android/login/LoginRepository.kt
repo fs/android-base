@@ -8,6 +8,7 @@ import com.flatstack.android.model.entities.Session
 import com.flatstack.android.model.network.NetworkBoundResource
 import com.flatstack.android.model.network.errors.ErrorHandler
 import com.flatstack.android.profile.AuthorizationModel
+import com.flatstack.android.type.SignInInput
 import kotlinx.coroutines.*
 
 class LoginRepository(
@@ -41,5 +42,5 @@ class LoginRepository(
     }
 
     private fun loginMutation(email: String, password: String) =
-        LoginMutation(email = email, password = password)
+        LoginMutation(SignInInput(email, password))
 }

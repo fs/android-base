@@ -13,4 +13,5 @@ fun initKodein(app: Application) =
         import(viewModelModule)
         import(netModule)
         import(repoModule)
+        import(mapperModule)
     }
