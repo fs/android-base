@@ -112,8 +112,6 @@ When you add new library or check out its Proguard section and add rules to `pro
 When you add code which uses reflection add rules to `proguard-rules.pro`.
 
 ## Credits
-Android app skeleton is maintained by [Adel Nizamutdinov](http://github.com/adelnizamutdinov) and [Ilya Eremin](http://github.com/ilyaeremin).
-It was written by [Flatstack](http://www.flatstack.com) with the help of our
-[contributors](http://github.com/fs/android-base/contributors)
+Android base app is maintained by [Flatstack](http://www.flatstack.com). [List of contributors](http://github.com/fs/android-base/contributors)
 
 [<img src="http://www.flatstack.com/logo.svg" width="100"/>](http://www.flatstack.com)
