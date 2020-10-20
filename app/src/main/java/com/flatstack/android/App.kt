@@ -2,7 +2,7 @@ package com.flatstack.android
 
 import android.app.Application
 import com.flatstack.android.di.initKodein
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.FirebaseApp
 import org.kodein.di.KodeinAware
 
 class App : Application(), KodeinAware {
@@ -10,6 +10,6 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+        FirebaseApp.initializeApp(this)
     }
 }
