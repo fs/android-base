@@ -10,7 +10,6 @@
 
     <!--Error messages -->
     <string name="unknown_error">Unknown error</string>
-    <string name="network_error">Error connecting to the internet</string>
     <string name="not_modified_error">304 Not Modified</string>
     <string name="bad_request_error">400 Bad Request</string>
     <string name="unauthorized_error">Unauthorized</string>

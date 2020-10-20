@@ -13,7 +13,8 @@ import kotlinx.coroutines.*
 class LoginRepository(
     private val apolloClient: ApolloClient,
     private val authorizationModel: AuthorizationModel,
-    private val errorHandler: ErrorHandler
+    private val errorHandler: ErrorHandler,
+    private val loginMapper: LoginMapper
 ) : CoroutineScope {
     override val coroutineContext = SupervisorJob() + Dispatchers.IO
 
@@ -22,8 +23,9 @@ class LoginRepository(
             override suspend fun createCallAsync(): Deferred<Response<LoginMutation.Data>> =
                 apolloClient.mutate(loginMutation(username, password)).toDeferred()
 
-            override suspend fun saveCallResult(item: LoginMutation.Data?) =
-                authorizationModel.setSession(LoginMapper.mapLogin(item?.signin))
+            override suspend fun saveCallResult(item: LoginMutation.Data?) {
+                authorizationModel.setSession(loginMapper.mapLogin(item?.signin))
+            }
 
             override suspend fun loadFromDb() = authorizationModel.getSession()
         }.asLiveData()
@@ -34,7 +36,9 @@ class LoginRepository(
         }
     }
 
-    fun onDestroy() = coroutineContext.cancelChildren()
+    fun onDestroy() {
+        coroutineContext.cancelChildren()
+    }
 
     private fun loginMutation(email: String, password: String) =
         LoginMutation(email = email, password = password)

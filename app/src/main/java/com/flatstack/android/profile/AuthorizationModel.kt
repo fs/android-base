@@ -9,13 +9,17 @@ class AuthorizationModel(
         private val sessionDao: SessionDao,
         private val appDatabase: AppDatabase
 ) {
-    suspend fun unAuthorize() = appDatabase.withTransaction {
-        appDatabase.clearAllTables()
+    suspend fun unAuthorize() {
+        appDatabase.withTransaction {
+            appDatabase.clearAllTables()
+        }
     }
 
     suspend fun getToken(): String = sessionDao.getToken()
 
-    suspend fun setSession(session: Session) = sessionDao.insert(session)
+    suspend fun setSession(session: Session) {
+        sessionDao.insert(session)
+    }
 
     suspend fun getSession() = sessionDao.getSession()
 

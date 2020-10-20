@@ -22,8 +22,9 @@ class ProfileRepository(
             override suspend fun createCallAsync(): Deferred<Response<GetUserQuery.Data>> =
                 apolloClient.query(GetUserQuery()).toDeferred()
 
-            override suspend fun saveCallResult(item: GetUserQuery.Data?) =
+            override suspend fun saveCallResult(item: GetUserQuery.Data?) {
                 profileDao.insertUserProfile(ProfileMapper.mapProfile(item?.me))
+            }
 
             override suspend fun loadFromDb(): Profile? = profileDao.getProfile()
         }

@@ -8,11 +8,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
-import org.kodein.di.generic.with
 
 val netModule = Kodein.Module(name = "netModule") {
-    constant("baseUrl") with BuildConfig.GQL_URL
-
     bind<Interceptor>() with singleton { AuthorizationInterceptor(instance()) }
 
     bind<OkHttpClient>() with singleton { OkHttpClient.Builder()
@@ -21,7 +18,7 @@ val netModule = Kodein.Module(name = "netModule") {
 
     bind<ApolloClient>() with singleton {
         ApolloClient.builder()
-            .serverUrl(instance<String>("baseUrl"))
+            .serverUrl(BuildConfig.BASE_URL)
             .okHttpClient(instance())
             .build()
     }

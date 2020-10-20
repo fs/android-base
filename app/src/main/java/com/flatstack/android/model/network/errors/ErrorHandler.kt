@@ -21,7 +21,11 @@ class ErrorHandler(
             when (code) {
                 HttpURLConnection.HTTP_UNAUTHORIZED -> runBlocking { unAuthorize() }
             }
-            userMessage(it)
+            if (error.message.isEmpty()) {
+                userMessage(it)
+            } else {
+                error.message
+            }
         }
     } ?: stringResource.getString(R.string.unknown_error)
 
@@ -40,7 +44,7 @@ class ErrorHandler(
         HttpURLConnection.HTTP_BAD_METHOD -> stringResource.getString(R.string.method_not_allowed_error)
         HttpURLConnection.HTTP_CONFLICT -> stringResource.getString(R.string.conflict_error)
         HttpURLConnection.HTTP_INTERNAL_ERROR -> stringResource.getString(R.string.server_error_error)
-        else -> error.message
+        else -> ""
     }
 
     private fun mapToStatus(error: Error) =

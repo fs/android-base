@@ -2,11 +2,11 @@ package com.flatstack.android.profile
 
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.lifecycle.LiveData
+import com.flatstack.android.graphql.query.GetUserQuery
 import com.flatstack.android.login.LoginRepository
 import com.flatstack.android.model.entities.Resource
 import com.flatstack.android.model.network.NetworkBoundResource
 import com.flatstack.android.profile.entities.Profile
-import com.flatstack.android.profile.entities.ProfileResponse
 import com.flatstack.android.test_utils.InstantLiveDataExecutor
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ object ProfileViewModelTest : Spek({
     }
 
     test("initial") {
-        val expectedBoundResource = mockk<NetworkBoundResource<Profile, ProfileResponse>>()
+        val expectedBoundResource = mockk<NetworkBoundResource<Profile, GetUserQuery.Data>>()
         val expectedLiveData = mockk<LiveData<Resource<Profile>>>()
         val mockRepository = mockk<ProfileRepository>()
         val mockAuthenticationModel = mockk<LoginRepository>()
@@ -45,7 +45,7 @@ object ProfileViewModelTest : Spek({
     }
 
     test("Refresh") {
-        val mockBoundResource = mockk<NetworkBoundResource<Profile, ProfileResponse>>()
+        val mockBoundResource = mockk<NetworkBoundResource<Profile, GetUserQuery.Data>>()
         val mockRepository = mockk<ProfileRepository>()
         val mockAuthenticationModel = mockk<LoginRepository>()
         every { mockRepository.loadProfile() } returns mockBoundResource

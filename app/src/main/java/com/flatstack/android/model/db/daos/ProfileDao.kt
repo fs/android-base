@@ -25,5 +25,7 @@ abstract class ProfileDao {
     }
 
     @Transaction
-    open suspend fun clear() = clearProfile()
+    open suspend fun clear() {
+        clearProfile()
+    }
 }

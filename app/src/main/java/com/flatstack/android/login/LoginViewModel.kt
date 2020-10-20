@@ -26,9 +26,13 @@ class LoginViewModel(
         })
     }
 
-    override fun onCleared() = loginRepository.onDestroy()
+    override fun onCleared() {
+        loginRepository.onDestroy()
+    }
 
-    fun login(username: String, password: String) = login.postValue(LoginId(username, password))
+    fun login(username: String, password: String) {
+        login.postValue(LoginId(username, password))
+    }
 
     @VisibleForTesting
     fun emptyLoginResource() =

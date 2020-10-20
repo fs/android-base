@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'com.antonchaynikov.oneclickpublish'
 apply plugin: 'com.apollographql.apollo'
@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument "runnerBuilder",
                 "de.mannodermaus.junit5.AndroidJUnit5Builder"
-        buildConfigField 'String', 'GQL_URL', "\"https://rails-base-graphql-api.herokuapp.com/graphql\""
+        buildConfigField 'String', 'BASE_URL', "\"https://rails-base-graphql-api.herokuapp.com/graphql\""
 
         oneClickPublish {
             branchNames = ["master"]  // branch names from which you can deploy, master by default
@@ -117,9 +117,7 @@ dependencies {
     androidTestImplementation androidTestsLibs
 
     //Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
-        transitive = true
-    }
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
 
     testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 }

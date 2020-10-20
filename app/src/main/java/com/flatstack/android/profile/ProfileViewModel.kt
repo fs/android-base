@@ -18,7 +18,11 @@ class ProfileViewModel(
         loginRepository.onDestroy()
     }
 
-    fun updateProfile() = profileBoundResource.fetchFromNetwork()
+    fun updateProfile() {
+        profileBoundResource.fetchFromNetwork()
+    }
 
-    fun logout() = loginRepository.unAuthorize()
+    fun logout() {
+        loginRepository.unAuthorize()
+    }
 }
