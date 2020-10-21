@@ -34,7 +34,7 @@ references:
     run:
       name: Downloading GraphQL schema
       command: |
-        sh secrets/download-graphql-schema.sh $GRAPHQL_TOKEN
+        sh secrets/download-graphql-schema.sh
 
   android_config: &android_config
     working_directory: *workspace
