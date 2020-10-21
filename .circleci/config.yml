@@ -46,7 +46,7 @@ references:
         - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2"
     environment:
       TERM: dumb
-      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions"
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
 
 jobs:
