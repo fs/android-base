@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -93,7 +94,6 @@ android {
 }
 
 apollo {
-    // instruct the compiler to generate Kotlin models
     generateKotlinModels.set(true)
 }
 
@@ -116,8 +116,9 @@ dependencies {
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
 
-    //Crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 }

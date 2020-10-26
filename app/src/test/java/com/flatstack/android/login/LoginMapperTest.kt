@@ -12,6 +12,8 @@ internal class LoginMapperTest {
         val expectedSignin = LoginMutation.Signin(accessToken = expectedAccessToken)
         val expectedSession = Session(accessToken = expectedAccessToken)
 
-        assertEquals(LoginMapper().mapLogin(expectedSignin), expectedSession)
+        val actualSession = LoginMapper().mapLogin(expectedSignin)
+
+        assertEquals(actualSession, expectedSession)
     }
 }
