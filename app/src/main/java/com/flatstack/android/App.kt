@@ -1,9 +1,8 @@
 package com.flatstack.android
 
 import android.app.Application
-import com.crashlytics.android.Crashlytics
 import com.flatstack.android.di.initKodein
-import io.fabric.sdk.android.Fabric
+import com.google.firebase.FirebaseApp
 import org.kodein.di.KodeinAware
 
 class App : Application(), KodeinAware {
@@ -11,6 +10,6 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
+        FirebaseApp.initializeApp(this)
     }
 }

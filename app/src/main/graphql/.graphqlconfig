@@ -1,0 +1,15 @@
+{
+  "name": "GraphQL Schema",
+  "extensions": {
+    "endpoints": {
+      "Base": {
+        "url": "https://rails-base-graphql-api.herokuapp.com/graphql",
+        "schemaPath": "com/flatstack/android/schema.json",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

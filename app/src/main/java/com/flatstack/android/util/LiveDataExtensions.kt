@@ -12,20 +12,22 @@ fun <T : Any> LiveData<Resource<T>>.observeBy(
     onError: (String) -> Unit = {},
     onLoading: (Boolean) -> Unit = {},
     onSuccess: () -> Unit = {}
-) = observe(owner, Observer {
-    when (it.status) {
-        Status.LOADING -> onLoading(true)
-        Status.SUCCESS -> {
-            onLoading(false)
-            onSuccess()
+) {
+    observe(owner, Observer {
+        when (it.status) {
+            Status.LOADING -> onLoading(true)
+            Status.SUCCESS -> {
+                onLoading(false)
+                onSuccess()
+            }
+            Status.ERROR -> {
+                onLoading(false)
+                it.error?.let(onError)
+            }
         }
-        Status.ERROR -> {
-            onLoading(false)
-            it.error?.let(onError)
-        }
-    }
-    it.data?.let(onNext)
-})
+        it.data?.let(onNext)
+    })
+}
 
 fun <T : Any> T.toLiveData() = object : LiveData<T>() {
     init {

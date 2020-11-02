@@ -60,4 +60,7 @@ fastlane/readme.md
 
 # Secret keys
 secrets/keys.properties
-app/fabric.properties
+
+# GraphQL schema and Apollo generated schema file
+schema.json
+schema.json.graphql
