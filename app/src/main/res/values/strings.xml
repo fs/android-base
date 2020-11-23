@@ -18,4 +18,7 @@
     <string name="method_not_allowed_error">405 Method Not Allowed</string>
     <string name="conflict_error">409 Conflict</string>
     <string name="server_error_error">500 Server Error</string>
+    <string name="sign_up">Sign up</string>
+    <string name="choose_avatar">Choose avatar</string>
+    <string name="default_filename">filename.jpg</string>
 </resources>

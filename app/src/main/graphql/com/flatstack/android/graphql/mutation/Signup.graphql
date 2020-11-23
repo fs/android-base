@@ -1,0 +1,5 @@
+mutation SignUp($avatar: ImageUploader, $email: String!, $firstName: String, $lastName: String, $password: String!) {
+    signup(avatar: $avatar, email: $email, firstName: $firstName, lastName: $lastName, password: $password) {
+        ...SessionFragment
+    }
+}

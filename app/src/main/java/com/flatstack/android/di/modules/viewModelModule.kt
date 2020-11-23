@@ -3,6 +3,7 @@ package com.flatstack.android.di.modules
 import androidx.lifecycle.ViewModelProvider
 import com.flatstack.android.login.LoginViewModel
 import com.flatstack.android.profile.ProfileViewModel
+import com.flatstack.android.signup.SignUpViewModel
 import com.flatstack.android.util.ViewModelFactory
 import com.flatstack.android.util.bindViewModel
 import org.kodein.di.Kodein
@@ -16,4 +17,5 @@ val viewModelModule = Kodein.Module(name = "viewModelModule") {
 
     bindViewModel<LoginViewModel>() with provider { LoginViewModel(instance(), instance()) }
     bindViewModel<ProfileViewModel>() with provider { ProfileViewModel(instance(), instance()) }
+    bindViewModel<SignUpViewModel>() with provider { SignUpViewModel(instance(), instance()) }
 }
