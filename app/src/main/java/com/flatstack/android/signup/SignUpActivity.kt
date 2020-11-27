@@ -11,7 +11,6 @@ import com.flatstack.android.Router
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up.pb_progress
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
