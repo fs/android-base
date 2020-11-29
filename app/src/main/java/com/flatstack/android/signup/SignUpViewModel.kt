@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.flatstack.android.R
 import com.flatstack.android.model.entities.Resource
 import com.flatstack.android.model.entities.Session
+import com.flatstack.android.type.ImageUploader
 import com.flatstack.android.util.StringResource
 import com.flatstack.android.util.toLiveData
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class SignUpViewModel(
 
     val signUpResource: LiveData<Resource<Session>> = Transformations.switchMap(signUp) {
         it.ifExists(exist = { email, password ->
-            signUpRepository.signUp(email, it.firstName, it.lastName, password)
+            signUpRepository.signUp(email, it.firstName, it.lastName, password, it.avatar)
                 .flowOn(Dispatchers.IO)
                 .map { Resource.success(it) }
                 .onStart { emit(Resource.loading()) }
@@ -33,8 +34,8 @@ class SignUpViewModel(
         })
     }
 
-    fun signUp(email: String, firstName: String?, lastName: String?, password: String) {
-        signUp.postValue(SignUpData(email, firstName, lastName, password))
+    fun signUp(email: String, firstName: String?, lastName: String?, password: String, avatar: ImageUploader?) {
+        signUp.postValue(SignUpData(email, firstName, lastName, password, avatar))
     }
 
     @VisibleForTesting
@@ -45,7 +46,8 @@ class SignUpViewModel(
         val email: String,
         val firstName: String?,
         val lastName: String?,
-        val password: String
+        val password: String,
+        val avatar: ImageUploader?
     ) {
         fun <T> ifExists(
             exist: (String, String) -> LiveData<T>,

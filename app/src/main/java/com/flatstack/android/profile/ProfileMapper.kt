@@ -7,7 +7,8 @@ object ProfileMapper {
     fun mapProfile(me: GetUserQuery.Me?) = me?.fragments?.userGqlFragment.run {
         Profile(
             firstName = this?.firstName ?: "",
-            lastName = this?.lastName ?: ""
+            lastName = this?.lastName ?: "",
+            avatarUrl = this?.avatarUrl ?: ""
         )
     }
 }

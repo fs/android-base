@@ -95,6 +95,9 @@ android {
 
 apollo {
     generateKotlinModels.set(true)
+    customTypeMapping = [
+        "ImageUploader" : "com.apollographql.apollo.api.FileUpload"
+    ]
 }
 
 repositories {
@@ -112,6 +115,7 @@ dependencies {
     implementation coroutinesLibs
     implementation kodeinLibs
     implementation roomLibs
+    implementation glideLibs
     kapt compilerLibs
 
     testImplementation unitTestLibs

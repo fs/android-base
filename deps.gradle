@@ -16,7 +16,9 @@ ext {
             retrofit           : '2.5.0',
             coroutines         : '1.1.1',
             room               : '2.1.0-beta01',
-            espressoVersion    : '3.1.1'
+            espressoVersion    : '3.1.1',
+            glide              : '4.11.0',
+            httpLogging        : '4.9.0'
     ]
     androidx = [
             appcompat       : 'androidx.appcompat:appcompat:1.0.2',
@@ -32,7 +34,8 @@ ext {
     ]
     apollo = [
             apollo_runtime    : "com.apollographql.apollo:apollo-runtime:$versions.apollo",
-            apollo_coroutines : "com.apollographql.apollo:apollo-coroutines-support:$versions.apollo"
+            apollo_coroutines : "com.apollographql.apollo:apollo-coroutines-support:$versions.apollo",
+            httpLogging       : "com.squareup.okhttp3:logging-interceptor:$versions.httpLogging"
     ]
     room = [
             room   : "androidx.room:room-runtime:$versions.room",
@@ -59,11 +62,16 @@ ext {
             testRunner  : "com.android.support.test:runner:1.1.1"
     ]
     kapt = [
-            room_compiler: "androidx.room:room-compiler:$versions.room",
-            lifecycle    : "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle",
+            room_compiler : "androidx.room:room-compiler:$versions.room",
+            lifecycle     : "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle",
+            glide         : "com.github.bumptech.glide:compiler:$versions.glide"
+    ]
+    glide = [
+            glide : "com.github.bumptech.glide:glide:$versions.glide"
     ]
 
     androidLibs = androidx.values()
+    glideLibs = glide.values()
     lifecycleLibs = lifecycle.values()
     apolloLibs = apollo.values()
     coroutinesLibs = coroutines.values()

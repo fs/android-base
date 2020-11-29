@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
+import com.bumptech.glide.Glide
 import com.flatstack.android.R
 import com.flatstack.android.Router
 import com.flatstack.android.util.observeBy
@@ -38,6 +39,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
                     showProfile()
                     showFirstName(it.firstName)
                     showLastName(it.lastName)
+                    showAvatar(it.avatarUrl)
                 },
                 onError = ::showError,
                 onLoading = ::visibleProgress)
@@ -58,6 +60,12 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
 
     override fun onRefresh() {
         viewModel.updateProfile()
+    }
+
+    private fun showAvatar(avatarUrl: String) {
+        Glide.with(this)
+            .load(avatarUrl)
+            .into(iv_avatar)
     }
 
     private fun showFirstName(firstName: String) {

@@ -61,5 +61,5 @@
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
 
-
-
+#apollo
+-keep class * implements com.apollographql.apollo.api.InputType { *; }
