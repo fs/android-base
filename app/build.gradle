@@ -32,6 +32,7 @@ android {
         testInstrumentationRunnerArgument "runnerBuilder",
                 "de.mannodermaus.junit5.AndroidJUnit5Builder"
         buildConfigField 'String', 'BASE_URL', "\"https://rails-base-graphql-api.herokuapp.com/graphql\""
+        buildConfigField 'String', 'RETROFIT_BASE_URL', "\"https://rails-base-graphql-api.herokuapp.com/\""
 
         oneClickPublish {
             branchNames = ["master"]  // branch names from which you can deploy, master by default
@@ -112,6 +113,7 @@ dependencies {
     implementation androidLibs
     implementation lifecycleLibs
     implementation apolloLibs
+    implementation retrofitLibs
     implementation coroutinesLibs
     implementation kodeinLibs
     implementation roomLibs

@@ -18,7 +18,8 @@ ext {
             room               : '2.1.0-beta01',
             espressoVersion    : '3.1.1',
             glide              : '4.11.0',
-            httpLogging        : '4.9.0'
+            httpLogging        : '4.9.0',
+            retrofit           : '2.9.0'
     ]
     androidx = [
             appcompat       : 'androidx.appcompat:appcompat:1.0.2',
@@ -36,6 +37,10 @@ ext {
             apollo_runtime    : "com.apollographql.apollo:apollo-runtime:$versions.apollo",
             apollo_coroutines : "com.apollographql.apollo:apollo-coroutines-support:$versions.apollo",
             httpLogging       : "com.squareup.okhttp3:logging-interceptor:$versions.httpLogging"
+    ]
+    retrofit = [
+            retrofit  : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            gson      : "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
     room = [
             room   : "androidx.room:room-runtime:$versions.room",
@@ -71,6 +76,7 @@ ext {
     ]
 
     androidLibs = androidx.values()
+    retrofitLibs = retrofit.values()
     glideLibs = glide.values()
     lifecycleLibs = lifecycle.values()
     apolloLibs = apollo.values()

@@ -1,0 +1,9 @@
+mutation Presign($filename: String!, $type: String!) {
+    presignData(filename: $filename, type: $type) {
+        fields {
+            key
+            value
+        }
+        url
+    }
+}

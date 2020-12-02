@@ -3,14 +3,16 @@ package com.flatstack.android.signup
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.coroutines.toDeferred
+import com.flatstack.android.graphql.mutation.PresignMutation
 import com.flatstack.android.graphql.mutation.SignUpMutation
 import com.flatstack.android.model.entities.Session
 import com.flatstack.android.profile.AuthorizationModel
 import com.flatstack.android.type.ImageUploader
-import com.flatstack.android.type.ImageUploaderMetadata
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import okhttp3.*
+import java.io.IOException
 
 class SignUpRepository(
     private val apolloClient: ApolloClient,
@@ -41,4 +43,9 @@ class SignUpRepository(
             }
         }
         .onEach { it?.let { authorizationModel.setSession(it) } }
+
+    fun presign(filename: String, type: String) = flow {
+        emit(apolloClient.mutate(PresignMutation(filename, type)).toDeferred().await())
+    }
+        .map { it.data?.presignData }
 }
