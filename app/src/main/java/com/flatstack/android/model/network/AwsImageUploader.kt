@@ -11,7 +11,8 @@ interface AwsImageUploader {
     @Multipart
     @POST
     suspend fun uploadImage(
-        @Part file: MultipartBody.Part,
-        @Url url: String
+        @Url url: String,
+        @PartMap body: Map<String, String>,
+        @Part file: MultipartBody.Part
     ): ImageUploader
 }

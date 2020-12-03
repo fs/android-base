@@ -12,8 +12,11 @@ import com.flatstack.android.util.toLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.FormBody
 import okhttp3.Headers.Companion.toHeaders
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
@@ -58,14 +61,17 @@ class SignUpViewModel(
                     .map {
                         it?.let { presignData ->
                             file?.let { file ->
-                                val fields = mapOf<String, String>()
+                                val fields = mutableMapOf<String, String>()
                                 presignData.fields.forEach { field ->
-                                    fields.plus(field.key to field.value)
+                                    fields[field.key] = field.value
                                 }
                                 awsImageUploader.uploadImage(
-                                    url = presignData.url, file = MultipartBody.Part.create(
-                                        headers = fields.toHeaders(),
-                                        body = RequestBody.create("image/jpeg".toMediaType(), file)
+                                    url = presignData.url,
+                                    body = fields.toMap(),
+                                    file = MultipartBody.Part.createFormData(
+                                        "file",
+                                        file.name,
+                                        RequestBody.create(avatar.metadata.mimeType.toMediaTypeOrNull(), file)
                                     )
                                 )
                             }
