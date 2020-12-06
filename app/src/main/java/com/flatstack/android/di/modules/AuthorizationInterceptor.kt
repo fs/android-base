@@ -9,8 +9,10 @@ class AuthorizationInterceptor(private val authorizationModel: AuthorizationMode
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-
+        val boundary = request.headers.get("boundary")
         request = request.newBuilder()
+            .removeHeader("boundary")
+            .addHeader("boundary", "--$boundary")
             .addHeader(AUTH_HEADER, getAccessToken())
             .build()
 

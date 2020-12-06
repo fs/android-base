@@ -1,5 +1,7 @@
 package com.flatstack.android.di.modules
 
+import android.content.Context
+import com.flatstack.android.App
 import com.flatstack.android.Router
 import com.flatstack.android.login.LoginMapper
 import com.flatstack.android.model.network.errors.ErrorHandler

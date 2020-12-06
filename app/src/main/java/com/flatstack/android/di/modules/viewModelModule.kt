@@ -17,5 +17,5 @@ val viewModelModule = Kodein.Module(name = "viewModelModule") {
 
     bindViewModel<LoginViewModel>() with provider { LoginViewModel(instance(), instance()) }
     bindViewModel<ProfileViewModel>() with provider { ProfileViewModel(instance(), instance()) }
-    bindViewModel<SignUpViewModel>() with provider { SignUpViewModel(instance(), instance(), instance()) }
+    bindViewModel<SignUpViewModel>() with provider { SignUpViewModel(instance(), instance(), instance(), instance()) }
 }

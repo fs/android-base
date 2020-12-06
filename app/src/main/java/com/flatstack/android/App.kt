@@ -12,4 +12,8 @@ class App : Application(), KodeinAware {
         super.onCreate()
         FirebaseApp.initializeApp(this)
     }
+
+    companion object{
+        fun getInstance() = this
+    }
 }
