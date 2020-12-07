@@ -18,4 +18,6 @@
     <string name="method_not_allowed_error">405 Method Not Allowed</string>
     <string name="conflict_error">409 Conflict</string>
     <string name="server_error_error">500 Server Error</string>
+    <string name="username_mask">%1$s %2$s</string>
+    <string name="go_to_activities">Show activities</string>
 </resources>

@@ -41,6 +41,15 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
                 },
                 onError = ::showError,
                 onLoading = ::visibleProgress)
+
+        initListeners()
+    }
+
+    private fun initListeners() {
+        bt_go_to_activities.setOnClickListener {
+            val router by kodein.instance<Router>()
+            router.activities(context = this, clearStack = true)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

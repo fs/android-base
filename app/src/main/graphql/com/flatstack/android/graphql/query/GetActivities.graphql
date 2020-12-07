@@ -1,0 +1,40 @@
+query GetActivities($after: String, $before: String, $events: [ActivityEvent!], $first: Int, $last: Int) {
+    activities(
+        after: $after,
+        before: $before,
+        events: $events,
+        first: $first,
+        last: $last
+    ) {
+        ...ActivityConnectionFragment
+    }
+}
+
+fragment ActivityConnectionFragment on ActivityConnection {
+    edges {
+        node {
+            ...ActivityFragment
+        }
+    }
+    pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+    }
+}
+
+
+fragment ActivityFragment on Activity {
+    body,
+    createdAt,
+    event,
+    id,
+    title,
+    user {
+        firstName,
+        lastName,
+        email,
+        avatarUrl
+    }
+}
