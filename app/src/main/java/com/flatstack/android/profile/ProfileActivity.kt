@@ -23,7 +23,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
     override val kodein: Kodein by kodein()
 
     private val viewModel: ProfileViewModel by provideViewModel()
-
+    private val router by kodein.instance<Router>()
     private val refreshLayout: SwipeRefreshLayout by lazy { swipe_layout }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +41,14 @@ class ProfileActivity : AppCompatActivity(), KodeinAware, OnRefreshListener {
                 },
                 onError = ::showError,
                 onLoading = ::visibleProgress)
+
+        initListeners()
+    }
+
+    private fun initListeners() {
+        bt_go_to_activities.setOnClickListener {
+            router.activities(context = this, clearStack = true)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -7,4 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.WhitishBackground" parent="AppTheme">
+        <item name="background">@color/colorWhitish</item>
+    </style>
 </resources>

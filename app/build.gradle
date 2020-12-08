@@ -37,6 +37,8 @@ android {
             branchNames = ["master"]  // branch names from which you can deploy, master by default
             remoteRepoName = "origin" // alias repository, origin by default
         }
+
+        multiDexEnabled true
     }
     signingConfigs {
         debug {
@@ -105,12 +107,19 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.8"
 
     implementation androidLibs
     implementation apolloLibs
     implementation coroutinesLibs
     implementation kodeinLibs
     implementation roomLibs
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     kapt compilerLibs
 
     testImplementation unitTestLibs
