@@ -30,37 +30,38 @@ class ActivitiesViewModel(
         )
     }
 
-    val activities: LiveData<Resource<PagedList<ActivitiesViewHolderModel?>>> = events.switchMap { events ->
-        LivePagedListBuilder(
-            activitiesRepository.getPagedUserActivities(viewModelScope, events)
-                .mapByPage { edges ->
-                    edges.map { edge ->
-                        edge.node?.fragments?.activityFragment?.let { fragment ->
-                            ActivitiesViewHolderModel(
-                                body = fragment.body,
-                                createdAt = fragment.createdAt.toString(),
-                                event = fragment.event,
-                                id = fragment.id,
-                                title = fragment.title,
-                                userName = fragment.id
-                            )
+    val activities: LiveData<Resource<PagedList<ActivitiesViewHolderModel?>>> =
+        events.switchMap { events ->
+            LivePagedListBuilder(
+                activitiesRepository.getPagedUserActivities(viewModelScope, events)
+                    .mapByPage { edges ->
+                        edges.map { edge ->
+                            edge.node?.fragments?.activityFragment?.let { fragment ->
+                                ActivitiesViewHolderModel(
+                                    body = fragment.body,
+                                    createdAt = fragment.createdAt.toString(),
+                                    event = fragment.event,
+                                    id = fragment.id,
+                                    title = fragment.title,
+                                    userName = fragment.id
+                                )
+                            }
                         }
+                    },
+                PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setPageSize(15)
+                    .build()
+            ).build().asFlow()
+                .flowOn(Dispatchers.IO)
+                .map { Resource.success(it) }
+                .onStart { emit(Resource.loading()) }
+                .catch { error ->
+                    error.message?.let {
+                        emit(Resource.error(it))
                     }
-                },
-            PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(15)
-                .build()
-        ).build().asFlow()
-            .flowOn(Dispatchers.IO)
-            .map { Resource.success(it) }
-            .onStart { emit(Resource.loading()) }
-            .catch { error ->
-                error.message?.let {
-                    emit(Resource.error(it))
                 }
-            }
-            .asLiveData(viewModelScope.coroutineContext)
-    }
+                .asLiveData(viewModelScope.coroutineContext)
+        }
 }
 

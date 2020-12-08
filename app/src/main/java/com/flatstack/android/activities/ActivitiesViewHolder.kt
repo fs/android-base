@@ -1,7 +1,6 @@
 package com.flatstack.android.activities
 
 import android.view.View
-import com.flatstack.android.R
 import com.flatstack.android.util.recyclerview.BaseHolder
 import kotlinx.android.synthetic.main.item_activity.view.*
 

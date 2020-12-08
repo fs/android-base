@@ -6,6 +6,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.PagedList
 import com.flatstack.android.R
+import com.flatstack.android.fragment.ActivityConnectionFragment
+import com.flatstack.android.fragment.ActivityConnectionFragment.Edge
+import com.flatstack.android.type.ActivityEvent
 import com.flatstack.android.util.observeBy
 import com.flatstack.android.util.provideViewModel
 import kotlinx.android.synthetic.main.activity_user_activities.*
