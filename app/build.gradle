@@ -111,7 +111,7 @@ dependencies {
     implementation "com.google.android.material:material:1.2.1"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.8"
 
     implementation androidLibs
     implementation apolloLibs

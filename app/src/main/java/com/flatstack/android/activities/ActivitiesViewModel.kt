@@ -1,10 +1,8 @@
 package com.flatstack.android.activities
 
 import androidx.lifecycle.*
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.flatstack.android.model.entities.Resource
-import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.type.ActivityEvent
 import com.flatstack.android.type.ActivityEvent.*
 import kotlinx.coroutines.Dispatchers
@@ -33,30 +31,7 @@ class ActivitiesViewModel(
 
     val activities: LiveData<Resource<PagedList<ActivitiesViewHolderModel?>>> =
         events.switchMap { events ->
-            LivePagedListBuilder(
-                activitiesRepository.getPagedUserActivities(viewModelScope, events)
-                    .mapByPage { edges ->
-                        edges.map { edge ->
-                            edge.node?.fragments?.activityFragment?.let { fragment ->
-                                ActivitiesViewHolderModel(
-                                    body = fragment.body,
-                                    createdAt = fragment.createdAt.toString(),
-                                    event = fragment.event,
-                                    id = fragment.id,
-                                    title = fragment.title,
-                                    user = Profile(
-                                        firstName = fragment.user.firstName ?: "",
-                                        lastName = fragment.user.lastName ?: ""
-                                    )
-                                )
-                            }
-                        }
-                    },
-                PagedList.Config.Builder()
-                    .setEnablePlaceholders(false)
-                    .setPageSize(15)
-                    .build()
-            ).build().asFlow()
+            activitiesRepository.getPagedUserActivities(viewModelScope, events)
                 .flowOn(Dispatchers.IO)
                 .map { Resource.success(it) }
                 .onStart { emit(Resource.loading()) }

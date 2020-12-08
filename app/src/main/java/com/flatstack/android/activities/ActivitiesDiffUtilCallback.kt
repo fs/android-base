@@ -6,7 +6,7 @@ class ActivitiesDiffUtilCallback : DiffUtil.ItemCallback<ActivitiesViewHolderMod
     override fun areItemsTheSame(
         oldItem: ActivitiesViewHolderModel,
         newItem: ActivitiesViewHolderModel
-    ): Boolean = oldItem == newItem
+    ): Boolean = oldItem.id == newItem.id
 
     override fun areContentsTheSame(
         oldItem: ActivitiesViewHolderModel,
