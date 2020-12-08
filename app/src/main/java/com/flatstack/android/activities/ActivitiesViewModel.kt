@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.flatstack.android.model.entities.Resource
+import com.flatstack.android.profile.entities.Profile
 import com.flatstack.android.type.ActivityEvent
 import com.flatstack.android.type.ActivityEvent.*
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +44,10 @@ class ActivitiesViewModel(
                                     event = fragment.event,
                                     id = fragment.id,
                                     title = fragment.title,
-                                    userName = fragment.id
+                                    user = Profile(
+                                        firstName = fragment.user.firstName ?: "",
+                                        lastName = fragment.user.lastName ?: ""
+                                    )
                                 )
                             }
                         }
@@ -64,4 +68,3 @@ class ActivitiesViewModel(
                 .asLiveData(viewModelScope.coroutineContext)
         }
 }
-

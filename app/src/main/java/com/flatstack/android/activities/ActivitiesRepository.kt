@@ -32,14 +32,14 @@ class ActivitiesRepository(
                                 )
                             ).toDeferred()
                                 .await().data?.activities?.fragments?.activityConnectionFragment?.let {
-                                it.edges?.let { edges ->
-                                    callback.onResult(
-                                        edges,
-                                        null,
-                                        it.pageInfo
-                                    )
+                                    it.edges?.let { edges ->
+                                        callback.onResult(
+                                            edges,
+                                            null,
+                                            it.pageInfo
+                                        )
+                                    }
                                 }
-                            }
                         }
                     }
 
@@ -56,13 +56,13 @@ class ActivitiesRepository(
                                 )
                             ).toDeferred()
                                 .await().data?.activities?.fragments?.activityConnectionFragment?.let {
-                                it.edges?.let { edges ->
-                                    callback.onResult(
-                                        edges,
-                                        it.pageInfo
-                                    )
+                                    it.edges?.let { edges ->
+                                        callback.onResult(
+                                            edges,
+                                            it.pageInfo
+                                        )
+                                    }
                                 }
-                            }
                         }
                     }
 
@@ -79,13 +79,13 @@ class ActivitiesRepository(
                                 )
                             ).toDeferred()
                                 .await().data?.activities?.fragments?.activityConnectionFragment?.let {
-                                it.edges?.let { edges ->
-                                    callback.onResult(
-                                        edges,
-                                        it.pageInfo
-                                    )
+                                    it.edges?.let { edges ->
+                                        callback.onResult(
+                                            edges,
+                                            it.pageInfo
+                                        )
+                                    }
                                 }
-                            }
                         }
                     }
                 }
