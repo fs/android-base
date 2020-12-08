@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 class ActivitiesRepository(
     private val apolloClient: ApolloClient
 ) {
+    @Suppress("LongMethod")
     fun getPagedUserActivities(coroutineScope: CoroutineScope, events: List<ActivityEvent>) =
         LivePagedListBuilder(
             object : DataSource.Factory<PageInfo, Edge>() {
@@ -33,7 +34,7 @@ class ActivitiesRepository(
                                 apolloClient.query(
                                     GetActivitiesQuery(
                                         events = Input.optional(events),
-                                        first = Input.optional(15)
+                                        first = Input.optional(PAGE_SIZE)
                                     )
                                 ).toDeferred()
                                     .await().data?.activities?.fragments?.activityConnectionFragment?.let {
@@ -57,7 +58,7 @@ class ActivitiesRepository(
                                     GetActivitiesQuery(
                                         after = Input.optional(params.key.endCursor),
                                         events = Input.optional(events),
-                                        first = Input.optional(15)
+                                        first = Input.optional(PAGE_SIZE)
                                     )
                                 ).toDeferred()
                                     .await().data?.activities?.fragments?.activityConnectionFragment?.let {
@@ -80,7 +81,7 @@ class ActivitiesRepository(
                                     GetActivitiesQuery(
                                         before = Input.optional(params.key.startCursor),
                                         events = Input.optional(events),
-                                        first = Input.optional(15)
+                                        first = Input.optional(PAGE_SIZE)
                                     )
                                 ).toDeferred()
                                     .await().data?.activities?.fragments?.activityConnectionFragment?.let {
@@ -114,7 +115,11 @@ class ActivitiesRepository(
                 },
             PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
-                .setPageSize(15)
+                .setPageSize(PAGE_SIZE)
                 .build()
         ).build().asFlow()
+
+    companion object {
+        private const val PAGE_SIZE = 15
+    }
 }
