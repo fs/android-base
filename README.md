@@ -30,12 +30,14 @@ This project will help you quickly start developing a new android app
 1. Download and install latest JDK8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
 1. Open Android Studio - Open Existing Android Project - find folder with project and click `OK`
 1. Wait a while. Follow Android Studio instructions to install missing items.
-1. Press `cmd + shift + a` and type `AVD Manager` and press Enter.
-1. Press `Create Virtual Device...` button.
-1. Select `Nexus 5X`
-1. Select latest API level (in case if latest is not available then click `Download` and wait, it's going to take a while).
-1. Click `Next`
-1. Click `Finish`
+2. Install the plugin 'JS GraphQl'.
+3. Run in the sh terminal 'secrets/download-graphql-schema.sh' to download shema.
+4. Press `cmd + shift + a` and type `AVD Manager` and press Enter.
+5. Press `Create Virtual Device...` button.
+6. Select `Nexus 5X`
+7. Select latest API level (in case if latest is not available then click `Download` and wait, it's going to take a while).
+8. Click `Next`
+9. Click `Finish`
 
 ### Updating secret keys
 1. Decrypt file:
