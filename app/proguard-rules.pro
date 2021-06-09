@@ -62,4 +62,7 @@
 -keepattributes SourceFile,LineNumberTable
 
 
+#apollo input types
+-keep class * implements com.apollographql.apollo.api.InputType { *; }
+
 

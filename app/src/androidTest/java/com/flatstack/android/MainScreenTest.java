@@ -30,7 +30,7 @@ public class MainScreenTest {
 
     @Test
     public void whenButtonClick_startedActivity() {
-        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.selectAvatar)).perform(click());
         intended(hasComponent(SecondActivity.class.getName()));
     }
 }

@@ -4,6 +4,7 @@
     package="com.flatstack.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -19,6 +20,9 @@
             android:label="@string/app_name" />
         <activity
             android:name=".login.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".registration.RegistrationActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MainActivity"

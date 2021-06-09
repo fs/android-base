@@ -32,7 +32,7 @@ class ErrorHandler(
     @VisibleForTesting
     suspend fun unAuthorize() {
         authorizationModel.unAuthorize()
-        router.login(clearStack = true)
+        router.login(shouldClearStack = true)
     }
 
     private fun userMessage(error: Error) = when (mapToStatus(error)) {

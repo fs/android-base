@@ -1,0 +1,5 @@
+mutation Register($input: SignUpInput!) {
+   signup(input: $input) {
+        accessToken
+   }
+}
